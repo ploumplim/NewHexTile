@@ -42,6 +42,7 @@ public class HexagonGrid : MonoBehaviour
         int centerY = gridHeight / 2;
         HexagonTile starterTile = _tileInstances[centerX, centerY].GetComponent<HexagonTile>();
         starterTile.GetComponent<TileState>().currentState = TileState.TileStates.StarterTile;
+        starterTile.ModifyBehavior( TileState.TileStates.StarterTile);
         starterTile.ActivateStateScript(TileState.TileStates.StarterTile);
         if (starterTile != null)
         {

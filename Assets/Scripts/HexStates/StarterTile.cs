@@ -1,4 +1,6 @@
 // StarterTile.cs
+
+using System;
 using UnityEngine;
 
 public class StarterTile : HexagonTile
@@ -18,6 +20,5 @@ public class StarterTile : HexagonTile
             parentTile.lifeTime = lifeTime;
             parentTile.isAlive = true;
         }
-        Debug.Log("StarterTile lifetime set to: " + lifeTime);
     }
 }

@@ -112,8 +112,7 @@ public class HexagonTile : MonoBehaviour
                 {
                     hexTile.isAlive = false;
                     hexTile.tileState.ApplyState(hexTile, TileState.TileStates.DefaultState);
-                    hexTile.GetComponentInChildren<Renderer>().material.color = Color.grey;
-                    DeleteTileX();
+                    hexTile.GetComponentInChildren<Renderer>().material.color = Color.black;
                 }
             }
             
@@ -141,6 +140,7 @@ public class HexagonTile : MonoBehaviour
         if (hexTile != null)
         {
             HexagonTile[] adjacentTiles = hexTile.GetAdjacentTiles();
+            
             foreach (HexagonTile adjacentTile in adjacentTiles)
             {
                 if (adjacentTile.tileState.currentState == TileState.TileStates.DefaultState)
@@ -150,20 +150,5 @@ public class HexagonTile : MonoBehaviour
             }
         }
     }
-    public void DeleteTileX()
-    {
-        HexagonTile hexTile = GetComponent<HexagonTile>();
-        if (hexTile != null)
-        {
-            HexagonTile[] adjacentTiles = hexTile.GetAdjacentTiles();
-            Debug.Log(adjacentTiles);
-            foreach (HexagonTile adjacentTile in adjacentTiles)
-            {
-                if (adjacentTile.tileState.currentState == TileState.TileStates.TileX)
-                {
-                    adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.DefaultState);
-                }
-            }
-        }
-    }
+    
 }

@@ -21,10 +21,8 @@ public class TileClickHandler : MonoBehaviour
                     {
                         tileState.ApplyState(hexTile, TileState.TileStates.Fusion1);
                         hexTile.ApplyLifeTime(hexTile); // Apply the lifetime to the tile
+                        hexTile.DecrementLifeTimeForAllTiles(gridParent);
                     }
-
-                    // Call DecrementLifeTimeForAllTiles method
-                    hexTile.DecrementLifeTimeForAllTiles(gridParent);
                 }
             }
         }
