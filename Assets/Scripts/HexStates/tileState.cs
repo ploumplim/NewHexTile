@@ -6,12 +6,11 @@ using UnityEngine;
 
 public class TileState : MonoBehaviour
 {
-    public GameObject gridParent;
     public enum TileStates
     {
         DefaultState,
-        Fusion1,
-        TileX,
+        BasicState,
+        LegalState,
         StarterTile
     }
 
@@ -22,7 +21,10 @@ public class TileState : MonoBehaviour
     private void Start()
     {
         // Set the default state
-        currentState = TileStates.DefaultState;
+        if (currentState!= TileStates.StarterTile)
+        {
+            currentState = TileStates.DefaultState;
+        }
     }
 
     public void ApplyState(HexagonTile tile, TileStates state)

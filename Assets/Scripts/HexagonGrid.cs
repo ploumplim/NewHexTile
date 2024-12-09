@@ -33,6 +33,7 @@ public class HexagonGrid : MonoBehaviour
                 HexagonTile tile = _tileInstances[x, y].GetComponent<HexagonTile>();
                 if (tile != null)
                 {
+                    tile.InitializeTile();
                     tile.parentGrid = this;
                 }
             }
@@ -40,29 +41,14 @@ public class HexagonGrid : MonoBehaviour
 
         int centerX = gridWidth / 2;
         int centerY = gridHeight / 2;
+        
+        
         HexagonTile starterTile = _tileInstances[centerX, centerY].GetComponent<HexagonTile>();
-        starterTile.GetComponent<TileState>().currentState = TileState.TileStates.StarterTile;
-        starterTile.ModifyBehavior( TileState.TileStates.StarterTile);
+        
+       Debug.Log(starterTile.gameObject.name);
+       starterTile.GetComponent<TileState>().ApplyState(starterTile, TileState.TileStates.StarterTile);
+        
         starterTile.ActivateStateScript(TileState.TileStates.StarterTile);
-        if (starterTile != null)
-        {
-            Renderer[] childRenderers = starterTile.GetComponentsInChildren<Renderer>();
-            if (childRenderers != null)
-            {
-                foreach (Renderer childRenderer in childRenderers)
-                {
-                    childRenderer.material.color = Color.red;
-                }
-            }
-        }
-        // Call the new method to log the central position
-        LogCentralPosition();
     }
-
-    private void LogCentralPosition()
-    {
-        float centerX = (gridWidth - 1) * tileScale / 2.0f;
-        float centerY = (gridHeight - 1) * 0.9f * tileScale / 2.0f;
-        Vector3 centralPosition = new Vector3(centerX, 0.0f, centerY);
-    }
+    
 }

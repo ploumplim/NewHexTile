@@ -13,28 +13,26 @@ public class HexagonTile : MonoBehaviour
     
     public bool isAlive;
     public int lifeTime;
+    
 
-    private void Start()
+    public void InitializeTile()
     {
-        // Ensure tileState is not null
         tileState = GetComponent<TileState>();
         if (tileState != null)
         {
-            tileState.OnStateChanged += HandleStateChanged;
-            tileState.ApplyState(this, TileState.TileStates.DefaultState);
+            tileState.OnStateChanged += ActivateStateScript;
         }
     }
 
-    private void HandleStateChanged(TileState.TileStates newState)
-    {
-        ActivateStateScript(newState);
-    }
+    
+
+    
 
     public void ActivateStateScript(TileState.TileStates state)
     {
         switch (state)
         {
-            case TileState.TileStates.Fusion1:
+            case TileState.TileStates.BasicState:
                 Fusion1 fusion1Script = GetComponent<Fusion1>();
                 if (fusion1Script == null)
                 {
@@ -58,13 +56,13 @@ public class HexagonTile : MonoBehaviour
         {
             case TileState.TileStates.DefaultState:
                 break;
-            case TileState.TileStates.TileX:
+            case TileState.TileStates.LegalState:
                 GetComponentInChildren<Renderer>().material.color = Color.white;
                 break;
             case TileState.TileStates.StarterTile:
                 GetComponentInChildren<Renderer>().material.color = Color.red;
                 break;
-            case TileState.TileStates.Fusion1:
+            case TileState.TileStates.BasicState:
                 GetComponentInChildren<Renderer>().material.color = Color.green;
                 break;
             default:
@@ -104,7 +102,7 @@ public class HexagonTile : MonoBehaviour
         foreach (Transform child in gridParent.transform)
         {
             HexagonTile hexTile = child.GetComponent<HexagonTile>();
-            
+
             if (hexTile.isAlive)
             {
                 hexTile.lifeTime -= 1;
@@ -112,10 +110,9 @@ public class HexagonTile : MonoBehaviour
                 {
                     hexTile.isAlive = false;
                     hexTile.tileState.ApplyState(hexTile, TileState.TileStates.DefaultState);
-                    hexTile.GetComponentInChildren<Renderer>().material.color = Color.black;
+                    //hexTile.GetComponentInChildren<Renderer>().material.color = Color.black;
                 }
             }
-            
         }
     }
     public void ApplyLifeTime(HexagonTile tile)
@@ -125,7 +122,7 @@ public class HexagonTile : MonoBehaviour
             case TileState.TileStates.StarterTile:
                 tile.GetComponent<StarterTile>()?.SetLifeTime();
                 break;
-            case TileState.TileStates.Fusion1:
+            case TileState.TileStates.BasicState:
                 tile.GetComponent<Fusion1>()?.SetLifeTime();
                 break;
             // Add cases for other states as needed
@@ -145,7 +142,7 @@ public class HexagonTile : MonoBehaviour
             {
                 if (adjacentTile.tileState.currentState == TileState.TileStates.DefaultState)
                 {
-                    adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.TileX);
+                    adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.LegalState);
                 }
             }
         }
