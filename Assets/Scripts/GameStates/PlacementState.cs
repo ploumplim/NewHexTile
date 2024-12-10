@@ -48,7 +48,7 @@ public class PlacementState : States
                         }
                         else
                         {
-                            nextTileCreate();
+                            nextTileCreate(tileState, hexTile);
                         }
 
                         GM.changeState(GM.GetComponent<FusionState>());
@@ -83,8 +83,20 @@ public class PlacementState : States
         }
     }
     
-    public void nextTileCreate()
+    public void nextTileCreate(TileState tileState, HexagonTile hexTile)
     {
-        
+        switch (GM.nextTile)
+        {
+            case 0:
+                
+                tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
+                break;
+            case 1:
+                tileState.ApplyState(hexTile, TileState.TileStates.SlowState);
+                break;
+            case 2:
+                tileState.ApplyState(hexTile, TileState.TileStates.FastState);
+                break;
+        }
     }
 }
