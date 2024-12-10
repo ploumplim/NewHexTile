@@ -46,10 +46,10 @@ public class HexagonGrid : MonoBehaviour
         centerY = gridHeight / 2;
         
         
-        //HexagonTile starterTile = _tileInstances[centerX, centerY].GetComponent<HexagonTile>();
+        HexagonTile starterTile = _tileInstances[centerX, centerY].GetComponent<HexagonTile>();
         
-       //Debug.Log(starterTile.gameObject.name);
-       //starterTile.GetComponent<TileState>().ApplyState(starterTile, TileState.TileStates.StarterTile);
+       Debug.Log(starterTile.gameObject.name);
+       starterTile.GetComponent<TileState>().ApplyState(starterTile, TileState.TileStates.StarterTile);
     }
     
 }

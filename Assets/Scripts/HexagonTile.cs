@@ -14,6 +14,11 @@ public class HexagonTile : MonoBehaviour
     public bool isAlive;
     public int lifeTime;
     
+    [Tooltip("This is the lfietime of the starter tile")]
+    public int StarterLifeTime = 1;
+    [Tooltip("This is the lifetime of the basic tile")]
+    public int BasicLifeTime = 5;
+    
 
     public void InitializeTile()
     {
@@ -36,6 +41,7 @@ public class HexagonTile : MonoBehaviour
             case TileState.TileStates.DefaultState:
                 GetComponentInChildren<Renderer>().material.color = Color.grey;
                 
+                
                 break;
             
             case TileState.TileStates.LegalState:
@@ -50,7 +56,7 @@ public class HexagonTile : MonoBehaviour
                 {
                     starterTile.Init();
                 }
-                
+                LegalizeTiles();
                 break;
             
             case TileState.TileStates.BasicState:
@@ -58,8 +64,11 @@ public class HexagonTile : MonoBehaviour
                 Tile_basic basicTile = GetComponent<Tile_basic>();
                 if (basicTile != null)
                 {
+                    Debug.Log("Basic tile is initialized");
                     basicTile.Init();
                 }
+                LegalizeTiles();
+                
                 break;
             
             default:
@@ -133,8 +142,6 @@ public class HexagonTile : MonoBehaviour
     public void DeadCells(HexagonTile hexTile)
     {
         HexagonTile[] adjacentTiles = hexTile.GetAdjacentTiles();
-        hexTile.isAlive = false;
-
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
             if (adjacentTile.tileState.currentState != TileState.TileStates.LegalState &&
@@ -143,10 +150,10 @@ public class HexagonTile : MonoBehaviour
                 hexTile.tileState.ApplyState(hexTile, TileState.TileStates.LegalState);
                 break;
             }
-            // else
-            // {
-            //     hexTile.tileState.ApplyState(hexTile, TileState.TileStates.DefaultState);
-            // }
+            else
+            {
+                hexTile.tileState.ApplyState(hexTile, TileState.TileStates.DefaultState);
+            }
         }
         
         foreach (HexagonTile adjacentTile in adjacentTiles)

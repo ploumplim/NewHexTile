@@ -6,10 +6,10 @@ namespace HexStates
 {
     public class StarterTile : HexagonTile
     {
-        public new int lifeTime = 1;
         public void Init()
         {
             HexagonTile thisTile = GetComponent<HexagonTile>();
+            int lifeTime = thisTile.StarterLifeTime;
             if (thisTile != null)
             {
                 thisTile.lifeTime = lifeTime;

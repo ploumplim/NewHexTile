@@ -6,13 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="17f6822e-6c11-447c-86eb-a40ca1fc295f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/StarterTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/StarterTile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Tile_basic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/Tile_basic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/tileState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/tileState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonGrid.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileClickHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileClickHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,28 +24,28 @@
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2q19c5VtJoyFFIuH4j1TnYBrop1" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "ivan-branch-1",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ivan-branch-1&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.41f1\Editor\Unity.exe" />
@@ -101,6 +99,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733819292779</updated>
       <workItem from="1733819295813" duration="5968000" />
+      <workItem from="1733825698441" duration="1135000" />
     </task>
     <servers />
   </component>

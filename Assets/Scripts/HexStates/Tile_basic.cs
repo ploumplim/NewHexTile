@@ -7,22 +7,17 @@ namespace HexStates
     
 public class Tile_basic : HexagonTile
 {
-    // Start is called before the first frame update
-    public void Start()
-    {
-        isAlive = true;
-        LegalizeTiles();
-    }
-        
     public void Init()
     {
-        lifeTime = 5; // Example value for Fusion1
-        HexagonTile parentTile = GetComponent<HexagonTile>();
-        if (parentTile != null)
+        HexagonTile thisTile = GetComponent<HexagonTile>();
+        int lifeTime = thisTile.BasicLifeTime;
+        if (thisTile != null)
         {
-            parentTile.lifeTime = lifeTime;
-            parentTile.isAlive = true;
+            thisTile.lifeTime = lifeTime;
+            thisTile.isAlive = true;
         }
+        LegalizeTiles();
+            
     }
 }
 
