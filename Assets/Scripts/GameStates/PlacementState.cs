@@ -48,7 +48,7 @@ public class PlacementState : States
                         }
                         else
                         {
-                            tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
+                            nextTileCreate();
                         }
 
                         GM.changeState(GM.GetComponent<FusionState>());
@@ -81,5 +81,10 @@ public class PlacementState : States
             default:
                 break;
         }
+    }
+    
+    public void nextTileCreate()
+    {
+        
     }
 }

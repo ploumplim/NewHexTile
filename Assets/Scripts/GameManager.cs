@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] livingTiles;
     [HideInInspector]
     public ToggleScript toggleScript;
+    [HideInInspector] 
+    public int nextTile;
     
     
     
