@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HexStates;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class HexagonTile : MonoBehaviour
 {
@@ -76,8 +77,10 @@ public class HexagonTile : MonoBehaviour
                     basicTile = gameObject.AddComponent<Tile_basic>();
                 }
                 basicTile.Init();
+                fillStatesToFuseWith();
                 
                 break;
+            
             case TileState.TileStates.SlowState:
                 GetComponentInChildren<Renderer>().material.color = Color.magenta;
                 Tile_Slow slowTile = GetComponent<Tile_Slow>();
@@ -86,8 +89,10 @@ public class HexagonTile : MonoBehaviour
                     slowTile = gameObject.AddComponent<Tile_Slow>();
                 }
                 slowTile.Init();
+                fillStatesToFuseWith();
                 
                 break;
+            
             case TileState.TileStates.FastState:
                 GetComponentInChildren<Renderer>().material.color = Color.yellow;
                 Tile_Fast fastTile = GetComponent<Tile_Fast>();
@@ -96,8 +101,47 @@ public class HexagonTile : MonoBehaviour
                     fastTile = gameObject.AddComponent<Tile_Fast>();
                 }
                 fastTile.Init();
+                fillStatesToFuseWith();
                 
                 break;
+            
+            case TileState.TileStates.Fusion1:
+                GetComponentInChildren<Renderer>().material.color = Color.cyan;
+                Fusion1 fusion1 = GetComponent<Fusion1>();
+                if (fusion1 == null)
+                {
+                    fusion1 = gameObject.AddComponent<Fusion1>();
+                }
+                fusion1.Init();
+                fillStatesToFuseWith();
+                
+                break;
+            
+            case TileState.TileStates.FusionSlow:
+                GetComponentInChildren<Renderer>().material.color = new Color(0.5f, 0.2f, 0.5f);
+                Fusion_slow fusionSlow = GetComponent<Fusion_slow>();
+                if (fusionSlow == null)
+                {
+                    fusionSlow = gameObject.AddComponent<Fusion_slow>();
+                }
+                fusionSlow.Init();
+                fillStatesToFuseWith();
+                
+                break;
+            
+            case TileState.TileStates.FusionFast:
+                GetComponentInChildren<Renderer>().material.color = new Color(0.9f, 0.5f, 0.3f);
+                Fusion_fast fusionFast = GetComponent<Fusion_fast>();
+                if (fusionFast == null)
+                {
+                    fusionFast = gameObject.AddComponent<Fusion_fast>();
+                }
+                fusionFast.Init();
+                fillStatesToFuseWith();
+                
+                break;
+            
+            
             default:
                 Debug.Log("The tile state is not recognized:" + transform);
                 GetComponentInChildren<Renderer>().material.color = Color.black;
@@ -190,16 +234,62 @@ public class HexagonTile : MonoBehaviour
         }
         return true;
     }
+    
+    public void fillStatesToFuseWith()
+    {
+        switch (tileState.currentState)
+        {
+            case TileState.TileStates.BasicState:
+                stateToFuseWith = new List<TileState.TileStates>
+                {
+                    TileState.TileStates.BasicState
+                };
+                break;
+            case TileState.TileStates.FastState:
+                stateToFuseWith = new List<TileState.TileStates>
+                {
+                    TileState.TileStates.FastState
+                };
+                break;
+            case TileState.TileStates.SlowState:
+                stateToFuseWith = new List<TileState.TileStates>
+                {
+                    TileState.TileStates.SlowState
+                };
+                break;
+            default:
+                stateToFuseWith = new List<TileState.TileStates>{};
+                break;
+        }
+    }
 
-    public void CheckToFuseWith(HexagonTile tile,List<TileState.TileStates> stateToFuseWith)
+    public void CheckToFuseWith(HexagonTile tile)
     {
         HexagonTile[] adjacentTiles = tile.GetAdjacentTiles();
         foreach (var adjacentTile in adjacentTiles)
         {
             if (adjacentTile != null && adjacentTile.tileState != null && stateToFuseWith.Contains(adjacentTile.tileState.currentState))
             {
-               adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.FastState);
-               tile.tileState.ApplyState(tile, TileState.TileStates.FastState);
+                
+                switch (tile.tileState.currentState)
+                {
+                    case TileState.TileStates.BasicState:
+                        tile.tileState.ApplyState(tile, TileState.TileStates.Fusion1);
+                        adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.Fusion1);
+                        break;
+                    case TileState.TileStates.FastState:
+                        tile.tileState.ApplyState(tile, TileState.TileStates.FusionFast);
+                        adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.FusionFast);
+                        break;
+                    case TileState.TileStates.SlowState:
+                        tile.tileState.ApplyState(tile, TileState.TileStates.FusionSlow);
+                        adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.FusionSlow);
+                        break;
+                    default:
+                        Debug.Log("The tile state is not recognized:" + transform);
+                        break;
+                }
+                
                 break;
             }
         }

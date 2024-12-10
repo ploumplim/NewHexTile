@@ -1,24 +1,20 @@
-// Fusion1.cs
 using UnityEngine;
 
 namespace HexStates
 {
     public class Fusion1 : HexagonTile
     {
-        public void Start()
+        public void Init()
         {
-            
-        }
-        
-        public void SetLifeTime()
-        {
-            lifeTime = 5; // Example value for Fusion1
-            HexagonTile parentTile = GetComponent<HexagonTile>();
-            if (parentTile != null)
+            HexagonTile thisTile = GetComponent<HexagonTile>();
+            int lifeTime = thisTile.BasicLifeTime*2;
+            if (thisTile != null)
             {
-                parentTile.lifeTime = lifeTime;
-                parentTile.isAlive = true;
+                thisTile.lifeTime = lifeTime;
+                thisTile.isAlive = true;
             }
+            LegalizeTiles();
+            
         }
     }
 }

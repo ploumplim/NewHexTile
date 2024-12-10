@@ -2,26 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile_Slow : HexagonTile
+namespace HexStates
 {
-    public void Init()
+    public class Tile_Slow : HexagonTile
     {
-        HexagonTile thisTile = GetComponent<HexagonTile>();
-        int lifeTime = thisTile.SlowLifeTime;
-        if (thisTile != null)
+        public void Init()
         {
-            thisTile.lifeTime = lifeTime;
-            thisTile.isAlive = true;
+            HexagonTile thisTile = GetComponent<HexagonTile>();
+            int lifeTime = thisTile.SlowLifeTime;
+            if (thisTile != null)
+            {
+                thisTile.lifeTime = lifeTime;
+                thisTile.isAlive = true;
+            }
+
+            LegalizeTiles();
+
         }
-        LegalizeTiles();
-        
-        CheckToFuseWith(thisTile, stateToFuseWith);
-    }
-    public Tile_Slow()
-    {
-        stateToFuseWith = new List<TileState.TileStates>
-        {
-            TileState.TileStates.SlowState
-        };
     }
 }

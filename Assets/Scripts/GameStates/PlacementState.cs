@@ -39,7 +39,7 @@ public class PlacementState : States
                                     tileState.ApplyState(hexTile, TileState.TileStates.FastState);
                                     break;
                                 case 3:
-                                    randomTile(tileState, hexTile);
+                                    nextTileCreate(tileState, hexTile);
                                     break;
                                 default:
                                     Debug.LogError("Invalid active tile index: " + activeTileIndex);
@@ -61,26 +61,6 @@ public class PlacementState : States
     public override void Exit()
     {
         //Debug.Log("Exiting Placement State");
-    }
-    
-    public void randomTile(TileState tileState, HexagonTile hexTile)
-    {
-        int randomTile = Random.Range(0, 3);
-        switch (randomTile)
-        {
-            case 0:
-                
-                tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
-                break;
-            case 1:
-                tileState.ApplyState(hexTile, TileState.TileStates.SlowState);
-                break;
-            case 2:
-                tileState.ApplyState(hexTile, TileState.TileStates.FastState);
-                break;
-            default:
-                break;
-        }
     }
     
     public void nextTileCreate(TileState tileState, HexagonTile hexTile)

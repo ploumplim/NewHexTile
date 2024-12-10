@@ -6,8 +6,22 @@ public class FusionState : States
 {
     public override void Enter()
     {
-        GM.changeState(GM.GetComponent<EffectState>());
+        for (int i = 0; i < GM.livingTiles.Length; i++)
+        {
+            if (GM.livingTiles[i] != null)
+            {
+                HexagonTile tile = GM.livingTiles[i].GetComponent<HexagonTile>();
+                if (tile != null)
+                {
+                    tile.CheckToFuseWith(tile);
+                }
+            }
+        }
         
+        
+        
+        
+        GM.changeState(GM.GetComponent<EffectState>());
     }
 
     public override void Tick()

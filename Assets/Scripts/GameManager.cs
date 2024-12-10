@@ -33,7 +33,9 @@ public class GameManager : MonoBehaviour
     public int BasicLifeTime = 5;
     public int FastLifeTime = 3;
     public int SlowLifeTime = 7;
-    
+
+    [Tooltip("next tile Prefab")]
+    public GameObject nextTilePreview;
     
     
 

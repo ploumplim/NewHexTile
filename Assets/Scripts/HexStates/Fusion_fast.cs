@@ -2,24 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexStates
-{
-    
-public class Tile_basic : HexagonTile
+public class Fusion_fast : HexagonTile
 {
     public void Init()
     {
         HexagonTile thisTile = GetComponent<HexagonTile>();
-        int lifeTime = thisTile.BasicLifeTime;
+        int lifeTime = thisTile.FastLifeTime*2;
         if (thisTile != null)
         {
             thisTile.lifeTime = lifeTime;
             thisTile.isAlive = true;
         }
-        LegalizeTiles();
-            
-    }
-    
-}
 
+        LegalizeTiles();
+
+    }
 }

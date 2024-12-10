@@ -13,7 +13,10 @@ public class TileState : MonoBehaviour
         SlowState,
         FastState,
         LegalState,
-        StarterTile
+        StarterTile,
+        Fusion1,
+        FusionSlow,
+        FusionFast,
     }
 
     public TileStates currentState;

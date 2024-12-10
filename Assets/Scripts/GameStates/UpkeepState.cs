@@ -48,16 +48,17 @@ public class UpkeepState : States
     public void generateNextTile()
     {
         GM.nextTile = Random.Range(0, 3);
+        HexagonGrid hexGrid = GM.HexGrid;
         switch (GM.nextTile)
         {
             case 0:
-                Debug.Log("next tile: basic tile");
+                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = Color.blue;
                 break;
             case 1:
-                Debug.Log("next tile: slow tile");
+                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = Color.magenta;
                 break;
             case 2:
-                Debug.Log("next tile: fast tile");
+                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = Color.yellow;
                 break;
         }
     }
