@@ -3,6 +3,7 @@
 public class TileClickHandler : MonoBehaviour
 {
     public GameObject gridParent;
+    public ToggleScript toggleScript; // Reference to the ToggleScript
 
     void Update()
     {
@@ -19,8 +20,30 @@ public class TileClickHandler : MonoBehaviour
                     TileState tileState = hexTile.GetComponent<TileState>();
                     if (tileState != null && tileState.currentState == TileState.TileStates.LegalState)
                     {
-                        tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
-                         // Apply the lifetime to the tile
+                        // Get the active tile index from the ToggleScript
+                        int activeTileIndex = toggleScript.activeTile;
+
+                        // Apply the corresponding state based on the active tile index
+                        switch (activeTileIndex)
+                        {
+                            case 0:
+                                tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
+                                Debug.Log("BasicState");
+                                break;
+                            case 1:
+                                tileState.ApplyState(hexTile, TileState.TileStates.SlowState);
+                                Debug.Log("SlowState");
+                                break;
+                            case 2:
+                                tileState.ApplyState(hexTile, TileState.TileStates.FastState);
+                                Debug.Log("FastState");
+                                break;
+                            default:
+                                Debug.LogError("Invalid active tile index: " + activeTileIndex);
+                                break;
+                        }
+
+                        // Apply the lifetime to the tile
                         hexTile.DecrementLifeTimeForAllTiles(gridParent);
                     }
                 }

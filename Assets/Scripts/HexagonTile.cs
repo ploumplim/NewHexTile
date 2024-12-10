@@ -19,6 +19,8 @@ public class HexagonTile : MonoBehaviour
     public int StarterLifeTime = 1;
     [Tooltip("This is the lifetime of the basic tile")]
     public int BasicLifeTime = 5;
+    public int SlowLifeTime = 10;
+    public int FastLifeTime = 3;
     
 
     public void InitializeTile()
@@ -40,7 +42,7 @@ public class HexagonTile : MonoBehaviour
         switch (state)
         {
             case TileState.TileStates.DefaultState:
-                GetComponentInChildren<Renderer>().material.color = Color.grey;
+                GetComponentInChildren<Renderer>().material.color = Color.black;
                 
                 
                 break;
@@ -69,8 +71,26 @@ public class HexagonTile : MonoBehaviour
                     basicTile = gameObject.AddComponent<Tile_basic>();
                 }
                 basicTile.Init();
-                LegalizeTiles();
-                
+                break;
+            
+            case TileState.TileStates.SlowState:
+                GetComponentInChildren<Renderer>().material.color = Color.blue;
+                Tile_Slow slowTile = GetComponent<Tile_Slow>();
+                if (slowTile == null)
+                {
+                    slowTile = gameObject.AddComponent<Tile_Slow>();
+                }
+                slowTile.Init();
+                break;
+            
+            case TileState.TileStates.FastState:
+                GetComponentInChildren<Renderer>().material.color = Color.magenta;
+                Tile_Fast fastTile = GetComponent<Tile_Fast>();
+                if (fastTile == null)
+                {
+                    fastTile = gameObject.AddComponent<Tile_Fast>();
+                }
+                fastTile.Init();
                 break;
             
             default:
@@ -151,10 +171,6 @@ public class HexagonTile : MonoBehaviour
             {
                 hexTile.tileState.ApplyState(hexTile, TileState.TileStates.LegalState);
                 break;
-            }
-            else
-            {
-                hexTile.tileState.ApplyState(hexTile, TileState.TileStates.DefaultState);
             }
         }
         
