@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using HexStates;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class HexagonTile : MonoBehaviour
@@ -52,21 +53,22 @@ public class HexagonTile : MonoBehaviour
             case TileState.TileStates.StarterTile:
                 GetComponentInChildren<Renderer>().material.color = Color.red;
                 StarterTile starterTile = GetComponent<StarterTile>();
-                if (starterTile != null)
+                if (starterTile == null)
                 {
-                    starterTile.Init();
+                    starterTile = gameObject.AddComponent<StarterTile>();
                 }
+                starterTile.Init();
                 LegalizeTiles();
                 break;
             
             case TileState.TileStates.BasicState:
                 GetComponentInChildren<Renderer>().material.color = Color.green;
                 Tile_basic basicTile = GetComponent<Tile_basic>();
-                if (basicTile != null)
+                if (basicTile == null)
                 {
-                    Debug.Log("Basic tile is initialized");
-                    basicTile.Init();
+                    basicTile = gameObject.AddComponent<Tile_basic>();
                 }
+                basicTile.Init();
                 LegalizeTiles();
                 
                 break;
