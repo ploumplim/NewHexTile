@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CountersState : States
@@ -13,8 +14,10 @@ public class CountersState : States
             if (hexTile.isAlive)
             {
                 hexTile.lifeTime -= 1;
+                hexTile.GetComponentInChildren<TextMeshPro>().text = hexTile.lifeTime.ToString();
                 if (hexTile.lifeTime <= 0)
                 {
+                    hexTile.GetComponentInChildren<TextMeshPro>().text = "";
                     hexTile.DeadCells();
                 }
             }
