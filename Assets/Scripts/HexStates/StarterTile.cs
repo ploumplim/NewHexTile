@@ -2,23 +2,21 @@
 
 using System;
 using UnityEngine;
-
-public class StarterTile : HexagonTile
+namespace HexStates
 {
-    public void Start()
+    public class StarterTile : HexagonTile
     {
-        isAlive = true;
-        TileXCreation();
-    }
-
-    public void SetLifeTime()
-    {
-        lifeTime = 40; // Example value for StarterTile
-        HexagonTile parentTile = GetComponent<HexagonTile>();
-        if (parentTile != null)
+        public new int lifeTime = 1;
+        public void Init()
         {
-            parentTile.lifeTime = lifeTime;
-            parentTile.isAlive = true;
+            HexagonTile thisTile = GetComponent<HexagonTile>();
+            if (thisTile != null)
+            {
+                thisTile.lifeTime = lifeTime;
+                thisTile.isAlive = true;
+            }
+            LegalizeTiles();
+            
         }
     }
 }

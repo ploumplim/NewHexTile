@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17f6822e-6c11-447c-86eb-a40ca1fc295f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/StarterTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/StarterTile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Tile_basic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/Tile_basic.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/tileState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/tileState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonGrid.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileClickHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileClickHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +21,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
@@ -91,7 +100,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1733819292779</updated>
-      <workItem from="1733819295813" duration="2235000" />
+      <workItem from="1733819295813" duration="5968000" />
     </task>
     <servers />
   </component>

@@ -2,17 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile_basic : MonoBehaviour
+namespace HexStates
+{
+    
+public class Tile_basic : HexagonTile
 {
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        
+        isAlive = true;
+        LegalizeTiles();
     }
+        
+    public void Init()
+    {
+        lifeTime = 5; // Example value for Fusion1
+        HexagonTile parentTile = GetComponent<HexagonTile>();
+        if (parentTile != null)
+        {
+            parentTile.lifeTime = lifeTime;
+            parentTile.isAlive = true;
+        }
+    }
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -11,7 +11,10 @@ public class HexagonGrid : MonoBehaviour
     [SerializeField] private GameObject hexagonTilePrefab;
 
     [SerializeField] public GameObject[,] _tileInstances;
-
+    [HideInInspector] public int centerX;
+    [HideInInspector] public int centerY;
+    
+    
     private void Awake()
     {
         _tileInstances = new GameObject[gridWidth, gridHeight];
@@ -39,16 +42,14 @@ public class HexagonGrid : MonoBehaviour
             }
         }
 
-        int centerX = gridWidth / 2;
-        int centerY = gridHeight / 2;
+        centerX = gridWidth / 2;
+        centerY = gridHeight / 2;
         
         
-        HexagonTile starterTile = _tileInstances[centerX, centerY].GetComponent<HexagonTile>();
+        //HexagonTile starterTile = _tileInstances[centerX, centerY].GetComponent<HexagonTile>();
         
-       Debug.Log(starterTile.gameObject.name);
-       starterTile.GetComponent<TileState>().ApplyState(starterTile, TileState.TileStates.StarterTile);
-        
-        starterTile.ActivateStateScript(TileState.TileStates.StarterTile);
+       //Debug.Log(starterTile.gameObject.name);
+       //starterTile.GetComponent<TileState>().ApplyState(starterTile, TileState.TileStates.StarterTile);
     }
     
 }

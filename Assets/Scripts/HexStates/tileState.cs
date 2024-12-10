@@ -18,7 +18,18 @@ public class TileState : MonoBehaviour
 
     public event Action<TileStates> OnStateChanged;
 
-    private void Start()
+    // private void Start()
+    // {
+    //     // Set the default state
+    //     if (currentState!= TileStates.StarterTile)
+    //     {
+    //         var thisTile = GetComponent<HexagonTile>();
+    //         currentState = TileStates.DefaultState;
+    //         ApplyState(thisTile, currentState);
+    //     }
+    // }
+
+    public void init()
     {
         // Set the default state
         if (currentState!= TileStates.StarterTile)
@@ -28,7 +39,6 @@ public class TileState : MonoBehaviour
             ApplyState(thisTile, currentState);
         }
     }
-
     public void ApplyState(HexagonTile tile, TileStates state)
     {
         currentState = state;

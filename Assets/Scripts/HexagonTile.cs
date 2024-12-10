@@ -18,31 +18,14 @@ public class HexagonTile : MonoBehaviour
     public void InitializeTile()
     {
         tileState = GetComponent<TileState>();
+        tileState.init();
         if (tileState != null)
         {
-            tileState.OnStateChanged += ActivateStateScript;
+            tileState.OnStateChanged += ModifyBehavior;
         }
-    }
-    
-    public void ActivateStateScript(TileState.TileStates state)
-    {
-        switch (state)
-        {
-            case TileState.TileStates.BasicState:
-                Fusion1 fusion1Script = GetComponent<Fusion1>();
-                if (fusion1Script == null)
-                {
-                    fusion1Script = gameObject.AddComponent<Fusion1>();
-                }
-                break;
-            case TileState.TileStates.StarterTile:
-                StarterTile starterTileScript = GetComponent<StarterTile>();
-                if (starterTileScript == null)
-                {
-                    starterTileScript = gameObject.AddComponent<StarterTile>();
-                }
-                break;
-        }
+        
+        
+        
     }
 
     public void ModifyBehavior(TileState.TileStates state)
@@ -52,19 +35,38 @@ public class HexagonTile : MonoBehaviour
         {
             case TileState.TileStates.DefaultState:
                 GetComponentInChildren<Renderer>().material.color = Color.grey;
+                
                 break;
+            
             case TileState.TileStates.LegalState:
                 GetComponentInChildren<Renderer>().material.color = Color.white;
+                
                 break;
+            
             case TileState.TileStates.StarterTile:
                 GetComponentInChildren<Renderer>().material.color = Color.red;
+                StarterTile starterTile = GetComponent<StarterTile>();
+                if (starterTile != null)
+                {
+                    starterTile.Init();
+                }
+                
                 break;
+            
             case TileState.TileStates.BasicState:
                 GetComponentInChildren<Renderer>().material.color = Color.green;
+                Tile_basic basicTile = GetComponent<Tile_basic>();
+                if (basicTile != null)
+                {
+                    basicTile.Init();
+                }
                 break;
+            
             default:
+                Debug.Log("The tile state is not recognized:" + transform);
                 GetComponentInChildren<Renderer>().material.color = Color.black;
                 break;
+            
         }
     }
 
@@ -110,23 +112,8 @@ public class HexagonTile : MonoBehaviour
             }
         }
     }
-    public void ApplyLifeTime(HexagonTile tile)
-    {
-        switch (tile.tileState.currentState)
-        {
-            case TileState.TileStates.StarterTile:
-                tile.GetComponent<StarterTile>()?.SetLifeTime();
-                break;
-            case TileState.TileStates.BasicState:
-                tile.GetComponent<Fusion1>()?.SetLifeTime();
-                break;
-            // Add cases for other states as needed
-            default:
-                tile.lifeTime = 0; // Default value for unknown states
-                break;
-        }
-    }
-    public void TileXCreation()
+
+    public void LegalizeTiles()
     {
         HexagonTile hexTile = GetComponent<HexagonTile>();
         if (hexTile != null)

@@ -20,7 +20,7 @@ public class TileClickHandler : MonoBehaviour
                     if (tileState != null && tileState.currentState == TileState.TileStates.LegalState)
                     {
                         tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
-                        hexTile.ApplyLifeTime(hexTile); // Apply the lifetime to the tile
+                         // Apply the lifetime to the tile
                         hexTile.DecrementLifeTimeForAllTiles(gridParent);
                     }
                 }

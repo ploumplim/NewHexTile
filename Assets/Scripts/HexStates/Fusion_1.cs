@@ -7,8 +7,7 @@ namespace HexStates
     {
         public void Start()
         {
-            isAlive = true;
-            TileXCreation();
+            
         }
         
         public void SetLifeTime()
