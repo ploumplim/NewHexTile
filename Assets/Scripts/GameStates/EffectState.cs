@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class EffectState : States
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Enter()
     {
-        
+        GM.changeState(GM.GetComponent<CountersState>());
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Tick()
     {
-        
+    }
+
+    public override void Exit()
+    {
+        Debug.Log("Exiting Effect State");
     }
 }

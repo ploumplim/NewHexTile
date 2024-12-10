@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class FusionState : States
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Enter()
     {
+        GM.changeState(GM.GetComponent<EffectState>());
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Tick()
     {
-        
+    }
+
+    public override void Exit()
+    {
+        Debug.Log("Exiting Fusion State");
     }
 }

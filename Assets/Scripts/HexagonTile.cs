@@ -41,13 +41,22 @@ public class HexagonTile : MonoBehaviour
         {
             case TileState.TileStates.DefaultState:
                 GetComponentInChildren<Renderer>().material.color = Color.grey;
-                
-                
+                Empty defaultTile = GetComponent<Empty>();
+                if (defaultTile == null)
+                {
+                    defaultTile = gameObject.AddComponent<Empty>();
+                }
+                defaultTile.Init();
                 break;
             
             case TileState.TileStates.LegalState:
                 GetComponentInChildren<Renderer>().material.color = Color.white;
-                
+                Legal legalTile = GetComponent<Legal>();
+                if (legalTile == null)
+                {
+                    legalTile = gameObject.AddComponent<Legal>();
+                }
+                legalTile.Init();
                 break;
             
             case TileState.TileStates.StarterTile:
@@ -58,7 +67,6 @@ public class HexagonTile : MonoBehaviour
                     starterTile = gameObject.AddComponent<StarterTile>();
                 }
                 starterTile.Init();
-                LegalizeTiles();
                 break;
             
             case TileState.TileStates.BasicState:
@@ -69,7 +77,6 @@ public class HexagonTile : MonoBehaviour
                     basicTile = gameObject.AddComponent<Tile_basic>();
                 }
                 basicTile.Init();
-                LegalizeTiles();
                 
                 break;
             
@@ -107,7 +114,7 @@ public class HexagonTile : MonoBehaviour
     }
 
     
-    public void DecrementLifeTimeForAllTiles(GameObject gridParent)
+    public void DecrementLifeTimeForAllTiles(HexagonGrid gridParent)
     {
         foreach (Transform child in gridParent.transform)
         {
@@ -118,7 +125,7 @@ public class HexagonTile : MonoBehaviour
                 hexTile.lifeTime -= 1;
                 if (hexTile.lifeTime <= 0)
                 {
-                    DeadCells(hexTile);
+                    DeadCells();
                 }
             }
         }
@@ -141,20 +148,20 @@ public class HexagonTile : MonoBehaviour
         }
     }
 
-    public void DeadCells(HexagonTile hexTile)
+    public void DeadCells()
     {
-        HexagonTile[] adjacentTiles = hexTile.GetAdjacentTiles();
+        HexagonTile[] adjacentTiles = GetAdjacentTiles();
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
             if (adjacentTile.tileState.currentState != TileState.TileStates.LegalState &&
                 adjacentTile.tileState.currentState != TileState.TileStates.DefaultState)
             {
-                hexTile.tileState.ApplyState(hexTile, TileState.TileStates.LegalState);
+                tileState.ApplyState(this, TileState.TileStates.LegalState);
                 break;
             }
             else
             {
-                hexTile.tileState.ApplyState(hexTile, TileState.TileStates.DefaultState);
+                tileState.ApplyState(this, TileState.TileStates.DefaultState);
             }
         }
         

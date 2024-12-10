@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+// StarterTile.cs
+
+using System;
 using UnityEngine;
-
-public class Empty : MonoBehaviour
+namespace HexStates
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Empty : HexagonTile
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void Init()
+        {
+            HexagonTile thisTile = GetComponent<HexagonTile>();
+            if (thisTile != null)
+            {
+                thisTile.isAlive = false;
+            }
+            
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 public class TileClickHandler : MonoBehaviour
 {
-    public GameObject gridParent;
+    public HexagonGrid gridParent;
 
     void Update()
     {
@@ -21,7 +21,7 @@ public class TileClickHandler : MonoBehaviour
                     {
                         tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
                          // Apply the lifetime to the tile
-                        hexTile.DecrementLifeTimeForAllTiles(gridParent);
+                        // hexTile.DecrementLifeTimeForAllTiles(gridParent);
                     }
                 }
             }
