@@ -55,6 +55,7 @@ public class HexagonTile : MonoBehaviour
         switch (state)
         {
             case TileState.TileStates.DefaultState:
+                GetComponentInChildren<Renderer>().material.color = Color.grey;
                 break;
             case TileState.TileStates.LegalState:
                 GetComponentInChildren<Renderer>().material.color = Color.white;
@@ -108,9 +109,7 @@ public class HexagonTile : MonoBehaviour
                 hexTile.lifeTime -= 1;
                 if (hexTile.lifeTime <= 0)
                 {
-                    hexTile.isAlive = false;
-                    hexTile.tileState.ApplyState(hexTile, TileState.TileStates.DefaultState);
-                    //hexTile.GetComponentInChildren<Renderer>().material.color = Color.black;
+                    DeadCells(hexTile);
                 }
             }
         }
@@ -144,6 +143,42 @@ public class HexagonTile : MonoBehaviour
                 {
                     adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.LegalState);
                 }
+            }
+        }
+    }
+
+    public void DeadCells(HexagonTile hexTile)
+    {
+        HexagonTile[] adjacentTiles = hexTile.GetAdjacentTiles();
+        hexTile.isAlive = false;
+
+        bool hasDifferentState = false;
+
+        foreach (HexagonTile adjacentTile in adjacentTiles)
+        {
+            if (adjacentTile.tileState.currentState != TileState.TileStates.LegalState &&
+                adjacentTile.tileState.currentState != TileState.TileStates.DefaultState)
+            {
+                hasDifferentState = true;
+                break;
+            }
+            else
+            {
+                hexTile.tileState.ApplyState(hexTile, TileState.TileStates.DefaultState);
+            }
+        }
+
+        if (hasDifferentState)
+        {
+            hexTile.tileState.ApplyState(hexTile, TileState.TileStates.LegalState);
+        }
+        
+        foreach (HexagonTile adjacentTile in adjacentTiles)
+        {
+            if (adjacentTile.tileState.currentState == TileState.TileStates.LegalState)
+            {
+                adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.DefaultState);
+                
             }
         }
     }
