@@ -20,7 +20,7 @@ public class HexagonGrid : MonoBehaviour
         TileInstances = new GameObject[gridWidth, gridHeight];
     }
 
-    public void InitGrid()
+    public void InitGrid(int basicLife, int fastLife ,int slowLife)
     {
         for (int y = 0; y < gridWidth; y++)
         {
@@ -36,7 +36,7 @@ public class HexagonGrid : MonoBehaviour
                 HexagonTile tile = TileInstances[x, y].GetComponent<HexagonTile>();
                 if (tile != null)
                 {
-                    tile.InitializeTile();
+                    tile.InitializeTile(basicLife, fastLife, slowLife);
                     tile.parentGrid = this;
                 }
             }

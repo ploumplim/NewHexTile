@@ -15,6 +15,6 @@ public class EffectState : States
 
     public override void Exit()
     {
-        Debug.Log("Exiting Effect State");
+        //Debug.Log("Exiting Effect State");
     }
 }

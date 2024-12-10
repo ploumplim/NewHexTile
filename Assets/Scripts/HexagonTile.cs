@@ -15,15 +15,18 @@ public class HexagonTile : MonoBehaviour
     public bool isAlive;
     public int lifeTime;
     
-    [Tooltip("This is the lfietime of the starter tile")]
+    
     public int StarterLifeTime = 1;
-    [Tooltip("This is the lifetime of the basic tile")]
+    
     public int BasicLifeTime = 5;
     public int FastLifeTime = 3;
     public int SlowLifeTime = 7;
 
-    public void InitializeTile()
+    public void InitializeTile(int basicLife, int fastLife, int slowLife)
     {
+        BasicLifeTime = basicLife;
+        FastLifeTime = fastLife;
+        SlowLifeTime = slowLife;
         tileState = GetComponent<TileState>();
         tileState.init();
         if (tileState != null)

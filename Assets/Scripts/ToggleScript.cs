@@ -25,7 +25,7 @@ public class ToggleScript : MonoBehaviour
                 if (i != index)
                 {
                     toggles[i].isOn = false;
-                    Debug.Log(index);
+//                    Debug.Log(index);
                 }
             }
         }
