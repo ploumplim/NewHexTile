@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7163118725097851189}
   - component: {fileID: 5598418211867190692}
   - component: {fileID: -4271742919183421098}
+  - component: {fileID: 3826982093671844701}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2ebfe9794fea647b41e51c2935ae7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 0}
   currentState: {fileID: 0}
 --- !u!114 &5598418211867190692
 MonoBehaviour:
@@ -73,3 +73,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d256f2093a824dd784f2eac38f204a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridParent: {fileID: 0}
+  toggleScript: {fileID: 3826982093671844701}
+--- !u!114 &3826982093671844701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2531548851215127038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b42addeb9542698db9cccaf66ac5ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggles: []
+  activeTile: 0

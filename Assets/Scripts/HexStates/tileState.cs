@@ -10,6 +10,8 @@ public class TileState : MonoBehaviour
     {
         DefaultState,
         BasicState,
+        SlowState,
+        FastState,
         LegalState,
         StarterTile
     }
@@ -17,17 +19,6 @@ public class TileState : MonoBehaviour
     public TileStates currentState;
 
     public event Action<TileStates> OnStateChanged;
-
-    // private void Start()
-    // {
-    //     // Set the default state
-    //     if (currentState!= TileStates.StarterTile)
-    //     {
-    //         var thisTile = GetComponent<HexagonTile>();
-    //         currentState = TileStates.DefaultState;
-    //         ApplyState(thisTile, currentState);
-    //     }
-    // }
 
     public void init()
     {
