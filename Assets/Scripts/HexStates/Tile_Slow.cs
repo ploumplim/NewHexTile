@@ -1,6 +1,7 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+
 public class Tile_Slow : HexagonTile
 {
     public void Init()
@@ -14,5 +15,13 @@ public class Tile_Slow : HexagonTile
         }
         LegalizeTiles();
         
+        CheckToFuseWith(thisTile, stateToFuseWith);
+    }
+    public Tile_Slow()
+    {
+        stateToFuseWith = new List<TileState.TileStates>
+        {
+            TileState.TileStates.SlowState
+        };
     }
 }
