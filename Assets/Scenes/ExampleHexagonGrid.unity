@@ -2071,7 +2071,7 @@ PrefabInstance:
       objectReference: {fileID: 1518312606}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: GODMODE
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: HexGrid

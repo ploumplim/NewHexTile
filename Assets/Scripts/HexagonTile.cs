@@ -21,7 +21,9 @@ public class HexagonTile : MonoBehaviour
     public int BasicLifeTime = 5;
     public int FastLifeTime = 3;
     public int SlowLifeTime = 7;
-
+    
+    public List<TileState.TileStates> stateToFuseWith;
+    
     public void InitializeTile(int basicLife, int fastLife, int slowLife)
     {
         BasicLifeTime = basicLife;
@@ -29,15 +31,8 @@ public class HexagonTile : MonoBehaviour
         SlowLifeTime = slowLife;
         tileState = GetComponent<TileState>();
         tileState.init();
-        if (tileState != null)
-        {
-            tileState.OnStateChanged += ModifyBehavior;
-        }
-        
-        
-        
     }
-
+    
     public void ModifyBehavior(TileState.TileStates state)
     {
         // Implement behavior modification based on the state
@@ -135,24 +130,8 @@ public class HexagonTile : MonoBehaviour
 
         return adjacentTiles.ToArray();
     }
-
     
-    public void DecrementLifeTimeForAllTiles(HexagonGrid gridParent)
-    {
-        foreach (Transform child in gridParent.transform)
-        {
-            HexagonTile hexTile = child.GetComponent<HexagonTile>();
-
-            if (hexTile.isAlive)
-            {
-                hexTile.lifeTime -= 1;
-                if (hexTile.lifeTime <= 0)
-                {
-                    DeadCells();
-                }
-            }
-        }
-    }
+    
 
     public void LegalizeTiles()
     {
@@ -211,5 +190,18 @@ public class HexagonTile : MonoBehaviour
         }
         return true;
     }
-    
+
+    public void CheckToFuseWith(HexagonTile tile,List<TileState.TileStates> stateToFuseWith)
+    {
+        HexagonTile[] adjacentTiles = tile.GetAdjacentTiles();
+        foreach (var adjacentTile in adjacentTiles)
+        {
+            if (adjacentTile != null && adjacentTile.tileState != null && stateToFuseWith.Contains(adjacentTile.tileState.currentState))
+            {
+               adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.FastState);
+               tile.tileState.ApplyState(tile, TileState.TileStates.FastState);
+                break;
+            }
+        }
+    }
 }
