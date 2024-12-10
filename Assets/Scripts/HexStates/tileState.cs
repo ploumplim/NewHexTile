@@ -23,7 +23,9 @@ public class TileState : MonoBehaviour
         // Set the default state
         if (currentState!= TileStates.StarterTile)
         {
+            var thisTile = GetComponent<HexagonTile>();
             currentState = TileStates.DefaultState;
+            ApplyState(thisTile, currentState);
         }
     }
 

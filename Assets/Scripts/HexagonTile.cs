@@ -23,11 +23,7 @@ public class HexagonTile : MonoBehaviour
             tileState.OnStateChanged += ActivateStateScript;
         }
     }
-
     
-
-    
-
     public void ActivateStateScript(TileState.TileStates state)
     {
         switch (state)
@@ -152,35 +148,42 @@ public class HexagonTile : MonoBehaviour
         HexagonTile[] adjacentTiles = hexTile.GetAdjacentTiles();
         hexTile.isAlive = false;
 
-        bool hasDifferentState = false;
-
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
             if (adjacentTile.tileState.currentState != TileState.TileStates.LegalState &&
                 adjacentTile.tileState.currentState != TileState.TileStates.DefaultState)
             {
-                hasDifferentState = true;
+                hexTile.tileState.ApplyState(hexTile, TileState.TileStates.LegalState);
                 break;
             }
-            else
-            {
-                hexTile.tileState.ApplyState(hexTile, TileState.TileStates.DefaultState);
-            }
-        }
-
-        if (hasDifferentState)
-        {
-            hexTile.tileState.ApplyState(hexTile, TileState.TileStates.LegalState);
+            // else
+            // {
+            //     hexTile.tileState.ApplyState(hexTile, TileState.TileStates.DefaultState);
+            // }
         }
         
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
-            if (adjacentTile.tileState.currentState == TileState.TileStates.LegalState)
+            if (adjacentTile.tileState.currentState == TileState.TileStates.LegalState && CellShouldBeDefault(adjacentTile))
             {
                 adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.DefaultState);
-                
             }
         }
+    }
+    
+    public bool CellShouldBeDefault(HexagonTile hexTile) // This method should only be called by dying cells to have any
+                                                         // legal tiles around them check if they should still be legal.
+    {
+        HexagonTile[] adjacentTiles = hexTile.GetAdjacentTiles();
+        foreach (HexagonTile adjacentTile in adjacentTiles)
+        {
+            if (adjacentTile.tileState.currentState != TileState.TileStates.LegalState &&
+                adjacentTile.tileState.currentState != TileState.TileStates.DefaultState)
+            {
+                return false;
+            }
+        }
+        return true;
     }
     
 }
