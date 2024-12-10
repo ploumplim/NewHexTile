@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
         currentState.Exit();
         currentState = newState;
-        Debug.Log("State changed to " + newState);
+        //Debug.Log("State changed to " + newState);
         currentState.Enter();
     }
 }

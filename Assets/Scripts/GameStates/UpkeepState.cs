@@ -38,6 +38,6 @@ public class UpkeepState : States
     
     public override void Exit()
     {
-        Debug.Log("Current living tiles: " + GM.livingTiles.Length);
+        //Debug.Log("Current living tiles: " + GM.livingTiles.Length);
     }
 }

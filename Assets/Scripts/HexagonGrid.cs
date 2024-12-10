@@ -48,7 +48,7 @@ public class HexagonGrid : MonoBehaviour
         
         HexagonTile starterTile = TileInstances[centerX, centerY].GetComponent<HexagonTile>();
         
-       Debug.Log(starterTile.gameObject.name);
+       //Debug.Log(starterTile.gameObject.name);
        starterTile.GetComponent<TileState>().ApplyState(starterTile, TileState.TileStates.StarterTile);
     }
     

@@ -16,6 +16,6 @@ public class FusionState : States
 
     public override void Exit()
     {
-        Debug.Log("Exiting Fusion State");
+        //Debug.Log("Exiting Fusion State");
     }
 }

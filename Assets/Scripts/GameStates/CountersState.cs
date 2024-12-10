@@ -30,6 +30,6 @@ public class CountersState : States
 
     public override void Exit()
     {
-        Debug.Log("Exiting Counters State");
+        //Debug.Log("Exiting Counters State");
     }
 }

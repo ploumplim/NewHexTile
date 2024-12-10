@@ -19,7 +19,8 @@ public class HexagonTile : MonoBehaviour
     public int StarterLifeTime = 1;
     [Tooltip("This is the lifetime of the basic tile")]
     public int BasicLifeTime = 5;
-    
+    public int FastLifeTime = 3;
+    public int SlowLifeTime = 7;
 
     public void InitializeTile()
     {
@@ -70,7 +71,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileState.TileStates.BasicState:
-                GetComponentInChildren<Renderer>().material.color = Color.green;
+                GetComponentInChildren<Renderer>().material.color = Color.blue;
                 Tile_basic basicTile = GetComponent<Tile_basic>();
                 if (basicTile == null)
                 {
@@ -79,7 +80,26 @@ public class HexagonTile : MonoBehaviour
                 basicTile.Init();
                 
                 break;
-            
+            case TileState.TileStates.SlowState:
+                GetComponentInChildren<Renderer>().material.color = Color.magenta;
+                Tile_Slow slowTile = GetComponent<Tile_Slow>();
+                if (slowTile == null)
+                {
+                    slowTile = gameObject.AddComponent<Tile_Slow>();
+                }
+                slowTile.Init();
+                
+                break;
+            case TileState.TileStates.FastState:
+                GetComponentInChildren<Renderer>().material.color = Color.yellow;
+                Tile_Fast fastTile = GetComponent<Tile_Fast>();
+                if (fastTile == null)
+                {
+                    fastTile = gameObject.AddComponent<Tile_Fast>();
+                }
+                fastTile.Init();
+                
+                break;
             default:
                 Debug.Log("The tile state is not recognized:" + transform);
                 GetComponentInChildren<Renderer>().material.color = Color.black;

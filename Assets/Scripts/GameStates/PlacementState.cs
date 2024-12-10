@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacementState : States
-{
+{public ToggleScript toggleScript; // Reference to the ToggleScript
     public override void Enter()
     {
 
@@ -24,10 +24,24 @@ public class PlacementState : States
                     TileState tileState = hexTile.GetComponent<TileState>();
                     if (tileState != null && tileState.currentState == TileState.TileStates.LegalState)
                     {
-                        tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
+                        int activeTileIndex = toggleScript.activeTile;
+                        switch (activeTileIndex)
+                        {
+                            case 0:
+                                tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
+                                break;
+                            case 1:
+                                tileState.ApplyState(hexTile, TileState.TileStates.SlowState);
+                                break;
+                            case 2:
+                                tileState.ApplyState(hexTile, TileState.TileStates.FastState);
+                                break;
+                            default:
+                                Debug.LogError("Invalid active tile index: " + activeTileIndex);
+                                break;
+                        }
                         GM.changeState(GM.GetComponent<FusionState>());
-                        // Apply the lifetime to the tile
-                        // hexTile.DecrementLifeTimeForAllTiles(GM.HexGrid);
+                        
                     }
                 }
             }
