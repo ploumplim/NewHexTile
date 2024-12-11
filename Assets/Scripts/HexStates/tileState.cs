@@ -17,6 +17,7 @@ public class TileState : MonoBehaviour
         Fusion1,
         FusionSlow,
         FusionFast,
+        DeadState,
     }
 
     public TileStates currentState;

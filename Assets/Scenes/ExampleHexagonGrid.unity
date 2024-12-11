@@ -2155,15 +2155,15 @@ PrefabInstance:
       objectReference: {fileID: 1910971298}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: FastLifeTime
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: SlowLifeTime
-      value: 15
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: BasicLifeTime
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: nextTilePreview

@@ -140,7 +140,17 @@ public class HexagonTile : MonoBehaviour
                 fillStatesToFuseWith();
                 
                 break;
-            
+            case TileState.TileStates.DeadState:
+                GetComponentInChildren<Renderer>().material.color = Color.black;
+                Dead_state deadState = GetComponent<Dead_state>();
+                if (deadState == null)
+                {
+                    deadState = gameObject.AddComponent<Dead_state>();
+                }
+                deadState.Init();
+                fillStatesToFuseWith();
+
+                break;
             
             default:
                 Debug.Log("The tile state is not recognized:" + transform);
@@ -197,20 +207,21 @@ public class HexagonTile : MonoBehaviour
     public void DeadCells()
     {
         HexagonTile[] adjacentTiles = GetAdjacentTiles();
+        
+        // Check if the cell should die
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
+            
+            // If the cell is not legal, it should die
             if (adjacentTile.tileState.currentState != TileState.TileStates.LegalState &&
                 adjacentTile.tileState.currentState != TileState.TileStates.DefaultState)
             {
-                tileState.ApplyState(this, TileState.TileStates.LegalState);
+                tileState.ApplyState(this, TileState.TileStates.DeadState);
                 break;
             }
-            else
-            {
-                tileState.ApplyState(this, TileState.TileStates.DefaultState);
-            }
+            
         }
-        
+        // Check if the adjacent cells should remain legal        
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
             if (adjacentTile.tileState.currentState == TileState.TileStates.LegalState && CellShouldBeDefault(adjacentTile))
@@ -227,7 +238,8 @@ public class HexagonTile : MonoBehaviour
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
             if (adjacentTile.tileState.currentState != TileState.TileStates.LegalState &&
-                adjacentTile.tileState.currentState != TileState.TileStates.DefaultState)
+                adjacentTile.tileState.currentState != TileState.TileStates.DefaultState &&
+                adjacentTile.tileState.currentState != TileState.TileStates.DeadState)
             {
                 return false;
             }
