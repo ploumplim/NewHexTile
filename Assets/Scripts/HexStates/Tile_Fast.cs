@@ -14,7 +14,7 @@ namespace HexStates
                 thisTile.isAlive = true;
             }
             LegalizeTiles();
-            
+           
         }
     }
 }

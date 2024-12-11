@@ -23,13 +23,15 @@ public class HexagonTile : MonoBehaviour
     public int FastLifeTime = 3;
     public int SlowLifeTime = 7;
     
+    
+    public int fusion1LifeTime = 10;
+    public int fusionFastLifeTime = 6;
+    public int fusionSlowLifeTime = 14;
+    
     public List<TileState.TileStates> stateToFuseWith;
     
-    public void InitializeTile(int basicLife, int fastLife, int slowLife)
+    public void InitializeTile()
     {
-        BasicLifeTime = basicLife;
-        FastLifeTime = fastLife;
-        SlowLifeTime = slowLife;
         tileState = GetComponent<TileState>();
         tileState.init();
     }
@@ -77,7 +79,7 @@ public class HexagonTile : MonoBehaviour
                     basicTile = gameObject.AddComponent<Tile_basic>();
                 }
                 basicTile.Init();
-                fillStatesToFuseWith();
+                FillStatesToFuseWith();
                 
                 break;
             
@@ -89,7 +91,7 @@ public class HexagonTile : MonoBehaviour
                     slowTile = gameObject.AddComponent<Tile_Slow>();
                 }
                 slowTile.Init();
-                fillStatesToFuseWith();
+                FillStatesToFuseWith();
                 
                 break;
             
@@ -101,7 +103,7 @@ public class HexagonTile : MonoBehaviour
                     fastTile = gameObject.AddComponent<Tile_Fast>();
                 }
                 fastTile.Init();
-                fillStatesToFuseWith();
+                FillStatesToFuseWith();
                 
                 break;
             
@@ -113,7 +115,7 @@ public class HexagonTile : MonoBehaviour
                     fusion1 = gameObject.AddComponent<Fusion1>();
                 }
                 fusion1.Init();
-                fillStatesToFuseWith();
+                FillStatesToFuseWith();
                 
                 break;
             
@@ -125,7 +127,7 @@ public class HexagonTile : MonoBehaviour
                     fusionSlow = gameObject.AddComponent<Fusion_slow>();
                 }
                 fusionSlow.Init();
-                fillStatesToFuseWith();
+                FillStatesToFuseWith();
                 
                 break;
             
@@ -137,7 +139,7 @@ public class HexagonTile : MonoBehaviour
                     fusionFast = gameObject.AddComponent<Fusion_fast>();
                 }
                 fusionFast.Init();
-                fillStatesToFuseWith();
+                FillStatesToFuseWith();
                 
                 break;
             case TileState.TileStates.DeadState:
@@ -148,7 +150,7 @@ public class HexagonTile : MonoBehaviour
                     deadState = gameObject.AddComponent<Dead_state>();
                 }
                 deadState.Init();
-                fillStatesToFuseWith();
+                FillStatesToFuseWith();
 
                 break;
             
@@ -247,7 +249,7 @@ public class HexagonTile : MonoBehaviour
         return true;
     }
     
-    public void fillStatesToFuseWith()
+    public void FillStatesToFuseWith()
     {
         switch (tileState.currentState)
         {
@@ -275,7 +277,7 @@ public class HexagonTile : MonoBehaviour
         }
     }
 
-    public void CheckToFuseWith(HexagonTile tile)
+    public void FuseTiles(HexagonTile tile)
     {
         HexagonTile[] adjacentTiles = tile.GetAdjacentTiles();
         foreach (var adjacentTile in adjacentTiles)

@@ -7,7 +7,7 @@ namespace HexStates
         public void Init()
         {
             HexagonTile thisTile = GetComponent<HexagonTile>();
-            int lifeTime = thisTile.BasicLifeTime*2;
+            int lifeTime = thisTile.fusion1LifeTime;
             if (thisTile != null)
             {
                 thisTile.lifeTime = lifeTime;

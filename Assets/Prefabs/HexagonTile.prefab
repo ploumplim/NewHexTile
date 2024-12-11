@@ -614,9 +614,9 @@ MonoBehaviour:
   isAlive: 0
   lifeTime: 0
   StarterLifeTime: 1
-  BasicLifeTime: 5
-  FastLifeTime: 3
-  SlowLifeTime: 7
+  BasicLifeTime: 10
+  FastLifeTime: 5
+  SlowLifeTime: 15
   stateToFuseWith: 
 --- !u!114 &-3343785008575026658
 MonoBehaviour:

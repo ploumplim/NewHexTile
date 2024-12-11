@@ -13,7 +13,7 @@ public class FusionState : States
                 HexagonTile tile = GM.livingTiles[i].GetComponent<HexagonTile>();
                 if (tile != null)
                 {
-                    tile.CheckToFuseWith(tile);
+                    tile.FuseTiles(tile);
                 }
             }
         }

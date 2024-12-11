@@ -8,7 +8,7 @@ public class Fusion_slow : HexagonTile
     public void Init()
     {
         HexagonTile thisTile = GetComponent<HexagonTile>();
-        int lifeTime = thisTile.SlowLifeTime*2;
+        int lifeTime = thisTile.fusionSlowLifeTime;
         if (thisTile != null)
         {
             thisTile.lifeTime = lifeTime;

@@ -30,9 +30,6 @@ public class GameManager : MonoBehaviour
     
     public bool GODMODE;
     
-    public int BasicLifeTime = 5;
-    public int FastLifeTime = 3;
-    public int SlowLifeTime = 7;
 
     [Tooltip("next tile Prefab")]
     public GameObject nextTilePreview;
@@ -54,7 +51,7 @@ public class GameManager : MonoBehaviour
        
         currentState = GetComponent<UpkeepState>();
         currentState.Enter();
-        HexGrid.InitGrid(BasicLifeTime, FastLifeTime, SlowLifeTime);
+        HexGrid.InitGrid();
 
 
 
