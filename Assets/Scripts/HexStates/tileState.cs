@@ -18,6 +18,7 @@ public class TileState : MonoBehaviour
         FusionSlow,
         FusionFast,
         DeadState,
+        DestroyerState,
     }
 
     public TileStates currentState;
@@ -38,7 +39,7 @@ public class TileState : MonoBehaviour
     {
         currentState = state;
         OnStateChanged?.Invoke(state);
-        tile.ModifyBehavior(state);
+        tile.TileStateChange(state);
     }
     
     

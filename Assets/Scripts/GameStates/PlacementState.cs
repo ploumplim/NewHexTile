@@ -39,6 +39,9 @@ public class PlacementState : States
                                     tileState.ApplyState(hexTile, TileState.TileStates.FastState);
                                     break;
                                 case 3:
+                                    tileState.ApplyState(hexTile, TileState.TileStates.DestroyerState);
+                                    break;
+                                case 4:
                                     nextTileCreate(tileState, hexTile);
                                     break;
                                 default:
@@ -68,7 +71,6 @@ public class PlacementState : States
         switch (GM.nextTile)
         {
             case 0:
-                
                 tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
                 break;
             case 1:
@@ -76,6 +78,9 @@ public class PlacementState : States
                 break;
             case 2:
                 tileState.ApplyState(hexTile, TileState.TileStates.FastState);
+                break;
+            case 3:
+                tileState.ApplyState(hexTile, TileState.TileStates.DestroyerState);
                 break;
         }
     }

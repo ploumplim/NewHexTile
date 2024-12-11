@@ -11,6 +11,7 @@ namespace HexStates
             HexagonTile thisTile = GetComponent<HexagonTile>();
             if (thisTile != null)
             {
+                thisTile.lifeTime = 0;
                 thisTile.isAlive = false;
             }
             

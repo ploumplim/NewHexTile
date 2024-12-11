@@ -22,7 +22,7 @@ public class HexagonTile : MonoBehaviour
     public int BasicLifeTime = 5;
     public int FastLifeTime = 3;
     public int SlowLifeTime = 7;
-    
+    public int destroyerLifeTime = 1;
     
     public int fusion1LifeTime = 10;
     public int fusionFastLifeTime = 6;
@@ -36,7 +36,7 @@ public class HexagonTile : MonoBehaviour
         tileState.init();
     }
     
-    public void ModifyBehavior(TileState.TileStates state)
+    public void TileStateChange(TileState.TileStates state)
     {
         // Implement behavior modification based on the state
         switch (state)
@@ -62,7 +62,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileState.TileStates.StarterTile:
-                GetComponentInChildren<Renderer>().material.color = Color.red;
+                GetComponentInChildren<Renderer>().material.color = new Color(0f,0f,0f);
                 StarterTile starterTile = GetComponent<StarterTile>();
                 if (starterTile == null)
                 {
@@ -72,7 +72,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileState.TileStates.BasicState:
-                GetComponentInChildren<Renderer>().material.color = Color.blue;
+                GetComponentInChildren<Renderer>().material.color = new Color(0f,0.5f,0f);
                 Tile_basic basicTile = GetComponent<Tile_basic>();
                 if (basicTile == null)
                 {
@@ -84,7 +84,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileState.TileStates.SlowState:
-                GetComponentInChildren<Renderer>().material.color = Color.magenta;
+                GetComponentInChildren<Renderer>().material.color = new Color(0f,0f,0.5f);
                 Tile_Slow slowTile = GetComponent<Tile_Slow>();
                 if (slowTile == null)
                 {
@@ -96,7 +96,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileState.TileStates.FastState:
-                GetComponentInChildren<Renderer>().material.color = Color.yellow;
+                GetComponentInChildren<Renderer>().material.color = new Color(0.5f,0f,0f);
                 Tile_Fast fastTile = GetComponent<Tile_Fast>();
                 if (fastTile == null)
                 {
@@ -108,7 +108,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileState.TileStates.Fusion1:
-                GetComponentInChildren<Renderer>().material.color = Color.cyan;
+                GetComponentInChildren<Renderer>().material.color = new Color(0f,1f,0f);
                 Fusion1 fusion1 = GetComponent<Fusion1>();
                 if (fusion1 == null)
                 {
@@ -120,7 +120,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileState.TileStates.FusionSlow:
-                GetComponentInChildren<Renderer>().material.color = new Color(0.5f, 0.2f, 0.5f);
+                GetComponentInChildren<Renderer>().material.color = new Color(0f, 0f, 1f);
                 Fusion_slow fusionSlow = GetComponent<Fusion_slow>();
                 if (fusionSlow == null)
                 {
@@ -132,7 +132,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileState.TileStates.FusionFast:
-                GetComponentInChildren<Renderer>().material.color = new Color(0.9f, 0.5f, 0.3f);
+                GetComponentInChildren<Renderer>().material.color = new Color(1f, 0f, 0f);
                 Fusion_fast fusionFast = GetComponent<Fusion_fast>();
                 if (fusionFast == null)
                 {
@@ -153,7 +153,18 @@ public class HexagonTile : MonoBehaviour
                 FillStatesToFuseWith();
 
                 break;
-            
+            case TileState.TileStates.DestroyerState:
+                GetComponentInChildren<Renderer>().material.color = new Color(1f, 0f, 1f);
+                DestroyerTile destroyerTile = GetComponent<DestroyerTile>();
+                if (destroyerTile == null)
+                {
+                    destroyerTile = gameObject.AddComponent<DestroyerTile>();
+                }
+                destroyerTile.Init();
+                FillStatesToFuseWith();
+                break;
+                
+                
             default:
                 Debug.Log("The tile state is not recognized:" + transform);
                 GetComponentInChildren<Renderer>().material.color = Color.black;
@@ -186,8 +197,6 @@ public class HexagonTile : MonoBehaviour
 
         return adjacentTiles.ToArray();
     }
-    
-    
 
     public void LegalizeTiles()
     {
@@ -206,35 +215,24 @@ public class HexagonTile : MonoBehaviour
         }
     }
 
-    public void DeadCells()
+    public void EndOfLifeTime()
     {
         HexagonTile[] adjacentTiles = GetAdjacentTiles();
         
-        // Check if the cell should die
-        foreach (HexagonTile adjacentTile in adjacentTiles)
-        {
-            
-            // If the cell is not legal, it should die
-            if (adjacentTile.tileState.currentState != TileState.TileStates.LegalState &&
-                adjacentTile.tileState.currentState != TileState.TileStates.DefaultState)
-            {
-                tileState.ApplyState(this, TileState.TileStates.DeadState);
-                break;
-            }
-            
-        }
+        // Kill my cell
+        tileState.ApplyState(this, TileState.TileStates.DeadState);
+                
         // Check if the adjacent cells should remain legal        
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
-            if (adjacentTile.tileState.currentState == TileState.TileStates.LegalState && CellShouldBeDefault(adjacentTile))
+            if (adjacentTile.tileState.currentState == TileState.TileStates.LegalState && LegalTileShouldBeDefault(adjacentTile))
             {
                 adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.DefaultState);
             }
         }
     }
     
-    public bool CellShouldBeDefault(HexagonTile hexTile) // This method should only be called by dying cells to have any
-                                                         // legal tiles around them check if they should still be legal.
+    public bool LegalTileShouldBeDefault(HexagonTile hexTile) // This method should only be called by dying cells to have any legal tiles around them check if they should still be legal.
     {
         HexagonTile[] adjacentTiles = hexTile.GetAdjacentTiles();
         foreach (HexagonTile adjacentTile in adjacentTiles)
@@ -308,7 +306,59 @@ public class HexagonTile : MonoBehaviour
             }
         }
     }
+
+    public void ActivateTileEffects()
+    {
+        var state = tileState.currentState;
+        switch (state)
+        {
+            case TileState.TileStates.DestroyerState:
+                EffectDestroy();
+                break;
+            
+            default:
+                break;
+        }
+    }
     
-    
+    public void EffectDestroy()
+    {
+        EndOfLifeTime();
+        tileState.ApplyState(this, TileState.TileStates.DefaultState);
+        
+        
+        HexagonTile[] adjacentTiles = GetAdjacentTiles();
+        foreach (HexagonTile adjacentTile in adjacentTiles)
+        {
+            if (adjacentTile.isAlive)
+            {
+                adjacentTile.EndOfLifeTime();
+
+                if (adjacentTile.tileState.currentState == TileState.TileStates.DeadState)
+                {
+                    adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.LegalState);
+                    
+                    if (adjacentTile.LegalTileShouldBeDefault(adjacentTile))
+                    {
+                        adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.DefaultState);
+                    }
+                }
+
+            }
+
+            if (!adjacentTile.isAlive)
+            {
+                if (adjacentTile.tileState.currentState == TileState.TileStates.DeadState)
+                {
+                    adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.LegalState);
+
+                    if (adjacentTile.LegalTileShouldBeDefault(adjacentTile))
+                    {
+                        adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.DefaultState);
+                    }
+                }
+            }
+        }
+    }
     
 }

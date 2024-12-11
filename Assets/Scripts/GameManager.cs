@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,9 +15,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int gridHeight;
     [HideInInspector]
-    public float tileScale;
-    [HideInInspector]
-    public GameObject[] livingTiles;
+    public List<HexagonTile> livingTiles;
     [HideInInspector]
     public ToggleScript toggleScript;
     [HideInInspector] 
@@ -29,7 +29,9 @@ public class GameManager : MonoBehaviour
     public GameObject godHUD;
     
     public bool GODMODE;
-    
+
+    public int starterTileXPosition = 1;
+    public int starterTileYPosition = 1;
 
     [Tooltip("next tile Prefab")]
     public GameObject nextTilePreview;
@@ -52,7 +54,12 @@ public class GameManager : MonoBehaviour
         currentState = GetComponent<UpkeepState>();
         currentState.Enter();
         HexGrid.InitGrid();
-
+        
+        // SET STARTER TILE
+        HexagonTile starterTile = HexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
+        
+        //Debug.Log(starterTile.gameObject.name);
+        starterTile.GetComponent<TileState>().ApplyState(starterTile, TileState.TileStates.StarterTile);
 
 
         toggleScript = GetComponent<ToggleScript>();
@@ -63,9 +70,7 @@ public class GameManager : MonoBehaviour
         
         gridWidth = HexGrid.gridWidth;
         gridHeight = HexGrid.gridHeight;
-        tileScale = HexGrid.tileScale;
         Tiles = HexGrid.TileInstances;
-
 
     }
     

@@ -18,8 +18,13 @@ public class CountersState : States
                 if (hexTile.lifeTime <= 0)
                 {
                     hexTile.GetComponentInChildren<TextMeshPro>().text = "";
-                    hexTile.DeadCells();
+                    hexTile.EndOfLifeTime();
                 }
+            }
+
+            if (!hexTile.isAlive)
+            {
+                hexTile.GetComponentInChildren<TextMeshPro>().text = "";
             }
         }
         

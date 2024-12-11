@@ -613,10 +613,14 @@ MonoBehaviour:
   tileState: {fileID: 0}
   isAlive: 0
   lifeTime: 0
-  StarterLifeTime: 1
-  BasicLifeTime: 10
-  FastLifeTime: 5
-  SlowLifeTime: 15
+  StarterLifeTime: 2
+  BasicLifeTime: 20
+  FastLifeTime: 10
+  SlowLifeTime: 30
+  destroyerLifeTime: 2
+  fusion1LifeTime: 20
+  fusionFastLifeTime: 10
+  fusionSlowLifeTime: 30
   stateToFuseWith: 
 --- !u!114 &-3343785008575026658
 MonoBehaviour:

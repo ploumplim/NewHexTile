@@ -1,36 +1,24 @@
-    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class UpkeepState : States
 {
     public override void Enter()
     {
-        GM.livingTiles = new GameObject[GM.gridWidth * GM.gridHeight];
-        int livingTilePosition = 0;
+        GM.livingTiles = new List<HexagonTile>();
         for (int y = 0; y < GM.gridWidth; y++)
         {
             for (int x = 0; x < GM.gridHeight; x++)
             {
-                // float xPosition = y % 2 == 0 ? x * GM.tileScale : x * GM.tileScale + GM.tileScale / 2.0f;
-                // float yPosition = y * 0.9f * GM.tileScale;
-                // Vector3 position = new Vector3(xPosition, 0.0f, yPosition);
-                // Vector3 scale = Vector3.one * GM.tileScale;
-
                 GameObject tile = GM.Tiles[x,y];
-                if (tile != null && tile.GetComponent<HexagonTile>().isAlive)
+                if (tile != null && tile.GetComponentInChildren<HexagonTile>().isAlive)
                 {
-                    GM.livingTiles[livingTilePosition] = tile;
-                    livingTilePosition++;
+                    GM.livingTiles.Add(tile.GetComponentInChildren<HexagonTile>());
                 }
-                
-                
-                
             }
         }
         
-        generateNextTile();
+        GenerateNextTile();
         
         GM.changeState(GM.GetComponent<PlacementState>());
     }
@@ -45,20 +33,22 @@ public class UpkeepState : States
         //Debug.Log("Current living tiles: " + GM.livingTiles.Length);
     }
     
-    public void generateNextTile()
+    public void GenerateNextTile()
     {
-        GM.nextTile = Random.Range(0, 3);
-        HexagonGrid hexGrid = GM.HexGrid;
+        GM.nextTile = Random.Range(0, 4);
         switch (GM.nextTile)
         {
-            case 0:
-                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = Color.blue;
+            case 0: //basic tile
+                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(0f, 0.5f, 0f);
                 break;
-            case 1:
-                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = Color.magenta;
+            case 1: //slow tile
+                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(0f, 0f, 0.5f);
                 break;
-            case 2:
-                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = Color.yellow;
+            case 2: //fast tile
+                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(0.5f, 0f, 0f);
+                break;
+            case 3: //destroyer tile
+                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(1f, 0f, 1f);
                 break;
         }
     }

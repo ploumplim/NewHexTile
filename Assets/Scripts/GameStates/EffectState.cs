@@ -1,11 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class EffectState : States
 {
     public override void Enter()
     {
+        
+        foreach (HexagonTile tile in GM.livingTiles)
+        {
+            tile.GetComponent<HexagonTile>().ActivateTileEffects();
+        }
+        
+        
         GM.changeState(GM.GetComponent<CountersState>());
     }
 

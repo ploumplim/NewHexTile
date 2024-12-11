@@ -6,7 +6,7 @@ public class FusionState : States
 {
     public override void Enter()
     {
-        for (int i = 0; i < GM.livingTiles.Length; i++)
+        for (int i = 0; i < GM.livingTiles.Count; i++)
         {
             if (GM.livingTiles[i] != null)
             {

@@ -41,15 +41,6 @@ public class HexagonGrid : MonoBehaviour
                 }
             }
         }
-
-        centerX = gridWidth / 2;
-        centerY = gridHeight / 2;
-        
-        
-        HexagonTile starterTile = TileInstances[centerX, centerY].GetComponent<HexagonTile>();
-        
-       //Debug.Log(starterTile.gameObject.name);
-       starterTile.GetComponent<TileState>().ApplyState(starterTile, TileState.TileStates.StarterTile);
     }
     
 }
