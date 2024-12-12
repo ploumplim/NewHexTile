@@ -15,6 +15,7 @@ public class CountersState : States
             if (hexTile.isAlive)
             {
                 hexTile.lifeTime -= 1;
+                hexTile.priorityScore -= 1; 
                 hexTile.GetComponentInChildren<TextMeshPro>().text = hexTile.lifeTime.ToString();
                 if (hexTile.lifeTime <= 0)
                 {

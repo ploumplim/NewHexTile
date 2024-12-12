@@ -13,7 +13,8 @@ public class Tile_basic : HexagonTile
         int lifeTime = thisTile.BasicLifeTime;
         if (thisTile != null)
         {
-            thisTile.lifeTime = lifeTime;
+            thisTile.lifeTime += lifeTime;
+            thisTile.priorityScore = thisTile.lifeTime;
             thisTile.isAlive = true;
         }
         LegalizeTiles();

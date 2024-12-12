@@ -14,13 +14,12 @@ public class FusionState : States
                 HexagonTile tile = GM.livingTiles[i].GetComponent<HexagonTile>();
                 if (tile != null)
                 {
+                    //tile.priorityScore=tile.lifeTime;
                     tile.FuseTiles(tile);
                 }
+               
             }
         }
-        
-        
-        
         
         GM.changeState(GM.GetComponent<EffectState>());
     }

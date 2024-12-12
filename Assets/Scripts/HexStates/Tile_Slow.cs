@@ -12,7 +12,7 @@ namespace HexStates
             int lifeTime = thisTile.SlowLifeTime;
             if (thisTile != null)
             {
-                thisTile.lifeTime = lifeTime;
+                thisTile.lifeTime += lifeTime;
                 thisTile.isAlive = true;
             }
 
