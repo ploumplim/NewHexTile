@@ -16,6 +16,7 @@ public class Tile_basic : HexagonTile
             thisTile.lifeTime += lifeTime;
             thisTile.priorityScore = thisTile.lifeTime;
             thisTile.isAlive = true;
+            //Debug.Log("SetAlive");
         }
         LegalizeTiles();
             

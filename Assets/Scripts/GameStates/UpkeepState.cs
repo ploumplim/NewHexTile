@@ -5,39 +5,46 @@ public class UpkeepState : States
 {
     public override void Enter()
     {
-        
+        //Debug.LogError("Entrer dans UpkeepState");
         // Reset the living tiles list
         GM.livingTiles = new List<HexagonTile>();
-        
+
         // Add all living tiles to the living tiles list
-        for (int y = 0; y < GM.gridWidth; y++)
+        // for (int y = 0; y < GM.gridWidth; y++)
+        // {
+        //     for (int x = 0; x < GM.gridHeight; x++)
+        //     {
+        //         HexagonTile tile = GM.Tiles[x, y].GetComponentInChildren<HexagonTile>();
+        //         
+        //         if (tile != null && tile.isAlive)
+        //         {
+        //             GM.livingTiles.Add(tile);
+        //             Debug.LogWarning("Tile added to living tiles: " + tile.transform.position);
+        //         }
+        //     }
+        // }
+
+        foreach (var VARIABLE in GM.livingTiles)
         {
-            for (int x = 0; x < GM.gridHeight; x++)
-            {
-                GameObject tile = GM.Tiles[x,y];
-                if (tile != null && tile.GetComponentInChildren<HexagonTile>().isAlive)
-                {
-                    GM.livingTiles.Add(tile.GetComponentInChildren<HexagonTile>());
-                }
-            }
+            //Debug.Log(VARIABLE.transform.position);
         }
         // Generate the next tile
         GenerateNextTile();
-        
+
         // Change the state to placement state
         GM.changeState(GM.GetComponent<PlacementState>());
     }
-    
+
     public override void Tick()
     {
-        
+
     }
-    
+
     public override void Exit()
     {
-        //Debug.Log("Current living tiles: " + GM.livingTiles.Length);
+        //Debug.Log("Current living tiles: " + GM.livingTiles.Count);
     }
-    
+
     public void GenerateNextTile()
     {
         GM.nextTile = Random.Range(0, 4);

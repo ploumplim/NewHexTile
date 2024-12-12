@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5533377454474176255}
   - component: {fileID: 7163118725097851189}
   - component: {fileID: 5598418211867190692}
-  - component: {fileID: -4271742919183421098}
   - component: {fileID: 3826982093671844701}
   m_Layer: 0
   m_Name: GameManager
@@ -48,6 +47,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 0}
+  gridWidth: 0
+  gridHeight: 0
+  livingTiles: []
+  toggleScript: {fileID: 0}
+  nextTile: 0
+  hexGrid: {fileID: 0}
+  godHUD: {fileID: 0}
+  GODMODE: 0
+  starterTileXPosition: 1
+  starterTileYPosition: 1
+  nextTilePreview: {fileID: 0}
 --- !u!114 &5598418211867190692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,20 +71,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
---- !u!114 &-4271742919183421098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531548851215127038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d256f2093a824dd784f2eac38f204a95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridParent: {fileID: 0}
-  toggleScript: {fileID: 3826982093671844701}
 --- !u!114 &3826982093671844701
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class PlacementState : States
 {
     public override void Enter()
     {
-
+        //Debug.LogError("EnterToPlacement");
     }
     
     public override void Tick()
@@ -22,6 +22,7 @@ public class PlacementState : States
                 HexagonTile hexTile = hit.collider.GetComponent<HexagonTile>();
                 if (hexTile != null)
                 {
+                    Debug.Log("Hexagon tile clicked: " + hexTile.transform.position);
                     TileState tileState = hexTile.GetComponent<TileState>();
                     if (tileState != null && tileState.currentState == TileState.TileStates.LegalTile)
                     {

@@ -13,7 +13,7 @@ namespace HexStates
             if (thisTile != null)
             {
                 thisTile.lifeTime = lifeTime;
-                thisTile.isAlive = true;
+                //thisTile.isAlive = true;
             }
             LegalizeTiles();
         }

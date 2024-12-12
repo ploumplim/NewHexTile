@@ -23,7 +23,7 @@ public class TileState : MonoBehaviour
 
     public TileStates currentState;
 
-    public event Action<TileStates> OnStateChanged;
+    //public event Action<TileStates> OnStateChanged;
 
     public void init()
     {
@@ -38,7 +38,8 @@ public class TileState : MonoBehaviour
     public void ApplyState(HexagonTile tile, TileStates state)
     {
         currentState = state;
-        OnStateChanged?.Invoke(state);
+        
+        //OnStateChanged?.Invoke(state);
         tile.TileStateChange(state);
     }
     

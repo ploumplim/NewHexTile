@@ -165,13 +165,11 @@ public class HexagonTile : MonoBehaviour
                 destroyerTile.Init();
                 FillStatesToFuseWith();
                 break;
-                
-                
+            
             default:
                 Debug.Log("The tile state is not recognized:" + transform);
                 GetComponentInChildren<Renderer>().material.color = Color.black;
                 break;
-            
         }
     }
 
@@ -203,6 +201,7 @@ public class HexagonTile : MonoBehaviour
     public void LegalizeTiles()
     {
         HexagonTile hexTile = GetComponent<HexagonTile>();
+        //Debug.Log(hexTile.transform.position);
         if (hexTile != null)
         {
             HexagonTile[] adjacentTiles = hexTile.GetAdjacentTiles();
@@ -284,10 +283,10 @@ public class HexagonTile : MonoBehaviour
 
         foreach (var adjacentTile in adjacentTiles)
         {
-            if (adjacentTile.isAlive &&
-                stateToFuseWith.Contains(adjacentTile.tileState.currentState))
+            if (stateToFuseWith.Contains(adjacentTile.tileState.currentState))
             {
                 tileToFuse.Add(adjacentTile);
+                //Debug.Log(adjacentTile.transform.position + " added to the list");
             }
         }
 
@@ -296,51 +295,48 @@ public class HexagonTile : MonoBehaviour
 
     public void FuseTiles(HexagonTile tile)
     {
-        List<HexagonTile> adjacentTiles = FusionArray(tile);
-
-        // Sort the adjacent tiles by the absolute value of priorityScore
+        List<HexagonTile> fusionableTiles = FusionArray(tile);
         
-        adjacentTiles = adjacentTiles.OrderBy(t => Math.Abs(t.priorityScore)).ToList();
         
-        for (int i = 0; i < adjacentTiles.Count; i++)
+        if (fusionableTiles.Count>0)
         {
-            HexagonTile adjacentTile = adjacentTiles[i];
-            Debug.Log($"Order: {i}, Tile position: {adjacentTile.transform.position}, Priority: {adjacentTile.priorityScore}");
+            Debug.Log("AdjacentTiles: " + fusionableTiles.Count + " for tile: " + tile.transform.position);
         }
-
-        foreach (var tileToFuse in adjacentTiles)
+        else
         {
+            Debug.Log("No adjacent tiles to fuse with for tile: " + tile.transform.position);    
+        }
+        // Sort the adjacent tiles by the absolute value of priorityScore
+        fusionableTiles = fusionableTiles.OrderBy(t => Math.Abs(t.priorityScore)).ToList();
+
+        foreach (var tileToFuse in fusionableTiles)
+        {
+            
             switch (tile.tileState.currentState)
             {
                 case TileState.TileStates.GreenTile:
-                    tile.tileState.ApplyState(tile, TileState.TileStates.GreenFusionTile);
+                    //tile.tileState.ApplyState(tile, TileState.TileStates.GreenFusionTile);
                     tileToFuse.tileState.ApplyState(tileToFuse, TileState.TileStates.GreenFusionTile);
-                    Debug.Log("Fusion1");
                     break;
                 case TileState.TileStates.RedTile:
-                    tile.tileState.ApplyState(tile, TileState.TileStates.RedFusionTile);
+                    //tile.tileState.ApplyState(tile, TileState.TileStates.RedFusionTile);
                     tileToFuse.tileState.ApplyState(tileToFuse, TileState.TileStates.RedFusionTile);
-                    Debug.Log("Fusion2");
                     break;
                 case TileState.TileStates.BlueTile:
-                    tile.tileState.ApplyState(tile, TileState.TileStates.BlueFusionTile);
+                    //tile.tileState.ApplyState(tile, TileState.TileStates.BlueFusionTile);
                     tileToFuse.tileState.ApplyState(tileToFuse, TileState.TileStates.BlueFusionTile);
-                    Debug.Log("Fusion3  ");
                     break;
                 default:
                     Debug.Log("The tile state is not recognized:" + transform);
                     break;
             }
-            Debug.Log("Fusion");
         }
-        
-        
 
-        // if (FusionArray(tile).Count > 0)
-        // {
-        //     Debug.Log(gameObject.transform.position + " Fused with " + FusionArray(tile).Count + " tiles");
-        //     tile.tileState.ApplyState(tile, TileState.TileStates.DestroyerTile);
-        // }
+        if (FusionArray(tile).Count > 0)
+        {
+            Debug.Log(gameObject.transform.position + " Fused with " + FusionArray(tile).Count + " tiles");
+            tile.tileState.ApplyState(tile, TileState.TileStates.DestroyerTile);
+        }
     }
 
     public void ActivateTileEffects()
