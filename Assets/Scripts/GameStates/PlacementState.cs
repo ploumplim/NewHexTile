@@ -23,7 +23,7 @@ public class PlacementState : States
                 if (hexTile != null)
                 {
                     TileState tileState = hexTile.GetComponent<TileState>();
-                    if (tileState != null && tileState.currentState == TileState.TileStates.LegalState)
+                    if (tileState != null && tileState.currentState == TileState.TileStates.LegalTile)
                     {
                         // If godmode is enabled, we want to apply the tile state that is selected in the godHUD
                         if (GM.GODMODE)
@@ -32,16 +32,16 @@ public class PlacementState : States
                             switch (activeTileIndex)
                             {
                                 case 0:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
+                                    tileState.ApplyState(hexTile, TileState.TileStates.GreenTile);
                                     break;
                                 case 1:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.SlowState);
+                                    tileState.ApplyState(hexTile, TileState.TileStates.BlueTile);
                                     break;
                                 case 2:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.FastState);
+                                    tileState.ApplyState(hexTile, TileState.TileStates.RedTile);
                                     break;
                                 case 3:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.DestroyerState);
+                                    tileState.ApplyState(hexTile, TileState.TileStates.DestroyerTile);
                                     break;
                                 case 4:
                                     NextTileCreate(tileState, hexTile);
@@ -73,16 +73,16 @@ public class PlacementState : States
         switch (GM.nextTile)
         {
             case 0:
-                tileState.ApplyState(hexTile, TileState.TileStates.BasicState);
+                tileState.ApplyState(hexTile, TileState.TileStates.GreenTile);
                 break;
             case 1:
-                tileState.ApplyState(hexTile, TileState.TileStates.SlowState);
+                tileState.ApplyState(hexTile, TileState.TileStates.BlueTile);
                 break;
             case 2:
-                tileState.ApplyState(hexTile, TileState.TileStates.FastState);
+                tileState.ApplyState(hexTile, TileState.TileStates.RedTile);
                 break;
             case 3:
-                tileState.ApplyState(hexTile, TileState.TileStates.DestroyerState);
+                tileState.ApplyState(hexTile, TileState.TileStates.DestroyerTile);
                 break;
         }
     }

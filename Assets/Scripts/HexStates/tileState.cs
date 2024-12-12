@@ -8,17 +8,17 @@ public class TileState : MonoBehaviour
 {
     public enum TileStates
     {
-        DefaultState,
-        BasicState,
-        SlowState,
-        FastState,
-        LegalState,
+        DefaultTile,
+        GreenTile,
+        BlueTile,
+        RedTile,
+        LegalTile,
         StarterTile,
-        Fusion1,
-        FusionSlow,
-        FusionFast,
-        DeadState,
-        DestroyerState,
+        GreenFusionTile,
+        BlueFusionTile,
+        RedFusionTile,
+        DeadTile,
+        DestroyerTile,
     }
 
     public TileStates currentState;
@@ -31,7 +31,7 @@ public class TileState : MonoBehaviour
         if (currentState!= TileStates.StarterTile)
         {
             var thisTile = GetComponent<HexagonTile>();
-            currentState = TileStates.DefaultState;
+            currentState = TileStates.DefaultTile;
             ApplyState(thisTile, currentState);
         }
     }
