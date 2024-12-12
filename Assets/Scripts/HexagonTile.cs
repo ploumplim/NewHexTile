@@ -280,21 +280,22 @@ public class HexagonTile : MonoBehaviour
         HexagonTile[] adjacentTiles = tile.GetAdjacentTiles();
         foreach (var adjacentTile in adjacentTiles)
         {
-            if (adjacentTile != null && adjacentTile.tileState != null && stateToFuseWith.Contains(adjacentTile.tileState.currentState))
+            if (adjacentTile != null &&
+                adjacentTile.tileState != null &&
+                stateToFuseWith.Contains(adjacentTile.tileState.currentState))
             {
-                
                 switch (tile.tileState.currentState)
                 {
                     case TileState.TileStates.BasicState:
-                        tile.tileState.ApplyState(tile, TileState.TileStates.Fusion1);
+                        tileState.ApplyState(this, TileState.TileStates.Fusion1);
                         adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.Fusion1);
                         break;
                     case TileState.TileStates.FastState:
-                        tile.tileState.ApplyState(tile, TileState.TileStates.FusionFast);
+                        tileState.ApplyState(this, TileState.TileStates.FusionFast);
                         adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.FusionFast);
                         break;
                     case TileState.TileStates.SlowState:
-                        tile.tileState.ApplyState(tile, TileState.TileStates.FusionSlow);
+                        tileState.ApplyState(this, TileState.TileStates.FusionSlow);
                         adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.FusionSlow);
                         break;
                     default:
@@ -302,7 +303,6 @@ public class HexagonTile : MonoBehaviour
                         break;
                 }
                 
-                break;
             }
         }
     }

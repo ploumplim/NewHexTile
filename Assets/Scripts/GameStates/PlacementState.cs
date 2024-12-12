@@ -18,12 +18,14 @@ public class PlacementState : States
 
             if (Physics.Raycast(ray, out hit))
             {
+                // If the ray hits a hexagon tile, we want to apply the next tile state to it.
                 HexagonTile hexTile = hit.collider.GetComponent<HexagonTile>();
                 if (hexTile != null)
                 {
                     TileState tileState = hexTile.GetComponent<TileState>();
                     if (tileState != null && tileState.currentState == TileState.TileStates.LegalState)
                     {
+                        // If godmode is enabled, we want to apply the tile state that is selected in the godHUD
                         if (GM.GODMODE)
                         {
                             int activeTileIndex = GM.toggleScript.activeTile;
@@ -42,16 +44,16 @@ public class PlacementState : States
                                     tileState.ApplyState(hexTile, TileState.TileStates.DestroyerState);
                                     break;
                                 case 4:
-                                    nextTileCreate(tileState, hexTile);
+                                    NextTileCreate(tileState, hexTile);
                                     break;
                                 default:
                                     Debug.LogError("Invalid active tile index: " + activeTileIndex);
                                     break;
                             }
                         }
-                        else
+                        else // If godmode is disabled, we want to apply the next tile state to the hexagon tile
                         {
-                            nextTileCreate(tileState, hexTile);
+                            NextTileCreate(tileState, hexTile);
                         }
 
                         GM.changeState(GM.GetComponent<FusionState>());
@@ -66,7 +68,7 @@ public class PlacementState : States
         //Debug.Log("Exiting Placement State");
     }
     
-    public void nextTileCreate(TileState tileState, HexagonTile hexTile)
+    public void NextTileCreate(TileState tileState, HexagonTile hexTile)
     {
         switch (GM.nextTile)
         {

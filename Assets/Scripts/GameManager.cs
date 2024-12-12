@@ -8,28 +8,38 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     [HideInInspector]
     public States currentState;
-    
+    // This is the hexagon grid that we will be using to store the tiles.
     public GameObject[,] Tiles;
+    // These are the width and height of the grid.
     [HideInInspector]
     public int gridWidth;
     [HideInInspector]
     public int gridHeight;
+    
+    // This is a list of all the living tiles in the grid.
     [HideInInspector]
     public List<HexagonTile> livingTiles;
+    
+    // This is the script that manages godmode.
     [HideInInspector]
     public ToggleScript toggleScript;
+    
+    // This is the next tile that will be placed, generated at upkeep state.
     [HideInInspector] 
     public int nextTile;
     
     
     
-    // These variables are used to send information to the hexgrid.
-    public HexagonGrid HexGrid;
+    // This is the hexagon grid that we will be using to store the tiles.
+    public HexagonGrid hexGrid;
 
+    // This is the HUD that will be displayed when godmode is enabled.
     public GameObject godHUD;
     
+    // This is the godmode toggle.
     public bool GODMODE;
-
+    
+    // 
     public int starterTileXPosition = 1;
     public int starterTileYPosition = 1;
 
@@ -53,10 +63,10 @@ public class GameManager : MonoBehaviour
        
         currentState = GetComponent<UpkeepState>();
         currentState.Enter();
-        HexGrid.InitGrid();
+        hexGrid.InitGrid();
         
         // SET STARTER TILE
-        HexagonTile starterTile = HexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
+        HexagonTile starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
         
         //Debug.Log(starterTile.gameObject.name);
         starterTile.GetComponent<TileState>().ApplyState(starterTile, TileState.TileStates.StarterTile);
@@ -68,9 +78,9 @@ public class GameManager : MonoBehaviour
             godHUD.SetActive(false);
         }
         
-        gridWidth = HexGrid.gridWidth;
-        gridHeight = HexGrid.gridHeight;
-        Tiles = HexGrid.TileInstances;
+        gridWidth = hexGrid.gridWidth;
+        gridHeight = hexGrid.gridHeight;
+        Tiles = hexGrid.TileInstances;
 
     }
     

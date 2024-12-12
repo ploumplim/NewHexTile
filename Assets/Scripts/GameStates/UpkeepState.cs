@@ -5,7 +5,11 @@ public class UpkeepState : States
 {
     public override void Enter()
     {
+        
+        // Reset the living tiles list
         GM.livingTiles = new List<HexagonTile>();
+        
+        // Add all living tiles to the living tiles list
         for (int y = 0; y < GM.gridWidth; y++)
         {
             for (int x = 0; x < GM.gridHeight; x++)
@@ -17,9 +21,10 @@ public class UpkeepState : States
                 }
             }
         }
-        
+        // Generate the next tile
         GenerateNextTile();
         
+        // Change the state to placement state
         GM.changeState(GM.GetComponent<PlacementState>());
     }
     

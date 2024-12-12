@@ -7,10 +7,11 @@ public class CountersState : States
 {
     public override void Enter()
     {
-        foreach (Transform child in GM.HexGrid.transform)
+        // For each hexagon tile in our livingTiles list, we want to reduce their lifetime.
+        foreach (Transform child in GM.hexGrid.transform)
         {
             HexagonTile hexTile = child.GetComponent<HexagonTile>();
-
+            // If the hexagon tile is alive, we want to reduce its lifetime by 1.
             if (hexTile.isAlive)
             {
                 hexTile.lifeTime -= 1;
@@ -21,8 +22,8 @@ public class CountersState : States
                     hexTile.EndOfLifeTime();
                 }
             }
-
-            if (!hexTile.isAlive)
+            // If the hexagon tile is not alive, we want to remove the text from the tile.
+            else if (!hexTile.isAlive)
             {
                 hexTile.GetComponentInChildren<TextMeshPro>().text = "";
             }
