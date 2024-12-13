@@ -6,9 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="17f6822e-6c11-447c-86eb-a40ca1fc295f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexagonTile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexagonTile.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/CountersState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/CountersState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/FusionState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/FusionState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/PlacementState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/PlacementState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/tileState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/tileState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/UpkeepState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/UpkeepState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_fast.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_fast.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_slow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_slow.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,6 +117,7 @@
       <workItem from="1733986223971" duration="4502000" />
       <workItem from="1733992739937" duration="205000" />
       <workItem from="1733992983219" duration="23000" />
+      <workItem from="1734081072169" duration="1289000" />
     </task>
     <servers />
   </component>

@@ -11,7 +11,7 @@ public class Fusion_slow : HexagonTile
         int lifeTime = thisTile.fusionSlowLifeTime;
         if (thisTile != null)
         {
-            thisTile.lifeTime = lifeTime;
+            thisTile.lifeTime += lifeTime;
             thisTile.isAlive = true;
         }
 

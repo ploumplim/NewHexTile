@@ -6,15 +6,32 @@ public class FusionState : States
 {
     public override void Enter()
     {
-        // For each hexagon tile in our livingTiles list, we want run their fuse function.
+        List<HexagonTile> fusableTiles = new List<HexagonTile>();
+        
         for (int i = 0; i < GM.livingTiles.Count; i++)
         {
-            if (GM.livingTiles[i] != null)
+            if (GM.livingTiles[i].CanBeFused())
             {
                 HexagonTile tile = GM.livingTiles[i].GetComponent<HexagonTile>();
                 if (tile != null)
                 {
-                    tile.FuseTiles(tile);
+                    if (tile.isAlive)
+                    {
+                        fusableTiles.Add(tile);
+                    }
+                }
+            }
+        }
+        
+        
+        for (int i = 0; i < fusableTiles.Count; i++)
+        {
+            if (fusableTiles[i] != null)
+            {
+                HexagonTile tile = fusableTiles[i].GetComponent<HexagonTile>();
+                if (tile != null)
+                {
+                    tile.FuseTiles();
                 }
             }
         }

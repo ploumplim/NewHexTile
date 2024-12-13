@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
        
-        currentState = GetComponent<UpkeepState>();
+        currentState = GetComponent<PlacementState>();
         currentState.Enter();
         hexGrid.InitGrid();
         

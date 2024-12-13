@@ -10,7 +10,7 @@ public class Fusion_fast : HexagonTile
         int lifeTime = thisTile.fusionFastLifeTime;
         if (thisTile != null)
         {
-            thisTile.lifeTime = lifeTime;
+            thisTile.lifeTime += lifeTime;
             thisTile.isAlive = true;
         }
 

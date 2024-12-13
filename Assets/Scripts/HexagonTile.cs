@@ -275,36 +275,39 @@ public class HexagonTile : MonoBehaviour
         }
     }
 
-    public void FuseTiles(HexagonTile tile)
+
+    public bool CanBeFused()
     {
-        HexagonTile[] adjacentTiles = tile.GetAdjacentTiles();
-        foreach (var adjacentTile in adjacentTiles)
+        HexagonTile[] adjacentTiles = GetAdjacentTiles();
+        
+        foreach (HexagonTile adjacentTile in adjacentTiles)
         {
             if (adjacentTile != null &&
                 adjacentTile.tileState != null &&
                 stateToFuseWith.Contains(adjacentTile.tileState.currentState))
             {
-                switch (tile.tileState.currentState)
+                return true;
+            }
+        }
+        return false;
+    }
+    public void FuseTiles()
+    {
+        switch (tileState.currentState)
                 {
                     case TileState.TileStates.GreenTile:
                         tileState.ApplyState(this, TileState.TileStates.GreenFusionTile);
-                        adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.GreenFusionTile);
                         break;
                     case TileState.TileStates.RedTile:
                         tileState.ApplyState(this, TileState.TileStates.RedFusionTile);
-                        adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.RedFusionTile);
                         break;
                     case TileState.TileStates.BlueTile:
                         tileState.ApplyState(this, TileState.TileStates.BlueFusionTile);
-                        adjacentTile.tileState.ApplyState(adjacentTile, TileState.TileStates.BlueFusionTile);
                         break;
                     default:
                         Debug.Log("The tile state is not recognized:" + transform);
                         break;
                 }
-                
-            }
-        }
     }
 
     public void ActivateTileEffects()
@@ -359,6 +362,11 @@ public class HexagonTile : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void EffectRot()
+    {
+        
     }
     
 }

@@ -24,8 +24,8 @@ public class UpkeepState : States
         // Generate the next tile
         GenerateNextTile();
         
-        // Change the state to placement state
-        GM.changeState(GM.GetComponent<PlacementState>());
+        // Change the state to fusion state
+        GM.changeState(GM.GetComponent<FusionState>());
     }
     
     public override void Tick()

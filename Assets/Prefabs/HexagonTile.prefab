@@ -613,7 +613,7 @@ MonoBehaviour:
   tileState: {fileID: 0}
   isAlive: 0
   lifeTime: 0
-  StarterLifeTime: 2
+  StarterLifeTime: 1
   BasicLifeTime: 20
   FastLifeTime: 10
   SlowLifeTime: 30

@@ -56,7 +56,7 @@ public class PlacementState : States
                             NextTileCreate(tileState, hexTile);
                         }
 
-                        GM.changeState(GM.GetComponent<FusionState>());
+                        GM.changeState(GM.GetComponent<UpkeepState>());
                         
                     }
                 }

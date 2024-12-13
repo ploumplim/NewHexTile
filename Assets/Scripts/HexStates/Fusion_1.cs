@@ -10,7 +10,7 @@ namespace HexStates
             int lifeTime = thisTile.fusion1LifeTime;
             if (thisTile != null)
             {
-                thisTile.lifeTime = lifeTime;
+                thisTile.lifeTime += lifeTime;
                 thisTile.isAlive = true;
             }
             LegalizeTiles();
