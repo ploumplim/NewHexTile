@@ -5,54 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17f6822e-6c11-447c-86eb-a40ca1fc295f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Dead_state.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/DestroyerTile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Empty.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Fusion_1.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Fusion_fast.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Fusion_slow.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Legal.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/StarterTile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Tile_Fast.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Tile_Slow.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Tile_basic.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/CountersState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/CountersState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/EffectState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/EffectState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/FusionState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/FusionState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/PlacementState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/PlacementState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/UpkeepState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/UpkeepState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED).meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Dead_state.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Dead_state.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Dead_state.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/DestroyerTile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/DestroyerTile.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/DestroyerTile.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Empty.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Empty.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Empty.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_1.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Fusion_1.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_fast.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_fast.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Fusion_fast.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_slow.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Fusion_slow.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Fusion_slow.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Legal.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Legal.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Legal.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/StarterTile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/StarterTile.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/StarterTile.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Tile_Fast.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Tile_Fast.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Tile_Fast.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Tile_Slow.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Tile_Slow.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Tile_Slow.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Tile_basic.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/Tile_basic.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/Tile_basic.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/tileState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/tileState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexStates/tileState.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ARCHIVE/HexStates(DEPRECATED)/tileState.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonGrid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +111,7 @@
       <workItem from="1733992739937" duration="205000" />
       <workItem from="1733992983219" duration="23000" />
       <workItem from="1734081072169" duration="16068000" />
-      <workItem from="1734111388318" duration="12486000" />
+      <workItem from="1734111388318" duration="13239000" />
     </task>
     <servers />
   </component>

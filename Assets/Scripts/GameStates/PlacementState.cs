@@ -9,7 +9,8 @@ public class PlacementState : States
 {
     public override void Enter()
     {
-        GenerateNextTile();
+        
+        
 
         // Remake the legal list.
         GM.legalTiles = UpdateLegalTileList(GM.Tiles);
@@ -42,9 +43,11 @@ public class PlacementState : States
                             {
                                 case 0:
                                     hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
+                                    GM.livingTiles = UpdateLivingTileList(GM.Tiles);
                                     break;
                                 case 1:
                                     hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);;
+                                    GM.livingTiles = UpdateLivingTileList(GM.Tiles);
                                     break;
                                 case 2:
                                     hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
@@ -58,14 +61,17 @@ public class PlacementState : States
                                 default:
                                     Debug.LogError("Invalid active tile index: " + activeTileIndex);
                                     break;
-                            }
-                        }
+                                
+                            } 
+                        } 
                         else // If godmode is disabled, we want to apply the next tile state to the hexagon tile
                         {
                             NextTileCreate(hexTile);
                         }
                         
+                        
                         GM.ChangeState(GM.GetComponent<UpkeepState>());
+
                         
                     }
                 }
@@ -73,38 +79,7 @@ public class PlacementState : States
         }
     }
     
-    public void GenerateNextTile()
-    {
-        if (GM.livingTiles.Count < GM.destroyerDangerLimit)
-        {
-            GM.nextTile = Random.Range(0, 3);
-        }
-
-        if (GM.livingTiles.Count >= GM.destroyerDangerLimit)
-        {
-            GM.nextTile = Random.Range(0, 4);
-        }
-
-        switch (GM.nextTile)
-        {
-            case 0: //basic tile
-                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0f, 0.5f, 0f);
-                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Green Tile";
-                break;
-            case 1: //slow tile
-                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0.5f);
-                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Blue Tile";
-                break;
-            case 2: //fast tile
-                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0.5f, 0f, 0f);
-                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Red Tile";
-                break;
-            case 3: //destroyer tile
-                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(1f, 0f, 1f);
-                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "La Bomba";
-                break;
-        }
-    }
+   
     
     public void NextTileCreate(HexagonTile hexTile)
     {

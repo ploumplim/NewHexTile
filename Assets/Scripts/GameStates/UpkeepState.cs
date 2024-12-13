@@ -5,8 +5,7 @@ public class UpkeepState : States
 {
     public override void Enter()
     {
-        
-        // update the living tiles list
+
         GM.livingTiles = UpdateLivingTileList(GM.Tiles);
         
         Debug.Log("Current living tiles: " + GM.livingTiles.Count);
