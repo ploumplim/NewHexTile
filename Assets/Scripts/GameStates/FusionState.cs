@@ -39,7 +39,7 @@ public class FusionState : States
         
         
         
-        GM.changeState(GM.GetComponent<EffectState>());
+        GM.ChangeState(GM.GetComponent<EffectState>());
     }
 
     public override void Tick()

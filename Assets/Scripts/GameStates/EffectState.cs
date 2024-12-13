@@ -11,7 +11,7 @@ public class EffectState : States
         }
         
         
-        GM.changeState(GM.GetComponent<CountersState>());
+        GM.ChangeState(GM.GetComponent<CountersState>());
     }
 
     public override void Tick()

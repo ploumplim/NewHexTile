@@ -24,7 +24,7 @@ public class UpkeepState : States
         
         
         // Change the state to fusion state
-        GM.changeState(GM.GetComponent<FusionState>());
+        GM.ChangeState(GM.GetComponent<FusionState>());
     }
     
     public override void Tick()

@@ -29,7 +29,7 @@ public class CountersState : States
             }
         }
         
-        GM.changeState(GM.GetComponent<PlacementState>());
+        GM.ChangeState(GM.GetComponent<PlacementState>());
     }
 
     public override void Tick()

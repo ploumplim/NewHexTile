@@ -11,9 +11,6 @@ public class HexagonGrid : MonoBehaviour
     [SerializeField] private GameObject hexagonTilePrefab;
 
     [SerializeField] public GameObject[,] TileInstances;
-    [HideInInspector] public int centerX;
-    [HideInInspector] public int centerY;
-    
     
     private void Awake()
     {

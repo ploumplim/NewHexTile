@@ -21,13 +21,11 @@ public class PlacementState : States
             if (Physics.Raycast(ray, out hit))
             {
                 
-                
                 // If the ray hits a hexagon tile, we want to apply the next tile state to it.
                 HexagonTile hexTile = hit.collider.GetComponent<HexagonTile>();
                 if (hexTile != null)
                 {
-                    TileState tileState = hexTile.GetComponent<TileState>();
-                    if (tileState != null && tileState.currentState == TileState.TileStates.LegalTile)
+                    if (hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
                     {
                         // If godmode is enabled, we want to apply the tile state that is selected in the godHUD
                         if (GM.GODMODE)
@@ -36,19 +34,19 @@ public class PlacementState : States
                             switch (activeTileIndex)
                             {
                                 case 0:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.GreenTile);
+                                    hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
                                     break;
                                 case 1:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.BlueTile);
+                                    hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);;
                                     break;
                                 case 2:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.RedTile);
+                                    hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
                                     break;
                                 case 3:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.DestroyerTile);
+                                    hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
                                     break;
                                 case 4:
-                                    NextTileCreate(tileState, hexTile);
+                                    NextTileCreate(hexTile);
                                     break;
                                 default:
                                     Debug.LogError("Invalid active tile index: " + activeTileIndex);
@@ -57,10 +55,10 @@ public class PlacementState : States
                         }
                         else // If godmode is disabled, we want to apply the next tile state to the hexagon tile
                         {
-                            NextTileCreate(tileState, hexTile);
+                            NextTileCreate(hexTile);
                         }
                         
-                        GM.changeState(GM.GetComponent<UpkeepState>());
+                        GM.ChangeState(GM.GetComponent<UpkeepState>());
                         
                     }
                 }
@@ -92,21 +90,21 @@ public class PlacementState : States
         }
     }
     
-    public void NextTileCreate(TileState tileState, HexagonTile hexTile)
+    public void NextTileCreate(HexagonTile hexTile)
     {
         switch (GM.nextTile)
         {
             case 0:
-                tileState.ApplyState(hexTile, TileState.TileStates.GreenTile);
+                hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
                 break;
             case 1:
-                tileState.ApplyState(hexTile, TileState.TileStates.BlueTile);
+                hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);
                 break;
             case 2:
-                tileState.ApplyState(hexTile, TileState.TileStates.RedTile);
+                hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
                 break;
             case 3:
-                tileState.ApplyState(hexTile, TileState.TileStates.DestroyerTile);
+                hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
                 break;
         }
     }

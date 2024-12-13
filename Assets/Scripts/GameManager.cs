@@ -66,10 +66,10 @@ public class GameManager : MonoBehaviour
         hexGrid.InitGrid();
         
         // SET STARTER TILE
-        HexagonTile starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
+        var starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
         
         //Debug.Log(starterTile.gameObject.name);
-        starterTile.GetComponent<TileState>().ApplyState(starterTile, TileState.TileStates.StarterTile);
+        starterTile.TileStateChange(HexagonTile.TileStates.StarterTile);
 
 
         toggleScript = GetComponent<ToggleScript>();
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         currentState?.Tick();
     }
 
-    public void changeState(States newState)
+    public void ChangeState(States newState)
     {
         currentState.Exit();
         currentState = newState;

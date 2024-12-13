@@ -551,7 +551,6 @@ GameObject:
   - component: {fileID: 2066530389040903937}
   - component: {fileID: 7837860199324556873}
   - component: {fileID: 7727613333656210295}
-  - component: {fileID: -3343785008575026658}
   m_Layer: 0
   m_Name: HexagonTile
   m_TagString: Untagged
@@ -610,31 +609,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentGrid: {fileID: 0}
-  tileState: {fileID: 0}
   isAlive: 0
   lifeTime: 0
-  StarterLifeTime: 1
-  BasicLifeTime: 20
-  FastLifeTime: 10
-  SlowLifeTime: 30
-  destroyerLifeTime: 2
-  fusion1LifeTime: 20
-  fusionFastLifeTime: 10
-  fusionSlowLifeTime: 30
   stateToFuseWith: 
---- !u!114 &-3343785008575026658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6892170649514544254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acaa931eb94dd6c4685c04a0d77accec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
+  currentTileState: 0
+  starterLifeTime: 1
+  greenLifeTime: 5
+  redLifeTime: 3
+  blueLifeTime: 7
+  destroyerLifeTime: 2
+  greenFusionLifeTime: 10
+  redFusionLifeTime: 6
+  blueFusionLifeTime: 14
 --- !u!1 &8324478897610271500
 GameObject:
   m_ObjectHideFlags: 0
