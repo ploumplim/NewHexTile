@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlacementState : States
 {
     public override void Enter()
     {
-
+        GenerateNextTile();
     }
     
     public override void Tick()
@@ -18,6 +20,8 @@ public class PlacementState : States
 
             if (Physics.Raycast(ray, out hit))
             {
+                
+                
                 // If the ray hits a hexagon tile, we want to apply the next tile state to it.
                 HexagonTile hexTile = hit.collider.GetComponent<HexagonTile>();
                 if (hexTile != null)
@@ -55,7 +59,7 @@ public class PlacementState : States
                         {
                             NextTileCreate(tileState, hexTile);
                         }
-
+                        
                         GM.changeState(GM.GetComponent<UpkeepState>());
                         
                     }
@@ -63,9 +67,29 @@ public class PlacementState : States
             }
         }
     }
-    public override void Exit()
+    
+    public void GenerateNextTile()
     {
-        //Debug.Log("Exiting Placement State");
+        GM.nextTile = Random.Range(0, 4);
+        switch (GM.nextTile)
+        {
+            case 0: //basic tile
+                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0f, 0.5f, 0f);
+                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Green Tile";
+                break;
+            case 1: //slow tile
+                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0.5f);
+                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Blue Tile";
+                break;
+            case 2: //fast tile
+                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0.5f, 0f, 0f);
+                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Red Tile";
+                break;
+            case 3: //destroyer tile
+                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(1f, 0f, 1f);
+                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "La Bomba";
+                break;
+        }
     }
     
     public void NextTileCreate(TileState tileState, HexagonTile hexTile)

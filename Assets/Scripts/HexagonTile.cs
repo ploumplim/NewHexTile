@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using HexStates;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class HexagonTile : MonoBehaviour
 {
     [HideInInspector]
     public HexagonGrid parentGrid;
-    
     [HideInInspector]
     public TileState tileState;
-    
+    [HideInInspector]
     public bool isAlive;
+    [HideInInspector]
     public int lifeTime;
+    [HideInInspector]
+    public List<TileState.TileStates> stateToFuseWith;
     
+    // Tile life times editable in inspector
+    public int starterLifeTime = 1;
     
-    public int StarterLifeTime = 1;
-    
-    public int BasicLifeTime = 5;
-    public int FastLifeTime = 3;
-    public int SlowLifeTime = 7;
+    public int greenLifeTime = 5;
+    public int redLifeTime = 3;
+    public int blueLifeTime = 7;
     public int destroyerLifeTime = 1;
     
-    public int fusion1LifeTime = 10;
-    public int fusionFastLifeTime = 6;
-    public int fusionSlowLifeTime = 14;
+    public int greenFusionLifeTime = 10;
+    public int redFusionLifeTime = 6;
+    public int blueFusionLifeTime = 14;
     
-    public List<TileState.TileStates> stateToFuseWith;
+
     
     public void InitializeTile()
     {

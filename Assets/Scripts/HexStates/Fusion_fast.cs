@@ -7,7 +7,7 @@ public class Fusion_fast : HexagonTile
     public void Init()
     {
         HexagonTile thisTile = GetComponent<HexagonTile>();
-        int lifeTime = thisTile.fusionFastLifeTime;
+        int lifeTime = thisTile.redFusionLifeTime;
         if (thisTile != null)
         {
             thisTile.lifeTime += lifeTime;

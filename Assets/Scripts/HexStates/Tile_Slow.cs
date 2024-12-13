@@ -9,7 +9,7 @@ namespace HexStates
         public void Init()
         {
             HexagonTile thisTile = GetComponent<HexagonTile>();
-            int lifeTime = thisTile.SlowLifeTime;
+            int lifeTime = thisTile.blueLifeTime;
             if (thisTile != null)
             {
                 thisTile.lifeTime = lifeTime;

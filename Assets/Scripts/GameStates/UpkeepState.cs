@@ -21,8 +21,7 @@ public class UpkeepState : States
                 }
             }
         }
-        // Generate the next tile
-        GenerateNextTile();
+        
         
         // Change the state to fusion state
         GM.changeState(GM.GetComponent<FusionState>());
@@ -38,23 +37,5 @@ public class UpkeepState : States
         //Debug.Log("Current living tiles: " + GM.livingTiles.Length);
     }
     
-    public void GenerateNextTile()
-    {
-        GM.nextTile = Random.Range(0, 4);
-        switch (GM.nextTile)
-        {
-            case 0: //basic tile
-                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(0f, 0.5f, 0f);
-                break;
-            case 1: //slow tile
-                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(0f, 0f, 0.5f);
-                break;
-            case 2: //fast tile
-                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(0.5f, 0f, 0f);
-                break;
-            case 3: //destroyer tile
-                GM.nextTilePreview.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(1f, 0f, 1f);
-                break;
-        }
-    }
+    
 }

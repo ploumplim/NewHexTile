@@ -10,7 +10,7 @@ public class Tile_basic : HexagonTile
     public void Init()
     {
         HexagonTile thisTile = GetComponent<HexagonTile>();
-        int lifeTime = thisTile.BasicLifeTime;
+        int lifeTime = thisTile.greenLifeTime;
         if (thisTile != null)
         {
             thisTile.lifeTime = lifeTime;
