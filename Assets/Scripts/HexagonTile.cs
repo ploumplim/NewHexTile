@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using HexStates;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -21,12 +20,14 @@ public class HexagonTile : MonoBehaviour
         BlueFusionTile,
         RedFusionTile,
         DeadTile,
-        DestroyerTile,
+        DestroyerTile
     }
     [HideInInspector]
     public HexagonGrid parentGrid;
     [HideInInspector]
     public bool isAlive;
+    [HideInInspector]
+    public bool doesntLegalize;
     [HideInInspector]
     public int lifeTime;
     [HideInInspector]
@@ -45,8 +46,6 @@ public class HexagonTile : MonoBehaviour
     public int greenFusionLifeTime = 10;
     public int redFusionLifeTime = 6;
     public int blueFusionLifeTime = 14;
-    
-    
     
     
     public void InitializeTile()
@@ -68,124 +67,83 @@ public class HexagonTile : MonoBehaviour
         {
             case TileStates.DefaultTile:
                 GetComponentInChildren<Renderer>().material.color = Color.grey;
-                Empty defaultTile = GetComponent<Empty>();
-                if (defaultTile == null)
-                {
-                    defaultTile = gameObject.AddComponent<Empty>();
-                }
-                defaultTile.Init();
+                lifeTime = 0;
+                isAlive = false;
+                FillStatesToFuseWith();
                 break;
             
             case TileStates.LegalTile:
                 GetComponentInChildren<Renderer>().material.color = Color.white;
-                Legal legalTile = GetComponent<Legal>();
-                if (legalTile == null)
-                {
-                    legalTile = gameObject.AddComponent<Legal>();
-                }
-                legalTile.Init();
+                lifeTime = 0;
+                isAlive = false;
+                FillStatesToFuseWith();
                 break;
             
             case TileStates.StarterTile:
                 GetComponentInChildren<Renderer>().material.color = new Color(0f,0f,0f);
-                StarterTile starterTile = GetComponent<StarterTile>();
-                if (starterTile == null)
-                {
-                    starterTile = gameObject.AddComponent<StarterTile>();
-                }
-                starterTile.Init();
+                lifeTime = starterLifeTime;
+                isAlive = true;
+                FillStatesToFuseWith();
+                LegalizeTiles();
                 break;
             
             case TileStates.GreenTile:
                 GetComponentInChildren<Renderer>().material.color = new Color(0f,0.5f,0f);
-                Tile_basic basicTile = GetComponent<Tile_basic>();
-                if (basicTile == null)
-                {
-                    basicTile = gameObject.AddComponent<Tile_basic>();
-                }
-                basicTile.Init();
+                lifeTime = greenLifeTime;
+                isAlive = true;
                 FillStatesToFuseWith();
                 
                 break;
             
             case TileStates.BlueTile:
                 GetComponentInChildren<Renderer>().material.color = new Color(0f,0f,0.5f);
-                Tile_Slow slowTile = GetComponent<Tile_Slow>();
-                if (slowTile == null)
-                {
-                    slowTile = gameObject.AddComponent<Tile_Slow>();
-                }
-                slowTile.Init();
+                lifeTime = blueLifeTime;
+                isAlive = true;
                 FillStatesToFuseWith();
                 
                 break;
             
             case TileStates.RedTile:
                 GetComponentInChildren<Renderer>().material.color = new Color(0.5f,0f,0f);
-                Tile_Fast fastTile = GetComponent<Tile_Fast>();
-                if (fastTile == null)
-                {
-                    fastTile = gameObject.AddComponent<Tile_Fast>();
-                }
-                fastTile.Init();
+                lifeTime = redLifeTime;
+                isAlive = true;
                 FillStatesToFuseWith();
                 
                 break;
             
             case TileStates.GreenFusionTile:
                 GetComponentInChildren<Renderer>().material.color = new Color(0f,1f,0f);
-                Fusion1 fusion1 = GetComponent<Fusion1>();
-                if (fusion1 == null)
-                {
-                    fusion1 = gameObject.AddComponent<Fusion1>();
-                }
-                fusion1.Init();
+                lifeTime += greenFusionLifeTime;
+                isAlive = true;
                 FillStatesToFuseWith();
                 
                 break;
             
             case TileStates.BlueFusionTile:
                 GetComponentInChildren<Renderer>().material.color = new Color(0f, 0f, 1f);
-                Fusion_slow fusionSlow = GetComponent<Fusion_slow>();
-                if (fusionSlow == null)
-                {
-                    fusionSlow = gameObject.AddComponent<Fusion_slow>();
-                }
-                fusionSlow.Init();
+                lifeTime += blueFusionLifeTime;
+                isAlive = true;
                 FillStatesToFuseWith();
                 
                 break;
             
             case TileStates.RedFusionTile:
                 GetComponentInChildren<Renderer>().material.color = new Color(1f, 0f, 0f);
-                Fusion_fast fusionFast = GetComponent<Fusion_fast>();
-                if (fusionFast == null)
-                {
-                    fusionFast = gameObject.AddComponent<Fusion_fast>();
-                }
-                fusionFast.Init();
+                lifeTime += redFusionLifeTime;
+                isAlive = true;
                 FillStatesToFuseWith();
                 
                 break;
             case TileStates.DeadTile:
                 GetComponentInChildren<Renderer>().material.color = Color.black;
-                Dead_state deadState = GetComponent<Dead_state>();
-                if (deadState == null)
-                {
-                    deadState = gameObject.AddComponent<Dead_state>();
-                }
-                deadState.Init();
+                lifeTime = 0;
+                isAlive = false;
                 FillStatesToFuseWith();
-
                 break;
             case TileStates.DestroyerTile:
                 GetComponentInChildren<Renderer>().material.color = new Color(1f, 0f, 1f);
-                DestroyerTile destroyerTile = GetComponent<DestroyerTile>();
-                if (destroyerTile == null)
-                {
-                    destroyerTile = gameObject.AddComponent<DestroyerTile>();
-                }
-                destroyerTile.Init();
+                lifeTime = destroyerLifeTime;
+                isAlive = true;
                 FillStatesToFuseWith();
                 break;
                 
@@ -225,10 +183,8 @@ public class HexagonTile : MonoBehaviour
 
     public void LegalizeTiles()
     {
-        HexagonTile hexTile = GetComponent<HexagonTile>();
-        if (hexTile != null)
-        {
-            HexagonTile[] adjacentTiles = hexTile.GetAdjacentTiles();
+        
+        HexagonTile[] adjacentTiles = GetAdjacentTiles();
             
             foreach (HexagonTile adjacentTile in adjacentTiles)
             {
@@ -237,39 +193,18 @@ public class HexagonTile : MonoBehaviour
                     adjacentTile.TileStateChange(TileStates.LegalTile);
                 }
             }
-        }
     }
-
-    public void EndOfLifeTime()
+    public bool HasLivingAdjacentTiles() // returns true if has living adjacent tiles
     {
         HexagonTile[] adjacentTiles = GetAdjacentTiles();
-        
-        // Kill my cell
-        TileStateChange(TileStates.DeadTile);
-                
-        // Check if the adjacent cells should remain legal        
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
-            if (adjacentTile.currentTileState == TileStates.LegalTile && LegalTileShouldBeDefault(adjacentTile))
+            if (adjacentTile.isAlive)
             {
-                adjacentTile.TileStateChange(TileStates.DefaultTile);
+                return true;
             }
         }
-    }
-    
-    public bool LegalTileShouldBeDefault(HexagonTile hexTile) // This method should only be called by dying cells to have any legal tiles around them check if they should still be legal.
-    {
-        HexagonTile[] adjacentTiles = hexTile.GetAdjacentTiles();
-        foreach (HexagonTile adjacentTile in adjacentTiles)
-        {
-            if (adjacentTile.currentTileState != TileStates.LegalTile &&
-                adjacentTile.currentTileState != TileStates.DefaultTile &&
-                adjacentTile.currentTileState != TileStates.DeadTile)
-            {
-                return false;
-            }
-        }
-        return true;
+        return false;
     }
     
     public void FillStatesToFuseWith()
@@ -299,8 +234,7 @@ public class HexagonTile : MonoBehaviour
                 break;
         }
     }
-
-
+    
     public bool CanBeFused()
     {
         HexagonTile[] adjacentTiles = GetAdjacentTiles();
@@ -315,6 +249,7 @@ public class HexagonTile : MonoBehaviour
         }
         return false;
     }
+    
     public void FuseTiles()
     {
         switch (currentTileState)
@@ -349,40 +284,18 @@ public class HexagonTile : MonoBehaviour
     
     public void EffectDestroy()
     {
-        EndOfLifeTime();
-        TileStateChange(TileStates.DefaultTile);
         
-        HexagonTile[] adjacentTiles = GetAdjacentTiles();
-        
-        foreach (HexagonTile adjacentTile in adjacentTiles)
+       
+        if (lifeTime == 1)
         {
-            if (adjacentTile.isAlive)
+            // we set its state to default.
+            TileStateChange(TileStates.DefaultTile);
+            // we make a list of all tiles around this one.
+            HexagonTile[] adjacentTiles = GetAdjacentTiles();
+            // for each, we set their lifetime to 0, run their end of lifetime, and set their state to legal.
+            foreach (HexagonTile adjacentTile in adjacentTiles)
             {
-                adjacentTile.EndOfLifeTime();
-
-                if (adjacentTile.currentTileState == TileStates.DeadTile)
-                {
-                    adjacentTile.TileStateChange(TileStates.LegalTile);
-                    
-                    if (adjacentTile.LegalTileShouldBeDefault(adjacentTile))
-                    {
-                        adjacentTile.TileStateChange(TileStates.DefaultTile);
-                    }
-                }
-
-            }
-
-            if (!adjacentTile.isAlive)
-            {
-                if (adjacentTile.currentTileState == TileStates.DeadTile)
-                {
-                    adjacentTile.TileStateChange(TileStates.LegalTile);
-
-                    if (adjacentTile.LegalTileShouldBeDefault(adjacentTile))
-                    {
-                        adjacentTile.TileStateChange(TileStates.DefaultTile);
-                    }
-                }
+                adjacentTile.TileStateChange(TileStates.DefaultTile);
             }
         }
     }

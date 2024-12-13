@@ -10,11 +10,11 @@ public class HexagonGrid : MonoBehaviour
     [SerializeField] public float tileScale = 1f;
     [SerializeField] private GameObject hexagonTilePrefab;
 
-    [SerializeField] public GameObject[,] TileInstances;
+    [SerializeField] public HexagonTile[,] TileInstances;
     
     private void Awake()
     {
-        TileInstances = new GameObject[gridWidth, gridHeight];
+        TileInstances = new HexagonTile[gridWidth, gridHeight];
     }
 
     public void InitGrid()
@@ -23,14 +23,19 @@ public class HexagonGrid : MonoBehaviour
         {
             for (int x = 0; x < gridHeight; x++)
             {
+                GameObject[,] tileGameObjects = new GameObject[gridWidth, gridHeight];
                 float xPosition = y % 2 == 0 ? x * tileScale : x * tileScale + tileScale / 2.0f;
                 float yPosition = y * 0.9f * tileScale;
                 Vector3 position = new Vector3(xPosition, 0.0f, yPosition);
                 Vector3 scale = Vector3.one * tileScale;
 
-                TileInstances[x, y] = Instantiate(hexagonTilePrefab, position, Quaternion.identity, transform);
-                TileInstances[x, y].transform.localScale = scale; 
-                HexagonTile tile = TileInstances[x, y].GetComponent<HexagonTile>();
+                tileGameObjects[x, y] = Instantiate(hexagonTilePrefab, position, Quaternion.identity, transform);
+                tileGameObjects[x, y].transform.localScale = scale; 
+                
+                TileInstances[x, y] = tileGameObjects[x, y].GetComponent<HexagonTile>();
+                
+                HexagonTile tile = TileInstances[x, y];
+                
                 if (tile != null)
                 {
                     tile.InitializeTile();

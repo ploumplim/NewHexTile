@@ -7,28 +7,28 @@ public class CountersState : States
 {
     public override void Enter()
     {
-        // For each hexagon tile in our livingTiles list, we want to reduce their lifetime.
-        foreach (Transform child in GM.hexGrid.transform)
+        foreach (HexagonTile tile in GM.Tiles)
         {
-            HexagonTile hexTile = child.GetComponent<HexagonTile>();
-            // If the hexagon tile is alive, we want to reduce its lifetime by 1.
-            if (hexTile.isAlive)
+            // If the hexagon tile is alive, we want to reduce the lifetime of the tile.
+            tile.lifeTime -= 1;
+            tile.GetComponentInChildren<TextMeshPro>().text = tile.lifeTime.ToString();
+            
+            if (tile.lifeTime <= 0 && tile.isAlive)
             {
-                hexTile.lifeTime -= 1;
-                hexTile.GetComponentInChildren<TextMeshPro>().text = hexTile.lifeTime.ToString();
-                if (hexTile.lifeTime <= 0)
-                {
-                    hexTile.GetComponentInChildren<TextMeshPro>().text = "";
-                    hexTile.EndOfLifeTime();
-                }
+                // if dead, remove the text from the tile and change the tile state to dead.
+                tile.GetComponentInChildren<TextMeshPro>().text = "";
+                tile.TileStateChange(HexagonTile.TileStates.DeadTile);
             }
+            
             // If the hexagon tile is not alive, we want to remove the text from the tile.
-            else if (!hexTile.isAlive)
+            if (!tile.isAlive)
             {
-                hexTile.GetComponentInChildren<TextMeshPro>().text = "";
+                tile.GetComponentInChildren<TextMeshPro>().text = "";
             }
         }
         
+        // Check if the legal tiles should be default and remove it from the legal list.
+        LegalTilesShouldBeDefault(GM.legalTiles);
         GM.ChangeState(GM.GetComponent<PlacementState>());
     }
 
@@ -39,6 +39,8 @@ public class CountersState : States
 
     public override void Exit()
     {
-        //Debug.Log("Exiting Counters State");
+        // clear all my lists
+        GM.legalTiles.Clear();
+        GM.livingTiles.Clear();
     }
 }

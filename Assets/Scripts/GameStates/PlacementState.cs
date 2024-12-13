@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,12 @@ public class PlacementState : States
     public override void Enter()
     {
         GenerateNextTile();
+
+        // Remake the legal list.
+        GM.legalTiles = UpdateLegalTileList(GM.Tiles);
+        
+        Debug.Log("Legal tiles: " + GM.legalTiles.Count);
+        
     }
     
     public override void Tick()
@@ -68,7 +75,16 @@ public class PlacementState : States
     
     public void GenerateNextTile()
     {
-        GM.nextTile = Random.Range(0, 4);
+        if (GM.livingTiles.Count < GM.destroyerDangerLimit)
+        {
+            GM.nextTile = Random.Range(0, 3);
+        }
+
+        if (GM.livingTiles.Count >= GM.destroyerDangerLimit)
+        {
+            GM.nextTile = Random.Range(0, 4);
+        }
+
         switch (GM.nextTile)
         {
             case 0: //basic tile

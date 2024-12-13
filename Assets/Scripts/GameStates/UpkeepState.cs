@@ -6,24 +6,21 @@ public class UpkeepState : States
     public override void Enter()
     {
         
-        // Reset the living tiles list
-        GM.livingTiles = new List<HexagonTile>();
+        // update the living tiles list
+        GM.livingTiles = UpdateLivingTileList(GM.Tiles);
         
-        // Add all living tiles to the living tiles list
-        for (int y = 0; y < GM.gridWidth; y++)
+        Debug.Log("Current living tiles: " + GM.livingTiles.Count);
+        
+        foreach (HexagonTile tile in GM.livingTiles)
         {
-            for (int x = 0; x < GM.gridHeight; x++)
-            {
-                GameObject tile = GM.Tiles[x,y];
-                if (tile != null && tile.GetComponentInChildren<HexagonTile>().isAlive)
-                {
-                    GM.livingTiles.Add(tile.GetComponentInChildren<HexagonTile>());
-                }
-            }
+            tile.LegalizeTiles();
         }
         
+        // Update the legal tiles list
+        GM.legalTiles = UpdateLegalTileList(GM.Tiles);
         
-        // Change the state to fusion state
+        
+        
         GM.ChangeState(GM.GetComponent<FusionState>());
     }
     

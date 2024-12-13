@@ -2198,8 +2198,6 @@ MonoBehaviour:
   gridHeight: 20
   tileScale: 1
   hexagonTilePrefab: {fileID: 6892170649514544254, guid: 2d25a368a18567740ab7f817e9f76730, type: 3}
-  centerX: 0
-  centerY: 0
 --- !u!4 &1910971299
 Transform:
   m_ObjectHideFlags: 0
@@ -2630,6 +2628,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2047192370}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: destroyerDangerLimit
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: starterTileXPosition
       value: 10
       objectReference: {fileID: 0}
@@ -2639,6 +2641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4271742919183421098, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+    - {fileID: 5598418211867190692, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
