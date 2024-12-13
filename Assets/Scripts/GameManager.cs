@@ -28,9 +28,11 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public ToggleScript toggleScript;
     
-    // This is the next tile that will be placed, generated at upkeep state.
-    [HideInInspector] 
-    public int nextTile;
+    // This is the next tile that will be placed, randomly generated at the end of each turn.
+    [Tooltip("Write here what is the first tile you wish to place. " +
+             "0 = Green, 1 = Blue, 2 = Red, 3 = Destroyer. It gets randomized at the end " +
+             "of each turn.")]
+   public int nextTile;
     
     // This is the minimum amount of tiles that need to be placed before we spawn bombs
     public int destroyerDangerLimit = 4;

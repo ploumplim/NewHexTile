@@ -9,9 +9,6 @@ public class PlacementState : States
 {
     public override void Enter()
     {
-        
-        
-
         // Remake the legal list.
         GM.legalTiles = UpdateLegalTileList(GM.Tiles);
         
@@ -42,22 +39,21 @@ public class PlacementState : States
                             switch (activeTileIndex)
                             {
                                 case 0:
-                                    hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
-                                    GM.livingTiles = UpdateLivingTileList(GM.Tiles);
-                                    break;
-                                case 1:
-                                    hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);;
-                                    GM.livingTiles = UpdateLivingTileList(GM.Tiles);
-                                    break;
-                                case 2:
-                                    hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
-                                    break;
-                                case 3:
-                                    hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
-                                    break;
-                                case 4:
                                     NextTileCreate(hexTile);
                                     break;
+                                case 1:
+                                    hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
+                                    break;
+                                case 2:
+                                    hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);
+                                    break;
+                                case 3:
+                                    hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
+                                    break;
+                                case 4:
+                                    hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
+                                    break;
+                                
                                 default:
                                     Debug.LogError("Invalid active tile index: " + activeTileIndex);
                                     break;

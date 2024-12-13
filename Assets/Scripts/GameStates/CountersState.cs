@@ -64,15 +64,15 @@ public class CountersState : States
 
         switch (GM.nextTile)
         {
-            case 0: //basic tile
+            case 0: //green tile
                 GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0f, 0.5f, 0f);
                 GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Green Tile";
                 break;
-            case 1: //slow tile
+            case 1: //blue tile
                 GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0.5f);
                 GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Blue Tile";
                 break;
-            case 2: //fast tile
+            case 2: //red tile
                 GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0.5f, 0f, 0f);
                 GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Red Tile";
                 break;

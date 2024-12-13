@@ -435,7 +435,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Slow_Tile
+  m_Text: 'Blue TIle
 
 '
 --- !u!222 &117457040
@@ -1069,7 +1069,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Fast_Tile
+  m_Text: 'Red Tile
 
 '
 --- !u!222 &863075917
@@ -1317,7 +1317,7 @@ GameObject:
   - component: {fileID: 1060891151}
   - component: {fileID: 1060891152}
   m_Layer: 5
-  m_Name: FastTile
+  m_Name: Red Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1478,7 +1478,7 @@ GameObject:
   - component: {fileID: 1135943684}
   - component: {fileID: 1135943685}
   m_Layer: 5
-  m_Name: BasicTile
+  m_Name: Green Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1552,7 +1552,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &1224452037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1741,7 +1741,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &1458830958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,11 +1924,11 @@ RectTransform:
   m_LocalScale: {x: 2.89, y: 2.89, z: 2.89}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1135943684}
-  - {fileID: 1684944805}
-  - {fileID: 1060891151}
-  - {fileID: 98638000}
   - {fileID: 1300800060}
+  - {fileID: 1135943684}
+  - {fileID: 1060891151}
+  - {fileID: 1684944805}
+  - {fileID: 98638000}
   m_Father: {fileID: 1224452041}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1992,7 +1992,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: -237.05
+  m_Spacing: -100
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -2070,7 +2070,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Basic Tile
+  m_Text: Green Tile
 --- !u!222 &1643054991
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2090,7 +2090,7 @@ GameObject:
   - component: {fileID: 1684944805}
   - component: {fileID: 1684944806}
   m_Layer: 5
-  m_Name: SlowTile
+  m_Name: Blue Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2534,23 +2534,23 @@ PrefabInstance:
     - target: {fileID: 3826982093671844701, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: toggles.Array.data[0]
       value: 
-      objectReference: {fileID: 1135943685}
+      objectReference: {fileID: 1300800061}
     - target: {fileID: 3826982093671844701, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: toggles.Array.data[1]
       value: 
-      objectReference: {fileID: 1684944806}
+      objectReference: {fileID: 1135943685}
     - target: {fileID: 3826982093671844701, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: toggles.Array.data[2]
       value: 
-      objectReference: {fileID: 1060891152}
+      objectReference: {fileID: 1684944806}
     - target: {fileID: 3826982093671844701, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: toggles.Array.data[3]
       value: 
-      objectReference: {fileID: 98638001}
+      objectReference: {fileID: 1060891152}
     - target: {fileID: 3826982093671844701, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: toggles.Array.data[4]
       value: 
-      objectReference: {fileID: 1300800061}
+      objectReference: {fileID: 98638001}
     - target: {fileID: 5533377454474176255, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.7980137
