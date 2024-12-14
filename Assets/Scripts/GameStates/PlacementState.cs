@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlacementState : States
 {
     public override void Enter()
     {
-        //Debug.LogError("EnterToPlacement");
+        // Remake the legal list.
+        GM.legalTiles = UpdateLegalTileList(GM.Tiles);
+        
+        Debug.Log("Legal tiles: " + GM.legalTiles.Count);
+        
     }
     
     public override void Tick()
@@ -18,13 +25,12 @@ public class PlacementState : States
 
             if (Physics.Raycast(ray, out hit))
             {
+                
                 // If the ray hits a hexagon tile, we want to apply the next tile state to it.
                 HexagonTile hexTile = hit.collider.GetComponent<HexagonTile>();
                 if (hexTile != null)
                 {
-                    Debug.Log("Hexagon tile clicked: " + hexTile.transform.position);
-                    TileState tileState = hexTile.GetComponent<TileState>();
-                    if (tileState != null && tileState.currentState == TileState.TileStates.LegalTile)
+                    if (hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
                     {
                         // If godmode is enabled, we want to apply the tile state that is selected in the godHUD
                         if (GM.GODMODE)
@@ -33,57 +39,59 @@ public class PlacementState : States
                             switch (activeTileIndex)
                             {
                                 case 0:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.GreenTile);
+                                    NextTileCreate(hexTile);
                                     break;
                                 case 1:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.BlueTile);
+                                    hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
                                     break;
                                 case 2:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.RedTile);
+                                    hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);
                                     break;
                                 case 3:
-                                    tileState.ApplyState(hexTile, TileState.TileStates.DestroyerTile);
+                                    hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
                                     break;
                                 case 4:
-                                    NextTileCreate(tileState, hexTile);
+                                    hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
                                     break;
+                                
                                 default:
                                     Debug.LogError("Invalid active tile index: " + activeTileIndex);
                                     break;
-                            }
-                        }
+                                
+                            } 
+                        } 
                         else // If godmode is disabled, we want to apply the next tile state to the hexagon tile
                         {
-                            NextTileCreate(tileState, hexTile);
+                            NextTileCreate(hexTile);
                         }
+                        
+                        
+                        GM.ChangeState(GM.GetComponent<UpkeepState>());
 
-                        GM.changeState(GM.GetComponent<FusionState>());
                         
                     }
                 }
             }
         }
     }
-    public override void Exit()
-    {
-        //Debug.Log("Exiting Placement State");
-    }
     
-    public void NextTileCreate(TileState tileState, HexagonTile hexTile)
+   
+    
+    public void NextTileCreate(HexagonTile hexTile)
     {
         switch (GM.nextTile)
         {
             case 0:
-                tileState.ApplyState(hexTile, TileState.TileStates.GreenTile);
+                hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
                 break;
             case 1:
-                tileState.ApplyState(hexTile, TileState.TileStates.BlueTile);
+                hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);
                 break;
             case 2:
-                tileState.ApplyState(hexTile, TileState.TileStates.RedTile);
+                hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
                 break;
             case 3:
-                tileState.ApplyState(hexTile, TileState.TileStates.DestroyerTile);
+                hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
                 break;
         }
     }

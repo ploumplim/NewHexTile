@@ -2,35 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CountersState : States
 {
     public override void Enter()
     {
-        // For each hexagon tile in our livingTiles list, we want to reduce their lifetime.
-        foreach (Transform child in GM.hexGrid.transform)
+        foreach (HexagonTile tile in GM.Tiles)
         {
-            HexagonTile hexTile = child.GetComponent<HexagonTile>();
-            // If the hexagon tile is alive, we want to reduce its lifetime by 1.
-            if (hexTile.isAlive)
+            // If the hexagon tile is alive, we want to reduce the lifetime of the tile.
+            tile.lifeTime -= 1;
+            tile.GetComponentInChildren<TextMeshPro>().text = tile.lifeTime.ToString();
+            
+            if (tile.lifeTime <= 0 && tile.isAlive)
             {
-                hexTile.lifeTime -= 1;
-                hexTile.priorityScore -= 1; 
-                hexTile.GetComponentInChildren<TextMeshPro>().text = hexTile.lifeTime.ToString();
-                if (hexTile.lifeTime <= 0)
-                {
-                    hexTile.GetComponentInChildren<TextMeshPro>().text = "";
-                    hexTile.EndOfLifeTime();
-                }
+                // if dead, remove the text from the tile and change the tile state to dead.
+                tile.GetComponentInChildren<TextMeshPro>().text = "";
+                tile.TileStateChange(HexagonTile.TileStates.DeadTile);
             }
+            
             // If the hexagon tile is not alive, we want to remove the text from the tile.
-            else if (!hexTile.isAlive)
+            if (!tile.isAlive)
             {
-                hexTile.GetComponentInChildren<TextMeshPro>().text = "";
+                tile.GetComponentInChildren<TextMeshPro>().text = "";
             }
         }
         
-        GM.changeState(GM.GetComponent<UpkeepState>());
+        // Check if the legal tiles should be default and remove it from the legal list.
+        LegalTilesShouldBeDefault(GM.legalTiles);
+        GenerateNextTile();
+        
+        
+        GM.ChangeState(GM.GetComponent<PlacementState>());
+        
+        
     }
 
     public override void Tick()
@@ -40,6 +45,41 @@ public class CountersState : States
 
     public override void Exit()
     {
-        //Debug.Log("Exiting Counters State");
+        // clear all my lists
+        GM.legalTiles.Clear();
+        GM.livingTiles.Clear();
+    }
+    
+    public void GenerateNextTile()
+    {
+        if (GM.livingTiles.Count < GM.destroyerDangerLimit)
+        {
+            GM.nextTile = Random.Range(0, 3);
+        }
+
+        if (GM.livingTiles.Count >= GM.destroyerDangerLimit)
+        {
+            GM.nextTile = Random.Range(0, 4);
+        }
+
+        switch (GM.nextTile)
+        {
+            case 0: //green tile
+                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0f, 0.5f, 0f);
+                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Green Tile";
+                break;
+            case 1: //blue tile
+                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0.5f);
+                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Blue Tile";
+                break;
+            case 2: //red tile
+                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(0.5f, 0f, 0f);
+                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "Red Tile";
+                break;
+            case 3: //destroyer tile
+                GM.nextTilePreview.GetComponentInChildren<Image>().color = new Color(1f, 0f, 1f);
+                GM.nextTilePreview.GetComponentInChildren<TextMeshProUGUI>().text = "La Bomba";
+                break;
+        }
     }
 }

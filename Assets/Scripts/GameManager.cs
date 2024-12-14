@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public States currentState;
     // This is the hexagon grid that we will be using to store the tiles.
-    public GameObject[,] Tiles;
+    public HexagonTile[,] Tiles;
     // These are the width and height of the grid.
     [HideInInspector]
     public int gridWidth;
@@ -20,15 +20,22 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public List<HexagonTile> livingTiles;
     
+    //this is a list of all tiles that are currently legal.
+    [HideInInspector]
+    public List<HexagonTile> legalTiles;
+    
     // This is the script that manages godmode.
     [HideInInspector]
     public ToggleScript toggleScript;
     
-    // This is the next tile that will be placed, generated at upkeep state.
-    [HideInInspector] 
-    public int nextTile;
+    // This is the next tile that will be placed, randomly generated at the end of each turn.
+    [Tooltip("Write here what is the first tile you wish to place. " +
+             "0 = Green, 1 = Blue, 2 = Red, 3 = Destroyer. It gets randomized at the end " +
+             "of each turn.")]
+   public int nextTile;
     
-    
+    // This is the minimum amount of tiles that need to be placed before we spawn bombs
+    public int destroyerDangerLimit = 4;
     
     // This is the hexagon grid that we will be using to store the tiles.
     public HexagonGrid hexGrid;
@@ -55,21 +62,30 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         States[] states = GetComponents<States>();
+        
         foreach (States state in states)
         {
             state.Initialize(this);
         }
         DontDestroyOnLoad(gameObject);
-       
-        currentState = GetComponent<UpkeepState>();
-        currentState.Enter();
+        
+        // Initialize the grid
         hexGrid.InitGrid();
         
+        gridWidth = hexGrid.gridWidth;
+        gridHeight = hexGrid.gridHeight;
+        Tiles = hexGrid.TileInstances;
+        
         // SET STARTER TILE
-        HexagonTile starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
+        var starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
+          starterTile.TileStateChange(HexagonTile.TileStates.StarterTile);
+          
+        // Set the current state to the placement state.
+        currentState = GetComponent<PlacementState>();
+        currentState.Enter();
         
         //Debug.Log(starterTile.gameObject.name);
-        starterTile.GetComponent<TileState>().ApplyState(starterTile, TileState.TileStates.StarterTile);
+      
 
 
         toggleScript = GetComponent<ToggleScript>();
@@ -78,9 +94,7 @@ public class GameManager : MonoBehaviour
             godHUD.SetActive(false);
         }
         
-        gridWidth = hexGrid.gridWidth;
-        gridHeight = hexGrid.gridHeight;
-        Tiles = hexGrid.TileInstances;
+        
 
     }
     
@@ -89,7 +103,7 @@ public class GameManager : MonoBehaviour
         currentState?.Tick();
     }
 
-    public void changeState(States newState)
+    public void ChangeState(States newState)
     {
         currentState.Exit();
         currentState = newState;

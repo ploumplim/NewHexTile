@@ -6,45 +6,30 @@ public class FusionState : States
 {
     public override void Enter()
     {
-        for (int y = 0; y < GM.gridWidth; y++)
+        // reset the list of fusable tiles
+        List<HexagonTile> fusableTiles = new List<HexagonTile>();
+        
+        for (int i = 0; i < GM.livingTiles.Count; i++)
         {
-            for (int x = 0; x < GM.gridHeight; x++)
+            if (GM.livingTiles[i].CanBeFused())
             {
-                HexagonTile tile = GM.Tiles[x, y].GetComponentInChildren<HexagonTile>();
-
-                if (tile != null && tile.isAlive && !GM.livingTiles.Contains(tile))
-                {
-                    GM.livingTiles.Add(tile);
-                    Debug.Log($"Tile added: {tile.transform.position}");
-                }
+                        fusableTiles.Add(GM.livingTiles[i]);
             }
         }
-        Debug.LogWarning("Starting fusion process...");
-        //Debug.LogError("Entrer dans FusionState");
         
-        //For each hexagon tile in our livingTiles list, we want run their fuse function.
-        foreach (var livingTile in GM.livingTiles)
+        // fuse the tiles in my list
+        for (int i = 0; i < fusableTiles.Count; i++)
         {
-            Debug.Log($"Fusing tile at position: {livingTile.transform.position}");
-            livingTile.FuseTiles(livingTile);
+            if (fusableTiles[i])
+            {
+                fusableTiles[i].FuseTiles();
+            }
         }
-        Debug.LogWarning("Fusion process completed.");
         
-            //Debug.Log(GM.livingTiles[i].transform.position);
-            // if (GM.livingTiles[i] != null)
-            // {
-            //     HexagonTile tile = GM.livingTiles[i].GetComponent<HexagonTile>();
-            //     if (tile != null)
-            //     {
-            //         //tile.priorityScore=tile.lifeTime;
-            //         tile.FuseTiles(tile);
-            //     }
-            //    
-            // }
         
-       
         
-        GM.changeState(GM.GetComponent<EffectState>());
+        
+        GM.ChangeState(GM.GetComponent<EffectState>());
     }
 
     public override void Tick()
@@ -53,6 +38,6 @@ public class FusionState : States
 
     public override void Exit()
     {
-        Debug.Log("Exiting Fusion State");
+        //Debug.Log("Exiting Fusion State");
     }
 }
