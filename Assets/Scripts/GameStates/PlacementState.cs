@@ -12,7 +12,7 @@ public class PlacementState : States
         // Remake the legal list.
         GM.legalTiles = UpdateLegalTileList(GM.Tiles);
         
-        Debug.Log("Legal tiles: " + GM.legalTiles.Count);
+        //Debug.Log("Legal tiles: " + GM.legalTiles.Count);
         
     }
     
@@ -79,6 +79,7 @@ public class PlacementState : States
     
     public void NextTileCreate(HexagonTile hexTile)
     {
+        hexTile.currentActiveAsset = hexTile.previewLister[GM.nextTile];
         switch (GM.nextTile)
         {
             case 0:
@@ -95,4 +96,5 @@ public class PlacementState : States
                 break;
         }
     }
+    
 }

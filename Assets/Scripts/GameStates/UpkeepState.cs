@@ -8,7 +8,7 @@ public class UpkeepState : States
 
         GM.livingTiles = UpdateLivingTileList(GM.Tiles);
         
-        Debug.Log("Current living tiles: " + GM.livingTiles.Count);
+        //Debug.Log("Current living tiles: " + GM.livingTiles.Count);
         
         foreach (HexagonTile tile in GM.livingTiles)
         {
