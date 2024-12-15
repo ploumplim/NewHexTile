@@ -14,6 +14,22 @@ public class CountersState : States
             tile.lifeTime -= 1;
             tile.GetComponentInChildren<TextMeshPro>().text = tile.lifeTime.ToString();
             
+            
+            // This function sets the color hue of the tile's text depending on their lifetime.
+            if (tile.lifeTime >= GM.resetLifeTimeColor)
+            {
+                tile.GetComponentInChildren<TextMeshPro>().color = Color.white;
+            }
+            else if (tile.lifeTime <= GM.firstLifeTimeThreshold && tile.lifeTime > GM.secondLifeTimeThreshold)
+            {
+                tile.GetComponentInChildren<TextMeshPro>().color = Color.yellow;
+            }
+            else if (tile.lifeTime <= GM.secondLifeTimeThreshold)
+            {
+                tile.GetComponentInChildren<TextMeshPro>().color = Color.red;
+            }
+            
+            
             if (tile.lifeTime <= 0 && tile.isAlive)
             {
                 // if dead, remove the text from the tile and change the tile state to dead.
@@ -52,16 +68,27 @@ public class CountersState : States
     
     public void GenerateNextTile()
     {
-        if (GM.livingTiles.Count < GM.destroyerDangerLimit)
+        int totalWeight = 0;
+        
+        foreach (int weight in GM.weights)
         {
-            GM.nextTile = Random.Range(0, 3);
+            totalWeight += weight;
         }
-
-        if (GM.livingTiles.Count >= GM.destroyerDangerLimit)
+        
+        int randomValue = Random.Range(0, totalWeight);
+        int cumulativeWeight = 0;
+        
+        for (int i = 0; i < GM.weights.Count; i++)
         {
-            GM.nextTile = Random.Range(0, 4);
+            cumulativeWeight += GM.weights[i];
+            if (randomValue < cumulativeWeight)
+            {
+                GM.nextTile = i;
+                break;
+            }
         }
-
+        
+        
         switch (GM.nextTile)
         {
             case 0: //green tile

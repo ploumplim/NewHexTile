@@ -79,7 +79,7 @@ public class PlacementState : States
     
     public void NextTileCreate(HexagonTile hexTile)
     {
-        hexTile.currentActiveAsset = hexTile.previewLister[GM.nextTile];
+        hexTile.currentActiveAsset = hexTile.tileVisuals[GM.nextTile];
         switch (GM.nextTile)
         {
             case 0:

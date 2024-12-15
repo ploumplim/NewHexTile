@@ -192,7 +192,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 0
-  m_Text: 'Destroyer
+  m_Text: 'La Bomba
 
 '
 --- !u!222 &76131544
@@ -1165,13 +1165,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 9.6, y: 16.28, z: 8.51}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 9.6, y: 10.68, z: -3.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!1 &1048749166
 GameObject:
   m_ObjectHideFlags: 0
@@ -2391,7 +2391,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 194, y: 126}
+  m_AnchoredPosition: {x: 194, y: 875}
   m_SizeDelta: {x: 208, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2047192372
@@ -2624,9 +2624,25 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: redTileWeight
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: blueTileWeight
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: greenTileWeight
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: nextTilePreview
       value: 
       objectReference: {fileID: 2047192370}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: destroyerTileWeight
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: destroyerDangerLimit
       value: 4
