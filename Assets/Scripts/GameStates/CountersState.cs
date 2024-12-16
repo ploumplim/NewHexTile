@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,22 @@ public class CountersState : States
             // If the hexagon tile is alive, we want to reduce the lifetime of the tile.
             tile.lifeTime -= 1;
             tile.GetComponentInChildren<TextMeshPro>().text = tile.lifeTime.ToString();
+            
+            
+            // This function sets the color hue of the tile's text depending on their lifetime.
+            if (tile.lifeTime >= GM.resetLifeTimeColor)
+            {
+                tile.GetComponentInChildren<TextMeshPro>().color = Color.white;
+            }
+            else if (tile.lifeTime <= GM.firstLifeTimeThreshold && tile.lifeTime > GM.secondLifeTimeThreshold)
+            {
+                tile.GetComponentInChildren<TextMeshPro>().color = Color.yellow;
+            }
+            else if (tile.lifeTime <= GM.secondLifeTimeThreshold)
+            {
+                tile.GetComponentInChildren<TextMeshPro>().color = Color.red;
+            }
+            
             
             if (tile.lifeTime <= 0 && tile.isAlive)
             {
@@ -28,8 +45,20 @@ public class CountersState : States
             }
         }
         
-        // Check if the legal tiles should be default and remove it from the legal list.
-        LegalTilesShouldBeDefault(GM.legalTiles);
+        
+        // Check if the legal tiles should be default from all my tiles
+        LegalTilesShouldBeDefault(GM.Tiles.Cast<HexagonTile>().ToList());
+        // Update my living tiles list
+        GM.livingTiles = UpdateLivingTileList(GM.Tiles);
+        // Legalize my tiles
+        foreach (HexagonTile tile in GM.livingTiles)
+        {
+            tile.LegalizeTiles();
+        }
+        // Update my legal tiles list
+        GM.legalTiles = UpdateLegalTileList(GM.Tiles);
+        
+        // Generate the next tile to be placed on the board.
         GenerateNextTile();
         
         
@@ -38,30 +67,43 @@ public class CountersState : States
         
     }
 
-    public override void Tick()
+   public void GenerateNextTile()
     {
+        // Generate the next tile to be placed on the board.
+        int totalWeight = 0;
+        // Calculate the total weight of the weights list.
+        foreach (int weight in GM.weights)
+        {
+            totalWeight += weight;
+        }
         
-    }
-
-    public override void Exit()
-    {
-        // clear all my lists
-        GM.legalTiles.Clear();
-        GM.livingTiles.Clear();
-    }
-    
-    public void GenerateNextTile()
-    {
-        if (GM.livingTiles.Count < GM.destroyerDangerLimit)
+        // Generate a random value between 0 and the total weight.
+        int randomValue = Random.Range(0, totalWeight);
+        
+        // Calculate the cumulative weight of the weights list.
+        int cumulativeWeight = 0;
+        
+        // Iterate through the weights list and set the next tile to the index of the weight that the random value is less than.
+        for (int i = 0; i < GM.weights.Count; i++)
         {
-            GM.nextTile = Random.Range(0, 3);
+            cumulativeWeight += GM.weights[i];
+            if (randomValue < cumulativeWeight)
+            {
+                if (GM.livingTiles.Count >= GM.destroyerDangerLimit)
+                {
+                    GM.nextTile = i;
+                }
+                else
+                {
+                    GM.nextTile = Random.Range(0, GM.weights.Count - 1);
+                }
+                break;
+            }
+            
         }
-
-        if (GM.livingTiles.Count >= GM.destroyerDangerLimit)
-        {
-            GM.nextTile = Random.Range(0, 4);
-        }
-
+        
+        
+        
         switch (GM.nextTile)
         {
             case 0: //green tile
