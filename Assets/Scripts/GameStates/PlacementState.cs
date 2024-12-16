@@ -9,11 +9,17 @@ public class PlacementState : States
 {
     public override void Enter()
     {
-        // Remake the legal list.
+        // Check if the legal tiles should be default from all my tiles
+        LegalTilesShouldBeDefault(GM.Tiles.Cast<HexagonTile>().ToList());
+        // Update my living tiles list
+        GM.livingTiles = UpdateLivingTileList(GM.Tiles);
+        // Legalize my tiles
+        foreach (HexagonTile tile in GM.livingTiles)
+        {
+            tile.LegalizeTiles();
+        }
+        // Update my legal tiles list
         GM.legalTiles = UpdateLegalTileList(GM.Tiles);
-        
-        //Debug.Log("Legal tiles: " + GM.legalTiles.Count);
-        
     }
     
     public override void Tick()
@@ -79,7 +85,7 @@ public class PlacementState : States
     
     public void NextTileCreate(HexagonTile hexTile)
     {
-        hexTile.currentActiveAsset = hexTile.previewLister[GM.nextTile];
+        hexTile.currentActiveAsset = hexTile.tileVisuals[GM.nextTile];
         switch (GM.nextTile)
         {
             case 0:

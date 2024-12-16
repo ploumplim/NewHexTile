@@ -22,6 +22,8 @@ public class HexagonTile : MonoBehaviour
         DeadTile,
         DestroyerTile
     }
+
+    public ParticleSystem explosionEffect;
     [HideInInspector]
     public HexagonGrid parentGrid;
     [HideInInspector]
@@ -34,21 +36,26 @@ public class HexagonTile : MonoBehaviour
     public List<TileStates> stateToFuseWith;
     [HideInInspector]
     public TileStates currentTileState;
-
-    public List<GameObject> previewLister;
+    
+    [Tooltip("Drag and drop new visuals for the tiles here.")] 
+    [FormerlySerializedAs("previewLister")] public List<GameObject> tileVisuals;
     
     // Tile life times editable in inspector
+    [Header("Tile Life Times")]
     public int starterLifeTime = 1;
-    
+    [Space]
     public int greenLifeTime = 5;
     public int redLifeTime = 3;
     public int blueLifeTime = 7;
-    public int destroyerLifeTime = 1;
-    
+    [Space]
     public int greenFusionLifeTime = 10;
     public int redFusionLifeTime = 6;
     public int blueFusionLifeTime = 14;
+    [Space]
+    public int destroyerLifeTime = 1;
+    [Space]
     
+    [HideInInspector]
     public GameObject currentActiveAsset;
     
     
@@ -71,7 +78,7 @@ public class HexagonTile : MonoBehaviour
         switch (state)
         {
             case TileStates.DefaultTile:
-                currentActiveAsset = previewLister[0];
+                currentActiveAsset = tileVisuals[0];
                 //GetComponentInChildren<Renderer>().material.color = Color.grey;
                 lifeTime = 0;
                 isAlive = false;
@@ -79,7 +86,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileStates.LegalTile:
-                currentActiveAsset = previewLister[1];
+                currentActiveAsset = tileVisuals[1];
                 //GetComponentInChildren<Renderer>().material.color = Color.white;
                 lifeTime = 0;
                 isAlive = false;
@@ -87,7 +94,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileStates.StarterTile:
-                currentActiveAsset = previewLister[2];
+                currentActiveAsset = tileVisuals[2];
                 //GetComponentInChildren<Renderer>().material.color = new Color(0f,0f,0f);
                 lifeTime = starterLifeTime;
                 isAlive = true;
@@ -96,7 +103,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileStates.GreenTile:
-                currentActiveAsset = previewLister[3];
+                currentActiveAsset = tileVisuals[3];
                 //GetComponentInChildren<Renderer>().material.color = new Color(0f,0.5f,0f);
                 lifeTime = greenLifeTime;
                 isAlive = true;
@@ -105,7 +112,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileStates.BlueTile:
-                currentActiveAsset = previewLister[4];
+                currentActiveAsset = tileVisuals[4];
                 //GetComponentInChildren<Renderer>().material.color = new Color(0f,0f,0.5f);
                 lifeTime = blueLifeTime;
                 isAlive = true;
@@ -114,7 +121,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileStates.RedTile:
-                currentActiveAsset = previewLister[5];
+                currentActiveAsset = tileVisuals[5];
                 //GetComponentInChildren<Renderer>().material.color = new Color(0.5f,0f,0f);
                 lifeTime = redLifeTime;
                 isAlive = true;
@@ -123,7 +130,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileStates.GreenFusionTile:
-                currentActiveAsset = previewLister[6];
+                currentActiveAsset = tileVisuals[6];
                 GetComponentInChildren<Renderer>().material.color = new Color(0f,1f,0f);
                 lifeTime += greenFusionLifeTime;
                 isAlive = true;
@@ -132,7 +139,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileStates.BlueFusionTile:
-                currentActiveAsset = previewLister[7];
+                currentActiveAsset = tileVisuals[7];
                 GetComponentInChildren<Renderer>().material.color = new Color(0f, 0f, 1f);
                 lifeTime += blueFusionLifeTime;
                 isAlive = true;
@@ -141,7 +148,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileStates.RedFusionTile:
-                currentActiveAsset = previewLister[8];
+                currentActiveAsset = tileVisuals[8];
                 GetComponentInChildren<Renderer>().material.color = new Color(1f, 0f, 0f);
                 lifeTime += redFusionLifeTime;
                 isAlive = true;
@@ -149,14 +156,14 @@ public class HexagonTile : MonoBehaviour
                 
                 break;
             case TileStates.DeadTile:
-                currentActiveAsset = previewLister[9];
+                currentActiveAsset = tileVisuals[9];
                 GetComponentInChildren<Renderer>().material.color = Color.black;
                 lifeTime = 0;
                 isAlive = false;
                 FillStatesToFuseWith();
                 break;
             case TileStates.DestroyerTile:
-                currentActiveAsset = previewLister[10];
+                currentActiveAsset = tileVisuals[10];
                 //GetComponentInChildren<Renderer>().material.color = new Color(1f, 0f, 1f);
                 lifeTime = destroyerLifeTime;
                 isAlive = true;
@@ -174,7 +181,7 @@ public class HexagonTile : MonoBehaviour
         {
             //previewLister[0].SetActive(false);
             currentActiveAsset.SetActive(true);
-            foreach (var asset in previewLister)
+            foreach (var asset in tileVisuals)
             {
                 if (asset != currentActiveAsset)
                 {
@@ -319,6 +326,10 @@ public class HexagonTile : MonoBehaviour
        
         if (lifeTime == 1)
         {
+
+            // activate the explosion effect
+            explosionEffect.Play();
+            
             // we set its state to default.
             TileStateChange(TileStates.DefaultTile);
             // we make a list of all tiles around this one.
@@ -326,6 +337,10 @@ public class HexagonTile : MonoBehaviour
             // for each, we set their lifetime to 0, run their end of lifetime, and set their state to legal.
             foreach (HexagonTile adjacentTile in adjacentTiles)
             {
+                if (adjacentTile.isAlive || adjacentTile.currentTileState == TileStates.DeadTile)
+                {
+                    adjacentTile.explosionEffect.Play();
+                }
                 adjacentTile.TileStateChange(TileStates.DefaultTile);
             }
         }

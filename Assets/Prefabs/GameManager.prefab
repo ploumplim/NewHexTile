@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5533377454474176255}
   - component: {fileID: 7163118725097851189}
-  - component: {fileID: 5598418211867190692}
   - component: {fileID: 3826982093671844701}
   m_Layer: 0
   m_Name: GameManager
@@ -50,27 +49,25 @@ MonoBehaviour:
   gridWidth: 0
   gridHeight: 0
   livingTiles: []
+  legalTiles: []
   toggleScript: {fileID: 0}
-  nextTile: 0
   hexGrid: {fileID: 0}
+  godModeToggle: {fileID: 0}
   godHUD: {fileID: 0}
+  nextTilePreview: {fileID: 0}
+  resetLifeTimeColor: 3
+  firstLifeTimeThreshold: 2
+  secondLifeTimeThreshold: 1
   GODMODE: 0
+  nextTile: 0
+  destroyerDangerLimit: 4
+  greenTileWeight: 25
+  blueTileWeight: 25
+  redTileWeight: 25
+  destroyerTileWeight: 25
+  weights: 
   starterTileXPosition: 1
   starterTileYPosition: 1
-  nextTilePreview: {fileID: 0}
---- !u!114 &5598418211867190692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531548851215127038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acaa931eb94dd6c4685c04a0d77accec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
 --- !u!114 &3826982093671844701
 MonoBehaviour:
   m_ObjectHideFlags: 0

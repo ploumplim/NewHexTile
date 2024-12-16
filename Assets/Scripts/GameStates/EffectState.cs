@@ -11,27 +11,21 @@ public class EffectState : States
             tile.GetComponent<HexagonTile>().ActivateTileEffects();
         }
         
-        
-        // update the living and legal tile lists
-        GM.livingTiles = UpdateLivingTileList(GM.Tiles);
-        GM.legalTiles = UpdateLegalTileList(GM.Tiles);
-        LegalTilesShouldBeDefault(GM.legalTiles);
-        
-        foreach (HexagonTile tile in GM.livingTiles)
-        {
-            tile.LegalizeTiles();
-        }
-        
         GM.ChangeState(GM.GetComponent<CountersState>());
-    }
-
-    public override void Tick()
-    {
-        
     }
 
     public override void Exit()
     {
-        //Debug.Log("Exiting Effect State");
+        // Check if the legal tiles should be default from all my tiles
+        LegalTilesShouldBeDefault(GM.Tiles.Cast<HexagonTile>().ToList());
+        // Update my living tiles list
+        GM.livingTiles = UpdateLivingTileList(GM.Tiles);
+        // Legalize my tiles
+        foreach (HexagonTile tile in GM.livingTiles)
+        {
+            tile.LegalizeTiles();
+        }
+        // Update my legal tiles list
+        GM.legalTiles = UpdateLegalTileList(GM.Tiles);
     }
 }
