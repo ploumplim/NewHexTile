@@ -9,6 +9,7 @@ public class FusionState : States
         // reset the list of fusable tiles
         List<HexagonTile> fusableTiles = new List<HexagonTile>();
         
+        // add all fusable tiles to my list
         for (int i = 0; i < GM.livingTiles.Count; i++)
         {
             if (GM.livingTiles[i].CanBeFused())
@@ -32,12 +33,15 @@ public class FusionState : States
         GM.ChangeState(GM.GetComponent<EffectState>());
     }
 
-    public override void Tick()
-    {
-    }
-
     public override void Exit()
     {
-        //Debug.Log("Exiting Fusion State");
+        // Update my lists
+        GM.legalTiles = UpdateLegalTileList(GM.Tiles);
+        GM.livingTiles = UpdateLivingTileList(GM.Tiles);
+        // Legalize my tiles
+        foreach (HexagonTile tile in GM.livingTiles)
+        {
+            tile.LegalizeTiles();
+        }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,9 +34,10 @@ public class GameManager : MonoBehaviour
     [Header("Initialized Variables")]
     // This is the hexagon grid that we will be using to store the tiles.
         public HexagonGrid hexGrid;
+        // This is the toggle that enables godmode.
+        public Toggle godModeToggle;
         // This is the HUD that will be displayed when godmode is enabled.
             public GameObject godHUD;
-    // This is the godmode toggle.
         [Tooltip("next tile Prefab")]
             public GameObject nextTilePreview;
             
@@ -56,7 +58,8 @@ public class GameManager : MonoBehaviour
     public bool GODMODE;
     [Tooltip("This is the porcentage rng that defines the next tile.")]
     public int nextTile;
-    
+    [Tooltip("This is the minimum amount of tiles that need to be placed before we spawn bombs. (Not implemented)")]
+    public int destroyerDangerLimit = 4;
     [Header("Tile Weights")]
     public int greenTileWeight = 25;
     public int blueTileWeight = 25;
@@ -66,10 +69,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public List<int> weights;
     // This is the minimum amount of tiles that need to be placed before we spawn bombs
     
-    
-    public int destroyerDangerLimit = 4;
-    
-       // starter tile position
+    [Header("Starter Tiles")]
+    // starter tile position
     public int starterTileXPosition = 1;
     public int starterTileYPosition = 1;
     
@@ -111,10 +112,7 @@ public class GameManager : MonoBehaviour
 
 
         toggleScript = GetComponent<ToggleScript>();
-        if (!GODMODE)
-        {
-            godHUD.SetActive(false);
-        }
+        
         
         
 
@@ -123,6 +121,16 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         currentState?.Tick();
+        if (godModeToggle.isOn)
+        {
+            godHUD.SetActive(true);
+            GODMODE = true;
+        }
+        else
+        {
+            godHUD.SetActive(false);
+            GODMODE = false;
+        }
     }
 
     public void ChangeState(States newState)

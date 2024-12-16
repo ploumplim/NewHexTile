@@ -65,10 +65,11 @@ public abstract class States : MonoBehaviour
    {
       foreach (HexagonTile tile in legalTiles.ToList())
       {
-         if (!tile.HasLivingAdjacentTiles())
+         // If the tile has no living adjacent tiles and is a legal tile, change the tile state to default.
+         if (!tile.HasLivingAdjacentTiles() &&
+             tile.currentTileState == HexagonTile.TileStates.LegalTile)
          {
             tile.TileStateChange(HexagonTile.TileStates.DefaultTile);
-            legalTiles.Remove(tile);
          }
       }
    }
