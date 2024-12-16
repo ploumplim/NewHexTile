@@ -22,6 +22,8 @@ public class HexagonTile : MonoBehaviour
         DeadTile,
         DestroyerTile
     }
+
+    public ParticleSystem explosionEffect;
     [HideInInspector]
     public HexagonGrid parentGrid;
     [HideInInspector]
@@ -324,6 +326,10 @@ public class HexagonTile : MonoBehaviour
        
         if (lifeTime == 1)
         {
+
+            // activate the explosion effect
+            explosionEffect.Play();
+            
             // we set its state to default.
             TileStateChange(TileStates.DefaultTile);
             // we make a list of all tiles around this one.
