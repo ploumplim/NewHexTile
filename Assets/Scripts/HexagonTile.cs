@@ -337,6 +337,10 @@ public class HexagonTile : MonoBehaviour
             // for each, we set their lifetime to 0, run their end of lifetime, and set their state to legal.
             foreach (HexagonTile adjacentTile in adjacentTiles)
             {
+                if (adjacentTile.isAlive || adjacentTile.currentTileState == TileStates.DeadTile)
+                {
+                    adjacentTile.explosionEffect.Play();
+                }
                 adjacentTile.TileStateChange(TileStates.DefaultTile);
             }
         }

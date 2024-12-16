@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17f6822e-6c11-447c-86eb-a40ca1fc295f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexagonTile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexagonTile.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +112,7 @@
       <workItem from="1734279524909" duration="4212000" />
       <workItem from="1734284845912" duration="44000" />
       <workItem from="1734330963779" duration="2310000" />
-      <workItem from="1734334945164" duration="531000" />
+      <workItem from="1734334945164" duration="1226000" />
     </task>
     <servers />
   </component>
