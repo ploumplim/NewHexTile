@@ -173,4 +173,22 @@ public class GameManager : MonoBehaviour
         //Debug.Log("State changed to " + newState);
         currentState.Enter();
     }
+    
+    public void RestartScene()
+    {
+        // Remove current tiles
+        foreach (HexagonTile tile in Tiles)
+        {
+            tile.TileStateChange(HexagonTile.TileStates.DefaultTile);
+        }
+
+        // Reset the game state
+        currentState = GetComponent<CountersState>();
+        currentState.Enter();
+        
+        // Set the starter tile
+        var starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
+        starterTile.TileStateChange(HexagonTile.TileStates.StarterTile);
+    }
+    
 }

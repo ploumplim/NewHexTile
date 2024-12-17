@@ -13,9 +13,9 @@ public class CountersState : States
         {
             // If the hexagon tile is alive, we want to reduce the lifetime of the tile.
             tile.lifeTime -= 1;
+            
+
             tile.GetComponentInChildren<TextMeshPro>().text = tile.lifeTime.ToString();
-            
-            
             // This function sets the color hue of the tile's text depending on their lifetime.
             if (tile.lifeTime >= GM.resetLifeTimeColor)
             {
@@ -30,7 +30,6 @@ public class CountersState : States
                 tile.GetComponentInChildren<TextMeshPro>().color = Color.red;
             }
             
-            
             if (tile.lifeTime <= 0 && tile.isAlive)
             {
                 // if dead, remove the text from the tile and change the tile state to dead.
@@ -43,21 +42,8 @@ public class CountersState : States
             {
                 tile.GetComponentInChildren<TextMeshPro>().text = "";
             }
+            
         }
-        
-        
-        // Check if the legal tiles should be default from all my tiles
-        LegalTilesShouldBeDefault(GM.Tiles.Cast<HexagonTile>().ToList());
-        // Update my living tiles list
-        GM.livingTiles = UpdateLivingTileList(GM.Tiles);
-        // Legalize my tiles
-        foreach (HexagonTile tile in GM.livingTiles)
-        {
-            tile.LegalizeTiles();
-        }
-        // Update my legal tiles list
-        GM.legalTiles = UpdateLegalTileList(GM.Tiles);
-        
         // Generate the next tile to be placed on the board.
         GM.nextTile1 = NextTileGenerator();
         do
@@ -65,17 +51,13 @@ public class CountersState : States
             GM.nextTile2 = NextTileGenerator();
         } while (GM.nextTile1 == GM.nextTile2);
         
-        
-        
         GM.ChangeState(GM.GetComponent<PlacementState>());
-        
-        
-    }
 
-   
+    }
 
     public override void Exit()
     {
+        
         // Check if the legal tiles should be default from all my tiles
         LegalTilesShouldBeDefault(GM.Tiles.Cast<HexagonTile>().ToList());
         // Update my living tiles list
