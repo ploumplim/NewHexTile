@@ -60,7 +60,11 @@ public class CountersState : States
         
         // Generate the next tile to be placed on the board.
         GM.nextTile1 = NextTileGenerator();
-        GM.nextTile2 = NextTileGenerator();
+        do
+        {
+            GM.nextTile2 = NextTileGenerator();
+        } while (GM.nextTile1 == GM.nextTile2);
+        
         
         
         GM.ChangeState(GM.GetComponent<PlacementState>());

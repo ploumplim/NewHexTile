@@ -14,15 +14,15 @@ public class PlacementState : States
         {
             case 0: //green tile
                 GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(0f, 0.5f, 0f);
-                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.greenLifeTime + ",+ " + GM.greenFusionLifeTime;
+                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.greenLifeTime + ",+" + GM.greenFusionLifeTime;
                 break;
             case 1: //blue tile
                 GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0.5f);
-                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.blueLifeTime + ",+ " + GM.blueFusionLifeTime;
+                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.blueLifeTime + ",+" + GM.blueFusionLifeTime;
                 break;
             case 2: //red tile
                 GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(0.5f, 0f, 0f);
-                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.redLifeTime + ",+ " + GM.redFusionLifeTime;
+                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.redLifeTime + ",+" + GM.redFusionLifeTime;
                 break;
             case 3: //destroyer tile
                 GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(1f, 0f, 1f);
@@ -34,15 +34,15 @@ public class PlacementState : States
         {
             case 0: //green tile
                 GM.nextTilePreview2.GetComponentInChildren<Image>().color = new Color(0f, 0.5f, 0f);
-                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.greenLifeTime + ",+ " + GM.greenFusionLifeTime;
+                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.greenLifeTime + ",+" + GM.greenFusionLifeTime;
                 break;
             case 1: //blue tile
                 GM.nextTilePreview2.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0.5f);
-                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.blueLifeTime + ",+ " + GM.blueFusionLifeTime;
+                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.blueLifeTime + ",+" + GM.blueFusionLifeTime;
                 break;
             case 2: //red tile
                 GM.nextTilePreview2.GetComponentInChildren<Image>().color = new Color(0.5f, 0f, 0f);
-                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.redLifeTime + ",+ " + GM.redFusionLifeTime;
+                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.redLifeTime + ",+" + GM.redFusionLifeTime;
                 break;
             case 3: //destroyer tile
                 GM.nextTilePreview2.GetComponentInChildren<Image>().color = new Color(1f, 0f, 1f);
