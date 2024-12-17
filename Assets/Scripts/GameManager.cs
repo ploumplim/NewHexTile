@@ -16,6 +16,19 @@ public class GameManager : MonoBehaviour
     public int gridWidth;
     [HideInInspector]
     public int gridHeight;
+    [HideInInspector]
+    public int greenLifeTime;
+    [HideInInspector]
+    public int blueLifeTime;
+    [HideInInspector]
+    public int redLifeTime;
+    [HideInInspector]
+    public int redFusionLifeTime;
+    [HideInInspector]
+    public int blueFusionLifeTime;
+    [HideInInspector]
+    public int greenFusionLifeTime;
+    
     
     // This is a list of all the living tiles in the grid.
     [HideInInspector]
@@ -26,8 +39,10 @@ public class GameManager : MonoBehaviour
     public List<HexagonTile> legalTiles;
     
     // This is the script that manages godmode.
+    [FormerlySerializedAs("toggleScript")] [HideInInspector]
+    public GodModeToggleScript godModeToggleScript;
     [HideInInspector]
-    public ToggleScript toggleScript;
+    public NextTileSelectorToggle nextTileSelectorToggle;
     
     
     //THIS SECTION HAS ALL THE VARIABLES THAT CAN BE CHANGED IN THE INSPECTOR.
@@ -38,10 +53,12 @@ public class GameManager : MonoBehaviour
         public Toggle godModeToggle;
         // This is the HUD that will be displayed when godmode is enabled.
             public GameObject godHUD;
+        [FormerlySerializedAs("nextTilePreview")]
         [Tooltip("This determines the next tile that will be placed. " +
                  "At the start of the game, it will generate the number" +
                  "introduced here. (0 = green tile... etc")]
-            public GameObject nextTilePreview;
+            public GameObject nextTilePreview1;
+            public GameObject nextTilePreview2;
             
         [Space]
     [Header("LifeTime Thresholds")]
@@ -58,8 +75,12 @@ public class GameManager : MonoBehaviour
     [Header("Miscellaneous Game Variables")]// This is the next tile that will be placed, randomly generated at the end of each turn.
     [Tooltip("Activate godmode")]
     public bool GODMODE;
-    [Tooltip("This is the porcentage rng that defines the next tile.")]
-    public int nextTile;
+    [FormerlySerializedAs("nextTile")] [Tooltip("Left next tile's ID.")]
+    public int nextTile1;
+    [Tooltip("Right next tile ID.")]
+    public int nextTile2;
+    [Tooltip("This is the text that will be displayed when a destroyer tile is previewed.")]
+    public string destroyerText = "La Bomba";
     [Tooltip("This is the minimum amount of tiles that need to be placed before we spawn bombs. (Not implemented)")]
     public int destroyerDangerLimit = 4;
     [Header("Tile Weights")]
@@ -100,6 +121,16 @@ public class GameManager : MonoBehaviour
         gridHeight = hexGrid.gridHeight;
         Tiles = hexGrid.TileInstances;
         
+        // Obtain the lifetime of the different tilestates for output.
+        greenLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().greenLifeTime - 1;
+        redLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().redLifeTime - 1;
+        blueLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().blueLifeTime - 1;
+        redFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().redFusionLifeTime - 1;
+        blueFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().blueFusionLifeTime - 1;
+        greenFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().greenFusionLifeTime - 1;
+        
+        
+        
         // SET STARTER TILE
         var starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
           starterTile.TileStateChange(HexagonTile.TileStates.StarterTile);
@@ -113,8 +144,8 @@ public class GameManager : MonoBehaviour
         weights = new List<int> {greenTileWeight, blueTileWeight, redTileWeight, destroyerTileWeight};        
 
 
-        toggleScript = GetComponent<ToggleScript>();
-        
+        godModeToggleScript = GetComponent<GodModeToggleScript>();
+        nextTileSelectorToggle = GetComponent<NextTileSelectorToggle>();
         
         
 

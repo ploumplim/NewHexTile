@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public abstract class States : MonoBehaviour
 {
@@ -74,5 +76,55 @@ public abstract class States : MonoBehaviour
          }
       }
    }
+   
+   public int NextTileGenerator()
+    {
+        // Generate the next tile to be placed on the board.
+        int totalWeight = 0;
+        // Calculate the total weight of the weights list with no danger.
+        if (GM.livingTiles.Count >= GM.destroyerDangerLimit)
+        {
+           foreach (int weight in GM.weights)
+           {
+              totalWeight += weight;
+           }
+           // Generate a random value between 0 and the total weight.
+           int randomValue = Random.Range(0, totalWeight);
+           // Calculate the cumulative weight of the weights list.
+           int cumulativeWeight = 0;
+           // Iterate through the weights list and set the next tile to the index of the weight that the random value is less than.
+           for (int i = 0; i < GM.weights.Count; i++)
+           {
+              cumulativeWeight += GM.weights[i];
+              if (randomValue < cumulativeWeight)
+              {
+                    return i;
+              }
+
+           }
+        }
+        else
+        {
+           foreach (int weight in GM.weights.Take(GM.weights.Count - 1))
+           {
+              totalWeight += weight;
+           }
+           // Generate a random value between 0 and the total weight.
+           int randomValue = Random.Range(0, totalWeight);
+           // Calculate the cumulative weight of the weights list.
+           int cumulativeWeight = 0;
+           // Iterate through the weights list and set the next tile to the index of the weight that the random value is less than.
+           for (int i = 0; i < GM.weights.Count; i++)
+           {
+              cumulativeWeight += GM.weights[i];
+              if (randomValue < cumulativeWeight)
+              {
+                 return i;
+              }
+
+           }
+        }
+        return 0;
+    }
 }
 

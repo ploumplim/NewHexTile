@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ToggleScript : MonoBehaviour
+public class GodModeToggleScript : MonoBehaviour
 {
     public Toggle[] toggles;
     public int activeTile;
