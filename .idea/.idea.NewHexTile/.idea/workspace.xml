@@ -6,11 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="17f6822e-6c11-447c-86eb-a40ca1fc295f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/BlueTile.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/BlueTile.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/GreenTile 1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/GreenTile 1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Starter.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Starter.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/White.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/White.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/WhiteTransparent.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/WhiteTransparent.mat.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/CountersState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/CountersState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonGrid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/PlacementState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/PlacementState.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +129,8 @@
       <workItem from="1734334945164" duration="1226000" />
       <workItem from="1734355794973" duration="1357000" />
       <workItem from="1734361142926" duration="1210000" />
-      <workItem from="1734426509654" duration="7859000" />
+      <workItem from="1734426509654" duration="9064000" />
+      <workItem from="1734445611222" duration="1092000" />
     </task>
     <servers />
   </component>

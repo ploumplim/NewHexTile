@@ -13,15 +13,15 @@ public class PlacementState : States
         switch (GM.nextTile1)
         {
             case 0: //green tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(0f, 0.5f, 0f);
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(0f, 1f, 0f);
                 GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.greenLifeTime + ",+" + GM.greenFusionLifeTime;
                 break;
             case 1: //blue tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0.5f);
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(0f, 0f, 1f);
                 GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.blueLifeTime + ",+" + GM.blueFusionLifeTime;
                 break;
             case 2: //red tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(0.5f, 0f, 0f);
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(1f, 0f, 0f);
                 GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.redLifeTime + ",+" + GM.redFusionLifeTime;
                 break;
             case 3: //destroyer tile
