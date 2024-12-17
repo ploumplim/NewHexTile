@@ -5909,12 +5909,12 @@ MonoBehaviour:
   - {fileID: 5834949633792385891}
   - {fileID: 904090365440887468}
   starterLifeTime: 1
-  greenLifeTime: 5
-  redLifeTime: 3
-  blueLifeTime: 7
-  greenFusionLifeTime: 10
-  redFusionLifeTime: 6
-  blueFusionLifeTime: 14
+  greenLifeTime: 4
+  redLifeTime: 6
+  blueLifeTime: 10
+  greenFusionLifeTime: 5
+  redFusionLifeTime: 8
+  blueFusionLifeTime: 10
   destroyerLifeTime: 1
   currentActiveAsset: {fileID: 0}
 --- !u!1 &8127604981770351466
