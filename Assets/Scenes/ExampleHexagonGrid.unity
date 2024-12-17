@@ -1302,7 +1302,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.29
+  orthographic size: 10.69
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1327,7 +1327,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 15.5, y: 32.91, z: 8.6}
+  m_LocalPosition: {x: 17.45, y: 10, z: 9.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2511,9 +2511,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e7d267072978d4abcfb6380e0bc195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridWidth: 20
-  gridHeight: 20
-  tileScale: 1
+  gridWidth: 15
+  gridHeight: 15
+  tileScale: 1.5
   hexagonTilePrefab: {fileID: 6892170649514544254, guid: 2d25a368a18567740ab7f817e9f76730, type: 3}
 --- !u!4 &1910971299
 Transform:
@@ -2970,11 +2970,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: starterTileXPosition
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: starterTileYPosition
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4271742919183421098, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}

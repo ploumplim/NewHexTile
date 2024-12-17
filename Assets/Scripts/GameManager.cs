@@ -38,7 +38,9 @@ public class GameManager : MonoBehaviour
         public Toggle godModeToggle;
         // This is the HUD that will be displayed when godmode is enabled.
             public GameObject godHUD;
-        [Tooltip("next tile Prefab")]
+        [Tooltip("This determines the next tile that will be placed. " +
+                 "At the start of the game, it will generate the number" +
+                 "introduced here. (0 = green tile... etc")]
             public GameObject nextTilePreview;
             
         [Space]

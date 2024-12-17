@@ -329,12 +329,11 @@ public class HexagonTile : MonoBehaviour
 
             // activate the explosion effect
             explosionEffect.Play();
-            
             // we set its state to default.
             TileStateChange(TileStates.DefaultTile);
             // we make a list of all tiles around this one.
             HexagonTile[] adjacentTiles = GetAdjacentTiles();
-            // for each, we set their lifetime to 0, run their end of lifetime, and set their state to legal.
+            // we iterate through the list and activate the explosion effect on each tile, then set their state to default.
             foreach (HexagonTile adjacentTile in adjacentTiles)
             {
                 if (adjacentTile.isAlive || adjacentTile.currentTileState == TileStates.DeadTile)

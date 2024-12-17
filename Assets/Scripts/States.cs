@@ -29,6 +29,7 @@ public abstract class States : MonoBehaviour
    public List<HexagonTile> UpdateLegalTileList(HexagonTile[,] tiles) //This list is used to update the legal tiles list.
    {
       List<HexagonTile> newLegalTiles = new List<HexagonTile>();
+      
       foreach (HexagonTile tile in tiles)
       { //If the tile is a legal tile, add it to the legal tiles list.
          if (tile.currentTileState == HexagonTile.TileStates.LegalTile)
