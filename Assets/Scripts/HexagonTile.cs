@@ -59,9 +59,6 @@ public class HexagonTile : MonoBehaviour
     
     [Header("Tile characteristics")]
     [Tooltip("How long the tile will wait before activating its effect.")]
-    public int PakkuCooldown = 1;
-    
-    [HideInInspector] public int PakkuCounter = 0;
     
     [HideInInspector]
     public GameObject currentActiveAsset;
@@ -369,14 +366,11 @@ public class HexagonTile : MonoBehaviour
 
     public void EffectInfect()
     {
-        PakkuCounter++;
         //Debug.Log("tile at hexagrid position:"+ transform.position +"PakkuCounter: " + PakkuCounter);
-        if (PakkuCounter < PakkuCooldown)
+        if (lifeTime != 1)
         {
-            
             return;
         }
-        PakkuCounter = 0;
         // we make a list of all tiles around this one.
         HexagonTile[] adjacentTiles = GetAdjacentTiles();
         
@@ -393,12 +387,11 @@ public class HexagonTile : MonoBehaviour
         
         // Then, we sort the list by their lifetime, with the longest life time being the first element.
         aliveTiles.Sort((x, y) => y.lifeTime.CompareTo(x.lifeTime));
-        
         // We then infect the first element in the list.
         if (aliveTiles.Count > 0)
-        {
-            aliveTiles[0].TileStateChange(TileStates.PakkuTile);
-            aliveTiles[0].PakkuCounter = 1;
+        { 
+            Debug.Log("Alive tiles count: " + aliveTiles.Count + ". With the highest lifetime: " + aliveTiles[0].lifeTime);
+            aliveTiles[0].TileStateChange(currentTileState);
         }
         
         //If no living tiles are around, we set the tile state to default.
