@@ -379,7 +379,7 @@ public class HexagonTile : MonoBehaviour
         // We then infect the first element in the list.
         if (aliveTiles.Count > 0)
         { 
-            Debug.Log("Alive tiles count: " + aliveTiles.Count + ". With the highest lifetime: " + aliveTiles[0].lifeTime);
+            // Debug.Log("Alive tiles count: " + aliveTiles.Count + ". With the highest lifetime: " + aliveTiles[0].lifeTime);
             aliveTiles[0].TileStateChange(currentTileState);
         }
         

@@ -8,15 +8,20 @@ public class EffectState : States
         // Sort the living tiles based on their state
         // ORDER: rest, Destroyer, Pakku
         var sortedTiles = GM.livingTiles
-            .OrderBy(tile => tile.currentTileState == HexagonTile.TileStates.PakkuTile ? 0 :
-                tile.currentTileState == HexagonTile.TileStates.DestroyerTile ? 1 :
+            .OrderBy(tile => tile.currentTileState == HexagonTile.TileStates.DestroyerTile ? 0 :
+                tile.currentTileState == HexagonTile.TileStates.PakkuTile ? 1 :
                 tile.currentTileState == HexagonTile.TileStates.GreenTile ? 2 :
                 tile.currentTileState == HexagonTile.TileStates.RedTile ? 3 :
                 tile.currentTileState == HexagonTile.TileStates.BlueTile ? 4 : 5)
             .ToList();
         
-        Debug.Log("sortedTIles: " + sortedTiles.Count + " . Every tile: ");
-        
+        // foreach (var tile in sortedTiles)
+        // {
+        //     Debug.Log("Tile State: " + tile.currentTileState);
+        // }
+        //
+        // Debug.Log("--------------------");
+        //
         // activate all effects on tiles in the sorted order.
         foreach (HexagonTile tile in sortedTiles)
         {
