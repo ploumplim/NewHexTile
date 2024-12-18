@@ -13,23 +13,23 @@ public class PlacementState : States
         switch (GM.nextTile1)
         {
             case 0: //green tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(0.3f, 1f, 0.3f);
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.greenTileColor;
                 GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.greenLifeTime + ",+" + GM.greenFusionLifeTime;
                 break;
             case 1: //blue tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(0.3f, 0.3f, 1f);
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.blueTileColor;
                 GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.blueLifeTime + ",+" + GM.blueFusionLifeTime;
                 break;
             case 2: //red tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(1f, 0.3f, 0.3f);
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.redTileColor;
                 GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.redLifeTime + ",+" + GM.redFusionLifeTime;
                 break;
             case 3: //destroyer tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(1f, 0f, 1f);
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.destroyerTileColor;
                 GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = GM.destroyerText;
                 break;
             case 4: //Pakku tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(1f, 1f, 0f);
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.pakkuTileColor;
                 GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = GM.pakkuText + "LT:" + GM.pakkuLifeTime;
                 break;
         }
@@ -37,23 +37,23 @@ public class PlacementState : States
         switch (GM.nextTile2)
         {
             case 0: //green tile
-                GM.nextTilePreview2.GetComponentInChildren<Image>().color = new Color(0f, 0.5f, 0f);
+                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.greenTileColor;
                 GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.greenLifeTime + ",+" + GM.greenFusionLifeTime;
                 break;
             case 1: //blue tile
-                GM.nextTilePreview2.GetComponentInChildren<Image>().color = new Color(0f, 0f, 0.5f);
+                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.blueTileColor;
                 GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.blueLifeTime + ",+" + GM.blueFusionLifeTime;
                 break;
             case 2: //red tile
-                GM.nextTilePreview2.GetComponentInChildren<Image>().color = new Color(0.5f, 0f, 0f);
+                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.redTileColor;
                 GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.redLifeTime + ",+" + GM.redFusionLifeTime;
                 break;
             case 3: //destroyer tile
-                GM.nextTilePreview2.GetComponentInChildren<Image>().color = new Color(1f, 0f, 1f);
+                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.destroyerTileColor;
                 GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = GM.destroyerText;
                 break;
             case 4: //Pakku tile
-                GM.nextTilePreview2.GetComponentInChildren<Image>().color = new Color(1f, 1f, 0f);
+                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.pakkuTileColor;
                 GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = GM.pakkuText + "LT:" + GM.pakkuLifeTime;
                 break;
         }

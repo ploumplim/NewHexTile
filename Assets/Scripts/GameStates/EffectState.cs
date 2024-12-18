@@ -15,11 +15,15 @@ public class EffectState : States
                 tile.currentTileState == HexagonTile.TileStates.BlueTile ? 4 : 5)
             .ToList();
         
+        Debug.Log("sortedTIles: " + sortedTiles.Count + " . Every tile: ");
+        
         // activate all effects on tiles in the sorted order.
         foreach (HexagonTile tile in sortedTiles)
         {
-            
-            tile.GetComponent<HexagonTile>().ActivateTileEffects();
+            if (tile.isAlive)
+            {
+                tile.GetComponent<HexagonTile>().ActivateTileEffects();
+            }
         }
         
         GM.ChangeState(GM.GetComponent<CountersState>());

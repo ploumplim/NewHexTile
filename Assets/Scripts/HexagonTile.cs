@@ -84,7 +84,6 @@ public class HexagonTile : MonoBehaviour
         {
             case TileStates.DefaultTile:
                 currentActiveAsset = tileVisuals[0];
-                //GetComponentInChildren<Renderer>().material.color = Color.grey;
                 lifeTime = 0;
                 isAlive = false;
                 FillStatesToFuseWith();
@@ -92,7 +91,6 @@ public class HexagonTile : MonoBehaviour
             
             case TileStates.LegalTile:
                 currentActiveAsset = tileVisuals[1];
-                //GetComponentInChildren<Renderer>().material.color = Color.white;
                 lifeTime = 0;
                 isAlive = false;
                 FillStatesToFuseWith();
@@ -100,7 +98,6 @@ public class HexagonTile : MonoBehaviour
             
             case TileStates.StarterTile:
                 currentActiveAsset = tileVisuals[2];
-                //GetComponentInChildren<Renderer>().material.color = new Color(0f,0f,0f);
                 lifeTime = starterLifeTime;
                 isAlive = true;
                 FillStatesToFuseWith();
@@ -109,7 +106,6 @@ public class HexagonTile : MonoBehaviour
             
             case TileStates.GreenTile:
                 currentActiveAsset = tileVisuals[3];
-                //GetComponentInChildren<Renderer>().material.color = new Color(0f,0.5f,0f);
                 lifeTime = greenLifeTime;
                 isAlive = true;
                 FillStatesToFuseWith();
@@ -118,7 +114,6 @@ public class HexagonTile : MonoBehaviour
             
             case TileStates.BlueTile:
                 currentActiveAsset = tileVisuals[4];
-                //GetComponentInChildren<Renderer>().material.color = new Color(0f,0f,0.5f);
                 lifeTime = blueLifeTime;
                 isAlive = true;
                 FillStatesToFuseWith();
@@ -126,8 +121,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileStates.RedTile:
-                currentActiveAsset = tileVisuals[5];
-                //GetComponentInChildren<Renderer>().material.color = new Color(0.5f,0f,0f);
+                currentActiveAsset = tileVisuals[5]; 
                 lifeTime = redLifeTime;
                 isAlive = true;
                 FillStatesToFuseWith();
@@ -136,7 +130,6 @@ public class HexagonTile : MonoBehaviour
             
             case TileStates.GreenFusionTile:
                 currentActiveAsset = tileVisuals[6];
-                GetComponentInChildren<Renderer>().material.color = new Color(0f,1f,0f);
                 lifeTime += greenFusionLifeTime;
                 isAlive = true;
                 FillStatesToFuseWith();
@@ -145,7 +138,6 @@ public class HexagonTile : MonoBehaviour
             
             case TileStates.BlueFusionTile:
                 currentActiveAsset = tileVisuals[7];
-                GetComponentInChildren<Renderer>().material.color = new Color(0f, 0f, 1f);
                 lifeTime += blueFusionLifeTime;
                 isAlive = true;
                 FillStatesToFuseWith();
@@ -154,7 +146,6 @@ public class HexagonTile : MonoBehaviour
             
             case TileStates.RedFusionTile:
                 currentActiveAsset = tileVisuals[8];
-                GetComponentInChildren<Renderer>().material.color = new Color(1f, 0f, 0f);
                 lifeTime += redFusionLifeTime;
                 isAlive = true;
                 FillStatesToFuseWith();
@@ -162,7 +153,6 @@ public class HexagonTile : MonoBehaviour
                 break;
             case TileStates.DeadTile:
                 currentActiveAsset = tileVisuals[9];
-                GetComponentInChildren<Renderer>().material.color = Color.black;
                 lifeTime = 0;
                 isAlive = false;
                 FillStatesToFuseWith();
@@ -186,7 +176,6 @@ public class HexagonTile : MonoBehaviour
                 
             default:
                 Debug.Log("The tile state is not recognized:" + transform);
-                GetComponentInChildren<Renderer>().material.color = Color.black;
                 break;
             
         }

@@ -11,12 +11,9 @@ public class GameManager : MonoBehaviour
     public States currentState;
     // This is the hexagon grid that we will be using to store the tiles.
     public HexagonTile[,] Tiles;
-    // These are the width and height of the grid.
-    [HideInInspector]
-    public int gridWidth;
-    [HideInInspector]
-    public int gridHeight;
-    [HideInInspector]
+    
+    // These variables store public information.
+    [HideInInspector] //lifetimes of the different tiles.
     public int greenLifeTime;
     [HideInInspector]
     public int blueLifeTime;
@@ -30,15 +27,8 @@ public class GameManager : MonoBehaviour
     public int greenFusionLifeTime;
     [HideInInspector]
     public int pakkuLifeTime;
-    
-    // This is a list of all the living tiles in the grid.
-    [HideInInspector]
+    [HideInInspector] // This is a list of all the living tiles in the grid.
     public List<HexagonTile> livingTiles;
-    
-    //this is a list of all tiles that are currently legal.
-    [HideInInspector]
-    public List<HexagonTile> legalTiles;
-    
     // This is the script that manages godmode.
     [FormerlySerializedAs("toggleScript")] [HideInInspector]
     public GodModeToggleScript godModeToggleScript;
@@ -70,7 +60,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("This is the second threshold for the lifetime of the tile. If the tile reaches this lifetime, the text will turn red.")]
     public int secondLifeTimeThreshold = 1;
     
-    // ada space in the inspector to separate the terms of a custom size
+    
     [Space]
     
     [Header("Miscellaneous Game Variables")]// This is the next tile that will be placed, randomly generated at the end of each turn.
@@ -93,6 +83,13 @@ public class GameManager : MonoBehaviour
     public int destroyerTileWeight = 25;
     public int pakkuTileWeight = 25;
 
+    [Header("Preview colors")]
+    public Color greenTileColor = new Color(0f, 0.5f, 0f);
+    public Color blueTileColor = new Color(0f, 0f, 0.5f);
+    public Color redTileColor = new Color(0.5f, 0f, 0f);
+    public Color destroyerTileColor = new Color(1f, 0f, 1f);
+    public Color pakkuTileColor = new Color(1f, 1f, 0f);
+    
     [HideInInspector] public List<int> weights;
     // This is the minimum amount of tiles that need to be placed before we spawn bombs
     
@@ -121,8 +118,6 @@ public class GameManager : MonoBehaviour
         // Initialize the grid
         hexGrid.InitGrid();
         
-        gridWidth = hexGrid.gridWidth;
-        gridHeight = hexGrid.gridHeight;
         Tiles = hexGrid.TileInstances;
         
         // Obtain the lifetime of the different tilestates for output.

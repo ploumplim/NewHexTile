@@ -4689,6 +4689,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: pakkuText
+      value: PakkuTile (Eats healthiest Hex)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: FastLifeTime
       value: 2
       objectReference: {fileID: 0}
@@ -4717,12 +4721,48 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: redTileColor.b
+      value: 0.47843137
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: redTileColor.g
+      value: 0.49201095
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: redTileColor.r
+      value: 0.70980394
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: blueTileColor.b
+      value: 0.70980394
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: blueTileColor.g
+      value: 0.4851688
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: blueTileColor.r
+      value: 0.47843137
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: greenTileWeight
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: nextTilePreview
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: greenTileColor.b
+      value: 0.4772606
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: greenTileColor.g
+      value: 0.7075472
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: greenTileColor.r
+      value: 0.4772606
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: nextTilePreview1
@@ -4733,12 +4773,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1668315237}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: pakkuTileColor.b
+      value: 0.47843137
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: pakkuTileColor.g
+      value: 0.70980394
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: pakkuTileColor.r
+      value: 0.69760764
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: destroyerTileWeight
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: destroyerDangerLimit
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: destroyerTileColor.b
+      value: 0.6845363
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: destroyerTileColor.g
+      value: 0.47843137
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: destroyerTileColor.r
+      value: 0.70980394
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: starterTileXPosition

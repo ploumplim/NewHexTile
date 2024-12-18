@@ -34,27 +34,7 @@ public abstract class States : MonoBehaviour
       {
          tile.LegalizeTiles();
       }
-      // Update my legal tiles list
-      GM.legalTiles = UpdateLegalTileList(GM.Tiles);
       
-   }
-   
-   public List<HexagonTile> UpdateLegalTileList(HexagonTile[,] tiles) //This list is used to update the legal tiles list.
-   {
-      List<HexagonTile> newLegalTiles = new List<HexagonTile>();
-      
-      foreach (HexagonTile tile in tiles)
-      { //If the tile is a legal tile, add it to the legal tiles list.
-         if (tile.currentTileState == HexagonTile.TileStates.LegalTile)
-         {
-            newLegalTiles.Add(tile);
-         }
-         else //If the tile is not a legal tile, remove it from the legal tiles list.
-         {
-            newLegalTiles.Remove(tile);
-         }
-      }
-      return newLegalTiles; //Return the updated list.
    }
    
    public List<HexagonTile> UpdateLivingTileList(HexagonTile[,] tiles)
