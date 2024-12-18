@@ -7,7 +7,8 @@ using UnityEngine.Tilemaps;
 public class HexagonTile : MonoBehaviour
 {
     [HideInInspector]
-    public enum TileStates // These are our tiles states
+    public enum TileStates // These are our tiles states. To add more states, we must add its corresponding variables
+    //and methods. Places where we hold this information is noted as with a ★
     {
         DefaultTile,
         GreenTile,
@@ -19,7 +20,8 @@ public class HexagonTile : MonoBehaviour
         BlueFusionTile,
         RedFusionTile,
         DeadTile,
-        DestroyerTile
+        DestroyerTile,
+        PakkuTile
     }
 
     public ParticleSystem explosionEffect;
@@ -39,7 +41,7 @@ public class HexagonTile : MonoBehaviour
     [Tooltip("Drag and drop new visuals for the tiles here.")] 
     [FormerlySerializedAs("previewLister")] public List<GameObject> tileVisuals;
     
-    // Tile life times editable in inspector
+    // Tile life times editable in inspector ★
     [Header("Tile Life Times")]
     public int starterLifeTime = 1;
     [Space]
@@ -52,7 +54,14 @@ public class HexagonTile : MonoBehaviour
     public int blueFusionLifeTime = 14;
     [Space]
     public int destroyerLifeTime = 1;
+    public int pakkuLifeTime = 3;
     [Space]
+    
+    [Header("Tile characteristics")]
+    [Tooltip("How long the tile will wait before activating its effect.")]
+    public int PakkuCooldown = 1;
+    
+    [HideInInspector] public int PakkuCounter = 0;
     
     [HideInInspector]
     public GameObject currentActiveAsset;
@@ -72,7 +81,7 @@ public class HexagonTile : MonoBehaviour
     {
         currentTileState = state;
         
-        // Change the tile's current state variable.
+        // Change the tile's current state variable. ★
         // Implement behavior modification based on the state
         switch (state)
         {
@@ -168,6 +177,14 @@ public class HexagonTile : MonoBehaviour
                 isAlive = true;
                 FillStatesToFuseWith();
                 break;
+            
+            case TileStates.PakkuTile:
+                currentActiveAsset = tileVisuals[11];
+                //GetComponentInChildren<Renderer>().material.color = new Color(1f, 1f, 0f);
+                lifeTime = pakkuLifeTime;
+                isAlive = true;
+                FillStatesToFuseWith();
+                break;
                 
                 
             default:
@@ -176,6 +193,8 @@ public class HexagonTile : MonoBehaviour
                 break;
             
         }
+        
+        // Set the current active asset to the current tile state
         if (currentActiveAsset != null)
         {
             //previewLister[0].SetActive(false);
@@ -183,7 +202,7 @@ public class HexagonTile : MonoBehaviour
             foreach (var asset in tileVisuals)
             {
                 if (asset != currentActiveAsset)
-                {
+                { // If the asset is not the current active asset, we want to deactivate it.
                     asset.SetActive(false);
                 }
             }
@@ -314,6 +333,10 @@ public class HexagonTile : MonoBehaviour
                 EffectDestroy();
                 break;
             
+            case TileStates.PakkuTile:
+                EffectInfect();
+                break;
+            
             default:
                 break;
         }
@@ -344,9 +367,45 @@ public class HexagonTile : MonoBehaviour
         }
     }
 
-    public void EffectRot()
+    public void EffectInfect()
     {
+        PakkuCounter++;
+        //Debug.Log("tile at hexagrid position:"+ transform.position +"PakkuCounter: " + PakkuCounter);
+        if (PakkuCounter < PakkuCooldown)
+        {
+            
+            return;
+        }
+        PakkuCounter = 0;
+        // we make a list of all tiles around this one.
+        HexagonTile[] adjacentTiles = GetAdjacentTiles();
         
+        // we check if any of them are alive and add them to an aliveTiles list.
+        List<HexagonTile> aliveTiles = new List<HexagonTile>();
+        
+        foreach (HexagonTile adjacentTile in adjacentTiles)
+        {
+            if (adjacentTile.isAlive)
+            {
+                aliveTiles.Add(adjacentTile);
+            }
+        }
+        
+        // Then, we sort the list by their lifetime, with the longest life time being the first element.
+        aliveTiles.Sort((x, y) => y.lifeTime.CompareTo(x.lifeTime));
+        
+        // We then infect the first element in the list.
+        if (aliveTiles.Count > 0)
+        {
+            aliveTiles[0].TileStateChange(TileStates.PakkuTile);
+            aliveTiles[0].PakkuCounter = 1;
+        }
+        
+        //If no living tiles are around, we set the tile state to default.
+        else
+        {
+            TileStateChange(TileStates.DefaultTile);
+        }
     }
     
 }

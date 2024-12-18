@@ -25,6 +25,17 @@ public abstract class States : MonoBehaviour
 
    public virtual void Exit()
    {
+      // Check if the legal tiles should be default from all my tiles
+      LegalTilesShouldBeDefault(GM.Tiles.Cast<HexagonTile>().ToList());
+      // Update my living tiles list
+      GM.livingTiles = UpdateLivingTileList(GM.Tiles);
+      // Legalize my tiles
+      foreach (HexagonTile tile in GM.livingTiles)
+      {
+         tile.LegalizeTiles();
+      }
+      // Update my legal tiles list
+      GM.legalTiles = UpdateLegalTileList(GM.Tiles);
       
    }
    
@@ -105,7 +116,7 @@ public abstract class States : MonoBehaviour
         }
         else
         {
-           foreach (int weight in GM.weights.Take(GM.weights.Count - 1))
+           foreach (int weight in GM.weights.Take(GM.weights.Count - 2))
            {
               totalWeight += weight;
            }

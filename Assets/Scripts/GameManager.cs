@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
     public int blueFusionLifeTime;
     [HideInInspector]
     public int greenFusionLifeTime;
-    
+    [HideInInspector]
+    public int pakkuLifeTime;
     
     // This is a list of all the living tiles in the grid.
     [HideInInspector]
@@ -81,6 +82,8 @@ public class GameManager : MonoBehaviour
     public int nextTile2;
     [Tooltip("This is the text that will be displayed when a destroyer tile is previewed.")]
     public string destroyerText = "La Bomba";
+    [Tooltip("This is the text that will be displayed when a pakku tile is previewed.")]
+    public string pakkuText = "PakkuTile";
     [Tooltip("This is the minimum amount of tiles that need to be placed before we spawn bombs. (Not implemented)")]
     public int destroyerDangerLimit = 4;
     [Header("Tile Weights")]
@@ -88,6 +91,7 @@ public class GameManager : MonoBehaviour
     public int blueTileWeight = 25;
     public int redTileWeight = 25;
     public int destroyerTileWeight = 25;
+    public int pakkuTileWeight = 25;
 
     [HideInInspector] public List<int> weights;
     // This is the minimum amount of tiles that need to be placed before we spawn bombs
@@ -128,7 +132,7 @@ public class GameManager : MonoBehaviour
         redFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().redFusionLifeTime - 1;
         blueFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().blueFusionLifeTime - 1;
         greenFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().greenFusionLifeTime - 1;
-        
+        pakkuLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().pakkuLifeTime - 1;
         
         
         // SET STARTER TILE
@@ -141,7 +145,7 @@ public class GameManager : MonoBehaviour
         
         //Debug.Log(starterTile.gameObject.name);
       
-        weights = new List<int> {greenTileWeight, blueTileWeight, redTileWeight, destroyerTileWeight};        
+        weights = new List<int> {greenTileWeight, blueTileWeight, redTileWeight, destroyerTileWeight, pakkuTileWeight};        
 
 
         godModeToggleScript = GetComponent<GodModeToggleScript>();

@@ -28,6 +28,10 @@ public class PlacementState : States
                 GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(1f, 0f, 1f);
                 GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = GM.destroyerText;
                 break;
+            case 4: //Pakku tile
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = new Color(1f, 1f, 0f);
+                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = GM.pakkuText + "LT:" + GM.pakkuLifeTime;
+                break;
         }
         
         switch (GM.nextTile2)
@@ -47,6 +51,10 @@ public class PlacementState : States
             case 3: //destroyer tile
                 GM.nextTilePreview2.GetComponentInChildren<Image>().color = new Color(1f, 0f, 1f);
                 GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = GM.destroyerText;
+                break;
+            case 4: //Pakku tile
+                GM.nextTilePreview2.GetComponentInChildren<Image>().color = new Color(1f, 1f, 0f);
+                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = GM.pakkuText + "LT:" + GM.pakkuLifeTime;
                 break;
         }
     }
@@ -87,6 +95,9 @@ public class PlacementState : States
                                     break;
                                 case 4:
                                     hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
+                                    break;
+                                case 5:
+                                    hexTile.TileStateChange(HexagonTile.TileStates.PakkuTile);
                                     break;
                                 
                                 default:
@@ -134,6 +145,9 @@ public class PlacementState : States
                 case 3:
                     hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
                     break;
+                case 4:
+                    hexTile.TileStateChange(HexagonTile.TileStates.PakkuTile);
+                    break;
             }
         }
 
@@ -154,25 +168,15 @@ public class PlacementState : States
                 case 3:
                     hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
                     break;
+                case 4:
+                    hexTile.TileStateChange(HexagonTile.TileStates.PakkuTile);
+                    break;
             }
         }
     }
     
     public override void Exit()
     {
-        // Check if the legal tiles should be default from all my tiles
-        LegalTilesShouldBeDefault(GM.Tiles.Cast<HexagonTile>().ToList());
-        // Update my living tiles list
-        GM.livingTiles = UpdateLivingTileList(GM.Tiles);
-        // Legalize my tiles
-        foreach (HexagonTile tile in GM.livingTiles)
-        {
-            tile.LegalizeTiles();
-        }
-        // Update my legal tiles list
-        GM.legalTiles = UpdateLegalTileList(GM.Tiles);
-        
-        
-        
+        base.Exit();
     }
 }
