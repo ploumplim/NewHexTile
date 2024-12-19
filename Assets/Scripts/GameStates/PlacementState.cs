@@ -9,17 +9,54 @@ public class PlacementState : States
 {
     public override void Enter()
     {
-        // Check if the legal tiles should be default from all my tiles
-        LegalTilesShouldBeDefault(GM.Tiles.Cast<HexagonTile>().ToList());
-        // Update my living tiles list
-        GM.livingTiles = UpdateLivingTileList(GM.Tiles);
-        // Legalize my tiles
-        foreach (HexagonTile tile in GM.livingTiles)
+        // Generate a preview of the next tiles that the player can choose.
+        switch (GM.nextTile1)
         {
-            tile.LegalizeTiles();
+            case 0: //green tile
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.greenTileColor;
+                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.greenLifeTime + ",+" + GM.greenFusionLifeTime;
+                break;
+            case 1: //blue tile
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.blueTileColor;
+                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.blueLifeTime + ",+" + GM.blueFusionLifeTime;
+                break;
+            case 2: //red tile
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.redTileColor;
+                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.redLifeTime + ",+" + GM.redFusionLifeTime;
+                break;
+            case 3: //destroyer tile
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.destroyerTileColor;
+                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = GM.destroyerText;
+                break;
+            case 4: //Pakku tile
+                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.pakkuTileColor;
+                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = GM.pakkuText + "LT:" + GM.pakkuLifeTime;
+                break;
         }
-        // Update my legal tiles list
-        GM.legalTiles = UpdateLegalTileList(GM.Tiles);
+        
+        switch (GM.nextTile2)
+        {
+            case 0: //green tile
+                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.greenTileColor;
+                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.greenLifeTime + ",+" + GM.greenFusionLifeTime;
+                break;
+            case 1: //blue tile
+                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.blueTileColor;
+                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.blueLifeTime + ",+" + GM.blueFusionLifeTime;
+                break;
+            case 2: //red tile
+                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.redTileColor;
+                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.redLifeTime + ",+" + GM.redFusionLifeTime;
+                break;
+            case 3: //destroyer tile
+                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.destroyerTileColor;
+                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = GM.destroyerText;
+                break;
+            case 4: //Pakku tile
+                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.pakkuTileColor;
+                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = GM.pakkuText + "LT:" + GM.pakkuLifeTime;
+                break;
+        }
     }
     
     public override void Tick()
@@ -41,7 +78,7 @@ public class PlacementState : States
                         // If godmode is enabled, we want to apply the tile state that is selected in the godHUD
                         if (GM.GODMODE)
                         {
-                            int activeTileIndex = GM.toggleScript.activeTile;
+                            int activeTileIndex = GM.godModeToggleScript.activeTile;
                             switch (activeTileIndex)
                             {
                                 case 0:
@@ -58,6 +95,9 @@ public class PlacementState : States
                                     break;
                                 case 4:
                                     hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
+                                    break;
+                                case 5:
+                                    hexTile.TileStateChange(HexagonTile.TileStates.PakkuTile);
                                     break;
                                 
                                 default:
@@ -85,22 +125,58 @@ public class PlacementState : States
     
     public void NextTileCreate(HexagonTile hexTile)
     {
-        hexTile.currentActiveAsset = hexTile.tileVisuals[GM.nextTile];
-        switch (GM.nextTile)
+        // Apply the next tile state to the hexagon tile
+        int playerTileChoice = GM.nextTileSelectorToggle.activeTile;
+
+        if (playerTileChoice == 0)
         {
-            case 0:
-                hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
-                break;
-            case 1:
-                hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);
-                break;
-            case 2:
-                hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
-                break;
-            case 3:
-                hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
-                break;
+            hexTile.currentActiveAsset = hexTile.tileVisuals[GM.nextTile1];
+            switch (GM.nextTile1)
+            {
+                case 0:
+                    hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
+                    break;
+                case 1:
+                    hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);
+                    break;
+                case 2:
+                    hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
+                    break;
+                case 3:
+                    hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
+                    break;
+                case 4:
+                    hexTile.TileStateChange(HexagonTile.TileStates.PakkuTile);
+                    break;
+            }
+        }
+
+        if (playerTileChoice == 1)
+        {
+            hexTile.currentActiveAsset = hexTile.tileVisuals[GM.nextTile2];
+            switch (GM.nextTile2)
+            {
+                case 0:
+                    hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
+                    break;
+                case 1:
+                    hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);
+                    break;
+                case 2:
+                    hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
+                    break;
+                case 3:
+                    hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
+                    break;
+                case 4:
+                    hexTile.TileStateChange(HexagonTile.TileStates.PakkuTile);
+                    break;
+            }
         }
     }
     
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }

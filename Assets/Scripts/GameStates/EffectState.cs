@@ -5,10 +5,30 @@ public class EffectState : States
 {
     public override void Enter()
     {
-        // activate all effects on tiles.
-        foreach (HexagonTile tile in GM.livingTiles.ToList())
+        // Sort the living tiles based on their state
+        // ORDER: rest, Destroyer, Pakku
+        var sortedTiles = GM.livingTiles
+            .OrderBy(tile => tile.currentTileState == HexagonTile.TileStates.DestroyerTile ? 0 :
+                tile.currentTileState == HexagonTile.TileStates.PakkuTile ? 1 :
+                tile.currentTileState == HexagonTile.TileStates.GreenTile ? 2 :
+                tile.currentTileState == HexagonTile.TileStates.RedTile ? 3 :
+                tile.currentTileState == HexagonTile.TileStates.BlueTile ? 4 : 5)
+            .ToList();
+        
+        // foreach (var tile in sortedTiles)
+        // {
+        //     Debug.Log("Tile State: " + tile.currentTileState);
+        // }
+        //
+        // Debug.Log("--------------------");
+        //
+        // activate all effects on tiles in the sorted order.
+        foreach (HexagonTile tile in sortedTiles)
         {
-            tile.GetComponent<HexagonTile>().ActivateTileEffects();
+            if (tile.isAlive)
+            {
+                tile.GetComponent<HexagonTile>().ActivateTileEffects();
+            }
         }
         
         GM.ChangeState(GM.GetComponent<CountersState>());
@@ -16,16 +36,6 @@ public class EffectState : States
 
     public override void Exit()
     {
-        // Check if the legal tiles should be default from all my tiles
-        LegalTilesShouldBeDefault(GM.Tiles.Cast<HexagonTile>().ToList());
-        // Update my living tiles list
-        GM.livingTiles = UpdateLivingTileList(GM.Tiles);
-        // Legalize my tiles
-        foreach (HexagonTile tile in GM.livingTiles)
-        {
-            tile.LegalizeTiles();
-        }
-        // Update my legal tiles list
-        GM.legalTiles = UpdateLegalTileList(GM.Tiles);
+        base.Exit();
     }
 }

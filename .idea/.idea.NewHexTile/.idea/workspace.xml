@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17f6822e-6c11-447c-86eb-a40ca1fc295f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +16,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/3D-Paysage/Assets/Script/PlayerCameraMouseLook.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameStates/FusionState.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -45,6 +48,14 @@
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/V1 - two Hextiles/HEXGRID.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\ivan_\Documents\GitHub\NewHexTile\Builds\V1 - two Hextiles" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.41f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\ivan_\Documents\GitHub\NewHexTile -debugCodeOptimization" />
@@ -113,6 +124,16 @@
       <workItem from="1734284845912" duration="44000" />
       <workItem from="1734330963779" duration="2310000" />
       <workItem from="1734334945164" duration="1226000" />
+      <workItem from="1734355794973" duration="1357000" />
+      <workItem from="1734361142926" duration="1210000" />
+      <workItem from="1734426509654" duration="9064000" />
+      <workItem from="1734445611222" duration="1092000" />
+      <workItem from="1734467123296" duration="1384000" />
+      <workItem from="1734469624763" duration="1595000" />
+      <workItem from="1734514019737" duration="2330000" />
+      <workItem from="1734516479887" duration="897000" />
+      <workItem from="1734548517523" duration="4366000" />
+      <workItem from="1734554090581" duration="1949000" />
     </task>
     <servers />
   </component>

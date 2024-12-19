@@ -12,13 +12,17 @@ public class HexagonGrid : MonoBehaviour
 
     [SerializeField] public HexagonTile[,] TileInstances;
     
-    private void Awake()
-    {
-        TileInstances = new HexagonTile[gridWidth, gridHeight];
-    }
+        // private void Awake()
+        // {
+        //     TileInstances = new HexagonTile[gridWidth, gridHeight];
+        // }
 
     public void InitGrid()
     {
+        
+        
+        
+        TileInstances = new HexagonTile[gridWidth, gridHeight];
         for (int y = 0; y < gridWidth; y++)
         {
             for (int x = 0; x < gridHeight; x++)
