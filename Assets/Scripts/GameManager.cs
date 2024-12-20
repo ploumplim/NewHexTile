@@ -124,9 +124,9 @@ public class GameManager : MonoBehaviour
         greenLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().greenLifeTime - 1;
         redLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().redLifeTime - 1;
         blueLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().blueLifeTime - 1;
-        redFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().redFusionLifeTime - 1;
-        blueFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().blueFusionLifeTime - 1;
-        greenFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().greenFusionLifeTime - 1;
+        redFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().redImproveValue - 1;
+        blueFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().blueImproveValue - 1;
+        greenFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().greenImproveValue - 1;
         pakkuLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().pakkuLifeTime - 1;
         
         

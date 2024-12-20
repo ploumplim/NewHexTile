@@ -112,7 +112,7 @@ public class PlacementState : States
                         }
                         
                         
-                        GM.ChangeState(GM.GetComponent<UpkeepState>());
+                        GM.ChangeState(GM.GetComponent<EffectState>());
 
                         
                     }

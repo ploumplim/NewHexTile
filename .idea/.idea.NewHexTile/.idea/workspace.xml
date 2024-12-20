@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="17f6822e-6c11-447c-86eb-a40ca1fc295f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/CountersState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/CountersState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/EffectState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/EffectState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/FusionState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/FusionState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/PlacementState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/PlacementState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/UpkeepState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/UpkeepState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,6 +141,7 @@
       <workItem from="1734516479887" duration="897000" />
       <workItem from="1734548517523" duration="4366000" />
       <workItem from="1734554090581" duration="1949000" />
+      <workItem from="1734685181477" duration="2837000" />
     </task>
     <servers />
   </component>

@@ -11,39 +11,50 @@ public class CountersState : States
     {
         foreach (HexagonTile tile in GM.Tiles)
         {
-            // If the hexagon tile is alive, we want to reduce the lifetime of the tile.
-            tile.lifeTime -= 1;
-            
+            if (tile.isAlive)
+            {
+                
+                // If the hexagon tile is alive, we want to reduce the lifetime of the tile and clear
+                // its first turn if it hasn't done so.
+                if (!tile.firstTurnCleared)
+                {
+                    tile.firstTurnCleared = true;
+                }
+                tile.lifeTime -= 1;
+                tile.GetComponentInChildren<TextMeshPro>().text = tile.lifeTime.ToString();
+                
+                // This function sets the color hue of the tile's text depending on their lifetime.
+                if (tile.lifeTime >= GM.resetLifeTimeColor)
+                {
+                    tile.GetComponentInChildren<TextMeshPro>().color = Color.white;
+                }
+                else if (tile.lifeTime <= GM.firstLifeTimeThreshold && tile.lifeTime > GM.secondLifeTimeThreshold)
+                {
+                    tile.GetComponentInChildren<TextMeshPro>().color = Color.yellow;
+                }
+                else if (tile.lifeTime <= GM.secondLifeTimeThreshold)
+                {
+                    tile.GetComponentInChildren<TextMeshPro>().color = Color.red;
+                }
+                
+                // When the lifetime of the tile reaches 0, we change it to dead, clear text and set first turn cleared to false.
+                if (tile.lifeTime <= 0 && tile.isAlive)
+                {
+                    tile.firstTurnCleared = false;
+                    // if dead, remove the text from the tile and change the tile state to dead.
+                    tile.GetComponentInChildren<TextMeshPro>().text = "";
+                    tile.TileStateChange(HexagonTile.TileStates.DeadTile);
+                }
 
-            tile.GetComponentInChildren<TextMeshPro>().text = tile.lifeTime.ToString();
-            // This function sets the color hue of the tile's text depending on their lifetime.
-            if (tile.lifeTime >= GM.resetLifeTimeColor)
-            {
-                tile.GetComponentInChildren<TextMeshPro>().color = Color.white;
             }
-            else if (tile.lifeTime <= GM.firstLifeTimeThreshold && tile.lifeTime > GM.secondLifeTimeThreshold)
+            else // If the tile is not alive, we want to clear the first turn and remove the text from the tile.
             {
-                tile.GetComponentInChildren<TextMeshPro>().color = Color.yellow;
-            }
-            else if (tile.lifeTime <= GM.secondLifeTimeThreshold)
-            {
-                tile.GetComponentInChildren<TextMeshPro>().color = Color.red;
-            }
-            
-            if (tile.lifeTime <= 0 && tile.isAlive)
-            {
-                // if dead, remove the text from the tile and change the tile state to dead.
-                tile.GetComponentInChildren<TextMeshPro>().text = "";
-                tile.TileStateChange(HexagonTile.TileStates.DeadTile);
-            }
-            
-            // If the hexagon tile is not alive, we want to remove the text from the tile.
-            if (!tile.isAlive)
-            {
+                tile.firstTurnCleared = false;
                 tile.GetComponentInChildren<TextMeshPro>().text = "";
             }
-            
+
         }
+
         // Generate the next tile to be placed on the board.
         GM.nextTile1 = NextTileGenerator();
         do
