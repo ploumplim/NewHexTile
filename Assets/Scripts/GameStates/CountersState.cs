@@ -54,14 +54,13 @@ public class CountersState : States
             }
 
         }
-
-        // Generate the next tile to be placed on the board.
-        GM.nextTile1 = NextTileGenerator();
-        do
-        {
-            GM.nextTile2 = NextTileGenerator();
-        } while (GM.nextTile1 == GM.nextTile2);
         
+        // if the future tiles are less than 2, we want to generate the next tiles to be placed on the board.
+        if (GM.futureTileStateList.Count < 2)
+        {
+            GM.RegenerateFutureTileStateList(GM.futureTilesListCount);
+        }
+
         GM.ChangeState(GM.GetComponent<PlacementState>());
 
     }
