@@ -28,8 +28,11 @@ public class EffectState : States
             if (tile.isAlive)
             {
                 tile.GetComponent<HexagonTile>().ActivateTileEffects();
+                
             }
         }
+        
+        
         
         GM.ChangeState(GM.GetComponent<CountersState>());
     }

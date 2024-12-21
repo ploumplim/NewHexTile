@@ -9,54 +9,11 @@ public class PlacementState : States
 {
     public override void Enter()
     {
-        // Generate a preview of the next tiles that the player can choose.
-        switch (GM.nextTile1)
-        {
-            case 0: //green tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.greenTileColor;
-                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.greenLifeTime + ",+" + GM.greenFusionLifeTime;
-                break;
-            case 1: //blue tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.blueTileColor;
-                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.blueLifeTime + ",+" + GM.blueFusionLifeTime;
-                break;
-            case 2: //red tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.redTileColor;
-                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.redLifeTime + ",+" + GM.redFusionLifeTime;
-                break;
-            case 3: //destroyer tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.destroyerTileColor;
-                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = GM.destroyerText;
-                break;
-            case 4: //Pakku tile
-                GM.nextTilePreview1.GetComponentInChildren<Image>().color = GM.pakkuTileColor;
-                GM.nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = GM.pakkuText + "LT:" + GM.pakkuLifeTime;
-                break;
-        }
+        // Generate the next tile to be placed on the board by updating the next tile state to the first element in the future tile list.
         
-        switch (GM.nextTile2)
-        {
-            case 0: //green tile
-                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.greenTileColor;
-                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.greenLifeTime + ",+" + GM.greenFusionLifeTime;
-                break;
-            case 1: //blue tile
-                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.blueTileColor;
-                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.blueLifeTime + ",+" + GM.blueFusionLifeTime;
-                break;
-            case 2: //red tile
-                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.redTileColor;
-                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + GM.redLifeTime + ",+" + GM.redFusionLifeTime;
-                break;
-            case 3: //destroyer tile
-                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.destroyerTileColor;
-                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = GM.destroyerText;
-                break;
-            case 4: //Pakku tile
-                GM.nextTilePreview2.GetComponentInChildren<Image>().color = GM.pakkuTileColor;
-                GM.nextTilePreview2.GetComponentInChildren<TextMeshProUGUI>().text = GM.pakkuText + "LT:" + GM.pakkuLifeTime;
-                break;
-        }
+        // Generate a preview of the next two tiles to be placed on the board.
+        GM.CorrectTileUIPreviews(0);
+        GM.CorrectTileUIPreviews(1);
     }
     
     public override void Tick()
@@ -68,7 +25,6 @@ public class PlacementState : States
 
             if (Physics.Raycast(ray, out hit))
             {
-                
                 // If the ray hits a hexagon tile, we want to apply the next tile state to it.
                 HexagonTile hexTile = hit.collider.GetComponent<HexagonTile>();
                 if (hexTile != null)
@@ -112,7 +68,7 @@ public class PlacementState : States
                         }
                         
                         
-                        GM.ChangeState(GM.GetComponent<UpkeepState>());
+                        GM.ChangeState(GM.GetComponent<EffectState>());
 
                         
                     }
@@ -124,55 +80,13 @@ public class PlacementState : States
    
     
     public void NextTileCreate(HexagonTile hexTile)
-    {
+    { 
+        
         // Apply the next tile state to the hexagon tile
-        int playerTileChoice = GM.nextTileSelectorToggle.activeTile;
+      hexTile.TileStateChange(GM.futureTileStateList[0]);
+      // Remove the first tile from the future tile list.
+      GM.futureTileStateList.RemoveAt(0);
 
-        if (playerTileChoice == 0)
-        {
-            hexTile.currentActiveAsset = hexTile.tileVisuals[GM.nextTile1];
-            switch (GM.nextTile1)
-            {
-                case 0:
-                    hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
-                    break;
-                case 1:
-                    hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);
-                    break;
-                case 2:
-                    hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
-                    break;
-                case 3:
-                    hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
-                    break;
-                case 4:
-                    hexTile.TileStateChange(HexagonTile.TileStates.PakkuTile);
-                    break;
-            }
-        }
-
-        if (playerTileChoice == 1)
-        {
-            hexTile.currentActiveAsset = hexTile.tileVisuals[GM.nextTile2];
-            switch (GM.nextTile2)
-            {
-                case 0:
-                    hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
-                    break;
-                case 1:
-                    hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);
-                    break;
-                case 2:
-                    hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
-                    break;
-                case 3:
-                    hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
-                    break;
-                case 4:
-                    hexTile.TileStateChange(HexagonTile.TileStates.PakkuTile);
-                    break;
-            }
-        }
     }
     
     public override void Exit()
