@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -19,21 +21,18 @@ public class GameManager : MonoBehaviour
     public int blueLifeTime;
     [HideInInspector]
     public int redLifeTime;
-    [HideInInspector]
-    public int redFusionLifeTime;
-    [HideInInspector]
-    public int blueFusionLifeTime;
-    [HideInInspector]
-    public int greenFusionLifeTime;
-    [HideInInspector]
-    public int pakkuLifeTime;
+    [FormerlySerializedAs("redFusionLifeTime")] [HideInInspector]
+    public int redImproveTime;
+    [FormerlySerializedAs("blueFusionLifeTime")] [HideInInspector]
+    public int blueImproveTime;
+    [FormerlySerializedAs("greenFusionLifeTime")] [HideInInspector]
+    public int greenImproveTime;
     [HideInInspector] // This is a list of all the living tiles in the grid.
     public List<HexagonTile> livingTiles;
     // This is the script that manages godmode.
     [FormerlySerializedAs("toggleScript")] [HideInInspector]
     public GodModeToggleScript godModeToggleScript;
-    [HideInInspector]
-    public NextTileSelectorToggle nextTileSelectorToggle;
+    // public NextTileSelectorToggle nextTileSelectorToggle;
     
     
     //THIS SECTION HAS ALL THE VARIABLES THAT CAN BE CHANGED IN THE INSPECTOR.
@@ -44,10 +43,10 @@ public class GameManager : MonoBehaviour
         public Toggle godModeToggle;
         // This is the HUD that will be displayed when godmode is enabled.
             public GameObject godHUD;
+            
+            
         [FormerlySerializedAs("nextTilePreview")]
-        [Tooltip("This determines the next tile that will be placed. " +
-                 "At the start of the game, it will generate the number" +
-                 "introduced here. (0 = green tile... etc")]
+        [Tooltip("GameObject that will display the next tile to be placed.")]
             public GameObject nextTilePreview1;
             public GameObject nextTilePreview2;
             
@@ -66,10 +65,6 @@ public class GameManager : MonoBehaviour
     [Header("Miscellaneous Game Variables")]// This is the next tile that will be placed, randomly generated at the end of each turn.
     [Tooltip("Activate godmode")]
     public bool GODMODE;
-    [FormerlySerializedAs("nextTile")] [Tooltip("Left next tile's ID.")]
-    public int nextTile1;
-    [Tooltip("Right next tile ID.")]
-    public int nextTile2;
     [Tooltip("This is the text that will be displayed when a destroyer tile is previewed.")]
     public string destroyerText = "La Bomba";
     [Tooltip("This is the text that will be displayed when a pakku tile is previewed.")]
@@ -90,6 +85,28 @@ public class GameManager : MonoBehaviour
     public Color destroyerTileColor = new Color(1f, 0f, 1f);
     public Color pakkuTileColor = new Color(1f, 1f, 0f);
     
+    [Header("Next Tile Generation")]
+    
+    // This is the length of the future tile list.
+    [Tooltip("This is the amount of future tiles that will be generated when the list is less than 2.")]
+    public int futureTilesListCount = 10;
+    
+    [Space]
+    // This list has the next tile states that will be generated.
+    public List<HexagonTile.TileStates> futureTileStateList;
+
+    [Space]
+    
+    //This list has the valid future tile states that can be generated.
+    public List<HexagonTile.TileStates> validFutureTileStates = new List<HexagonTile.TileStates>
+    {
+        HexagonTile.TileStates.GreenTile,
+        HexagonTile.TileStates.BlueTile,
+        HexagonTile.TileStates.RedTile,
+        HexagonTile.TileStates.DestroyerTile,
+        HexagonTile.TileStates.PakkuTile
+    };
+    
     [HideInInspector] public List<int> weights;
     // This is the minimum amount of tiles that need to be placed before we spawn bombs
     
@@ -98,9 +115,6 @@ public class GameManager : MonoBehaviour
     public int starterTileXPosition = 1;
     public int starterTileYPosition = 1;
     
-
-    
-
     private void Start()
     {
         if (Instance == null)
@@ -124,11 +138,9 @@ public class GameManager : MonoBehaviour
         greenLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().greenLifeTime - 1;
         redLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().redLifeTime - 1;
         blueLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().blueLifeTime - 1;
-        redFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().redFusionLifeTime - 1;
-        blueFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().blueFusionLifeTime - 1;
-        greenFusionLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().greenFusionLifeTime - 1;
-        pakkuLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().pakkuLifeTime - 1;
-        
+        redImproveTime = Tiles[1, 1].GetComponent<HexagonTile>().redImproveValue - 1;
+        blueImproveTime = Tiles[1, 1].GetComponent<HexagonTile>().blueImproveValue - 1;
+        greenImproveTime = Tiles[1, 1].GetComponent<HexagonTile>().greenImproveValue - 1;
         
         // SET STARTER TILE
         var starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
@@ -142,11 +154,13 @@ public class GameManager : MonoBehaviour
       
         weights = new List<int> {greenTileWeight, blueTileWeight, redTileWeight, destroyerTileWeight, pakkuTileWeight};        
 
-
+        // Initialize scripts
         godModeToggleScript = GetComponent<GodModeToggleScript>();
-        nextTileSelectorToggle = GetComponent<NextTileSelectorToggle>();
         
         
+        // nextTileSelectorToggle = GetComponent<NextTileSelectorToggle>();
+        
+        // Initialize the future tile state list by creating 10 random states and adding them to the list.
 
     }
     
@@ -180,7 +194,10 @@ public class GameManager : MonoBehaviour
         {
             tile.TileStateChange(HexagonTile.TileStates.DefaultTile);
         }
-
+        // reset the future tile list
+        futureTileStateList.Clear();
+        RegenerateFutureTileStateList(futureTilesListCount);
+        
         // Reset the game state
         currentState = GetComponent<CountersState>();
         currentState.Enter();
@@ -188,6 +205,104 @@ public class GameManager : MonoBehaviour
         // Set the starter tile
         var starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
         starterTile.TileStateChange(HexagonTile.TileStates.StarterTile);
+        
+        
     }
+
+    public void RegenerateFutureTileStateList(int count)
+    {
+        futureTileStateList.Clear();
+        System.Random random = new System.Random();
+
+        for (int i = 0; i < count; i++)
+        {
+            int totalWeight = weights.Sum();
+            int randomValue = random.Next(totalWeight);
+            int cumulativeWeight = 0;
+
+            for (int j = 0; j < validFutureTileStates.Count; j++)
+            {
+                cumulativeWeight += weights[j];
+                if (randomValue < cumulativeWeight)
+                {
+                    futureTileStateList.Add(validFutureTileStates[j]);
+                    break;
+                }
+            }
+        }
+    }
+    public void SwapIncomingTiles()
+    {
+        // Here, we change the first element of the future tile list with the second one.
+        if (futureTileStateList.Count > 1)
+        {
+            // Swap the first and second elements of the future tile list.
+            (futureTileStateList[0], futureTileStateList[1]) = (futureTileStateList[1], futureTileStateList[0]);
+        }
+        CorrectTileUIPreviews(0);
+        CorrectTileUIPreviews(1);
+    }
+
+    public void CorrectTileUIPreviews(int index)
+    {
+        //This function calls the visual representation of the next tile to be placed on the board.
+        // TODO: Implement the correct color and text for all tile choices on an appropriate UI element.
+
+        if (index == 0)
+        {
+            switch (futureTileStateList[index])
+            {
+                case HexagonTile.TileStates.GreenTile:
+                    nextTilePreview1.GetComponentInChildren<Image>().color = greenTileColor;
+                    nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + greenLifeTime + ", +" + greenImproveTime;
+                    break;
+                case HexagonTile.TileStates.BlueTile:
+                    nextTilePreview1.GetComponentInChildren<Image>().color = blueTileColor;
+                    nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + blueLifeTime + ", +" + blueImproveTime;
+                    break;
+                case HexagonTile.TileStates.RedTile:
+                    nextTilePreview1.GetComponentInChildren<Image>().color = redTileColor;
+                    nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = "LT: " + redLifeTime + ", +" + redImproveTime;
+                    break;
+                case HexagonTile.TileStates.DestroyerTile:
+                    nextTilePreview1.GetComponentInChildren<Image>().color = destroyerTileColor;
+                    nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = destroyerText;
+                    break;
+                case HexagonTile.TileStates.PakkuTile:
+                    nextTilePreview1.GetComponentInChildren<Image>().color = pakkuTileColor;
+                    nextTilePreview1.GetComponentInChildren<TextMeshProUGUI>().text = pakkuText;
+                    break;
+            }
+        }
+
+        if (index == 1)
+        {
+            switch (futureTileStateList[index])
+            {
+                case HexagonTile.TileStates.GreenTile:
+                    nextTilePreview2.GetComponentInChildren<Image>().color = greenTileColor;
+                    break;
+                case HexagonTile.TileStates.BlueTile:
+                    nextTilePreview2.GetComponentInChildren<Image>().color = blueTileColor;
+                    break;
+                case HexagonTile.TileStates.RedTile:
+                    nextTilePreview2.GetComponentInChildren<Image>().color = redTileColor;
+                    break;
+                case HexagonTile.TileStates.DestroyerTile:
+                    nextTilePreview2.GetComponentInChildren<Image>().color = destroyerTileColor;
+                    break;
+                case HexagonTile.TileStates.PakkuTile:
+                    nextTilePreview2.GetComponentInChildren<Image>().color = pakkuTileColor;
+                    break;
+            }
+            {
+                
+            }
+        }
+        
+        
+        //print("Tile index:" + index + "state: " + futureTileStateList[index]);
+    }
+
     
 }

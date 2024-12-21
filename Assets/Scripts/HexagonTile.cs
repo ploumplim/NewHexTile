@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
+using System.Linq;
+
 public class HexagonTile : MonoBehaviour
 {
-    [HideInInspector]
     public enum TileStates // These are our tiles states. To add more states, we must add its corresponding variables
     //and methods. Places where we hold this information is noted as with a ★
     {
@@ -16,28 +17,25 @@ public class HexagonTile : MonoBehaviour
         RedTile,
         LegalTile,
         StarterTile,
-        GreenFusionTile,
-        BlueFusionTile,
-        RedFusionTile,
         DeadTile,
         DestroyerTile,
         PakkuTile
+        // GreenFusionTile,
+        // BlueFusionTile,
+        // RedFusionTile,
     }
-
-    public ParticleSystem explosionEffect;
-    [HideInInspector]
-    public HexagonGrid parentGrid;
-    [HideInInspector]
-    public bool isAlive;
-    [HideInInspector]
-    public bool doesntLegalize;
-    [HideInInspector]
-    public int lifeTime;
-    [HideInInspector]
-    public List<TileStates> stateToFuseWith;
-    [HideInInspector]
-    public TileStates currentTileState;
     
+    public ParticleSystem explosionEffect;
+    [HideInInspector] public HexagonGrid parentGrid;
+    [HideInInspector] public bool isAlive;
+    [HideInInspector] public bool doesntLegalize;
+    [HideInInspector] public bool firstTurnCleared; //False when the tile arrives, becomes true one turn after (CounterState)
+    [HideInInspector] public int lifeTime;
+    [HideInInspector] public TileStates currentTileState;
+    
+    [Tooltip("This list has all states that this tile can improve.")]
+    [FormerlySerializedAs("stateToFuseWith")] 
+    public List<TileStates> improvableTileStates;
     [Tooltip("Drag and drop new visuals for the tiles here.")] 
     [FormerlySerializedAs("previewLister")] public List<GameObject> tileVisuals;
     
@@ -49,14 +47,16 @@ public class HexagonTile : MonoBehaviour
     public int redLifeTime = 3;
     public int blueLifeTime = 7;
     [Space]
-    public int greenFusionLifeTime = 10;
-    public int redFusionLifeTime = 6;
-    public int blueFusionLifeTime = 14;
-    [Space]
     public int destroyerLifeTime = 1;
     public int pakkuLifeTime = 3;
-    [Space]
     
+    [Header("Improvement Values")]
+    [FormerlySerializedAs("greenFusionLifeTime")] [Space]
+    public int greenImproveValue = 10;
+    [FormerlySerializedAs("redFusionLifeTime")]
+    public int redImproveValue = 6;
+    [FormerlySerializedAs("blueFusionLifeTime")]
+        public int blueImproveValue = 14;
     [Header("Tile characteristics")]
     [Tooltip("How long the tile will wait before activating its effect.")]
     
@@ -86,21 +86,21 @@ public class HexagonTile : MonoBehaviour
                 currentActiveAsset = tileVisuals[0];
                 lifeTime = 0;
                 isAlive = false;
-                FillStatesToFuseWith();
+                FillImprovableTiles();
                 break;
             
             case TileStates.LegalTile:
                 currentActiveAsset = tileVisuals[1];
                 lifeTime = 0;
                 isAlive = false;
-                FillStatesToFuseWith();
+                FillImprovableTiles();
                 break;
             
             case TileStates.StarterTile:
                 currentActiveAsset = tileVisuals[2];
                 lifeTime = starterLifeTime;
                 isAlive = true;
-                FillStatesToFuseWith();
+                FillImprovableTiles();
                 LegalizeTiles();
                 break;
             
@@ -108,7 +108,7 @@ public class HexagonTile : MonoBehaviour
                 currentActiveAsset = tileVisuals[3];
                 lifeTime = greenLifeTime;
                 isAlive = true;
-                FillStatesToFuseWith();
+                FillImprovableTiles();
                 
                 break;
             
@@ -116,7 +116,7 @@ public class HexagonTile : MonoBehaviour
                 currentActiveAsset = tileVisuals[4];
                 lifeTime = blueLifeTime;
                 isAlive = true;
-                FillStatesToFuseWith();
+                FillImprovableTiles();
                 
                 break;
             
@@ -124,45 +124,45 @@ public class HexagonTile : MonoBehaviour
                 currentActiveAsset = tileVisuals[5]; 
                 lifeTime = redLifeTime;
                 isAlive = true;
-                FillStatesToFuseWith();
+                FillImprovableTiles();
                 
                 break;
+                
+                //Deprecated fusion cases
+            // case TileStates.GreenFusionTile:
+            //     currentActiveAsset = tileVisuals[6];
+            //     lifeTime += greenImproveValue;
+            //     isAlive = true;
+            //     FillImprovableTiles();
+            //     
+            //     break;
             
-            case TileStates.GreenFusionTile:
-                currentActiveAsset = tileVisuals[6];
-                lifeTime += greenFusionLifeTime;
-                isAlive = true;
-                FillStatesToFuseWith();
-                
-                break;
+            // case TileStates.BlueFusionTile:
+            //     currentActiveAsset = tileVisuals[7];
+            //     lifeTime += blueImproveValue;
+            //     isAlive = true;
+            //     FillImprovableTiles();
+            //     
+            //     break;
             
-            case TileStates.BlueFusionTile:
-                currentActiveAsset = tileVisuals[7];
-                lifeTime += blueFusionLifeTime;
-                isAlive = true;
-                FillStatesToFuseWith();
-                
-                break;
+            // case TileStates.RedFusionTile:
+            //     currentActiveAsset = tileVisuals[8];
+            //     lifeTime += redImproveValue;
+            //     isAlive = true;
+            //     FillImprovableTiles();
             
-            case TileStates.RedFusionTile:
-                currentActiveAsset = tileVisuals[8];
-                lifeTime += redFusionLifeTime;
-                isAlive = true;
-                FillStatesToFuseWith();
-                
-                break;
             case TileStates.DeadTile:
                 currentActiveAsset = tileVisuals[9];
                 lifeTime = 0;
                 isAlive = false;
-                FillStatesToFuseWith();
+                FillImprovableTiles();
                 break;
             case TileStates.DestroyerTile:
                 currentActiveAsset = tileVisuals[10];
                 //GetComponentInChildren<Renderer>().material.color = new Color(1f, 0f, 1f);
                 lifeTime = destroyerLifeTime;
                 isAlive = true;
-                FillStatesToFuseWith();
+                FillImprovableTiles();
                 break;
             
             case TileStates.PakkuTile:
@@ -170,7 +170,7 @@ public class HexagonTile : MonoBehaviour
                 //GetComponentInChildren<Renderer>().material.color = new Color(1f, 1f, 0f);
                 lifeTime = pakkuLifeTime;
                 isAlive = true;
-                FillStatesToFuseWith();
+                FillImprovableTiles();
                 break;
                 
                 
@@ -249,72 +249,74 @@ public class HexagonTile : MonoBehaviour
         return false;
     }
     
-    public void FillStatesToFuseWith()
+    private void FillImprovableTiles()
     {
         switch (currentTileState)
         {
             case TileStates.GreenTile:
-                stateToFuseWith = new List<TileStates>
-                {
-                    TileStates.GreenTile
-                };
-                break;
-            case TileStates.RedTile:
-                stateToFuseWith = new List<TileStates>
-                {
-                    TileStates.RedTile
-                };
-                break;
             case TileStates.BlueTile:
-                stateToFuseWith = new List<TileStates>
+            case TileStates.RedTile:
+                
+                improvableTileStates = new List<TileStates>
                 {
-                    TileStates.BlueTile
+                    TileStates.GreenTile,
+                    TileStates.BlueTile,
+                    TileStates.RedTile,
+                    TileStates.PakkuTile,
                 };
                 break;
-            default:
-                stateToFuseWith = new List<TileStates>{};
+                default:
+                improvableTileStates = new List<TileStates>{};
                 break;
         }
     }
     
-    public bool CanBeFused()
-    {
-        HexagonTile[] adjacentTiles = GetAdjacentTiles();
-        
-        foreach (HexagonTile adjacentTile in adjacentTiles)
-        {
-            if (adjacentTile != null &&
-                stateToFuseWith.Contains(adjacentTile.currentTileState))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public void FuseTiles()
-    {
-        switch (currentTileState)
-                {
-                    case TileStates.GreenTile:
-                        TileStateChange(TileStates.GreenFusionTile);
-                        break;
-                    case TileStates.RedTile:
-                        TileStateChange(TileStates.RedFusionTile);
-                        break;
-                    case TileStates.BlueTile:
-                        TileStateChange(TileStates.BlueFusionTile);
-                        break;
-                    default:
-                        Debug.Log("The tile state is not recognized:" + transform);
-                        break;
-                }
-    }
+    //Deprecated fusion codes
+    // public bool CanBeFused()
+    // {
+    //     HexagonTile[] adjacentTiles = GetAdjacentTiles();
+    //     
+    //     foreach (HexagonTile adjacentTile in adjacentTiles)
+    //     {
+    //         if (adjacentTile != null &&
+    //             stateToFuseWith.Contains(adjacentTile.currentTileState))
+    //         {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+    //
+    // public void FuseTiles()
+    // {
+    //     switch (currentTileState)
+    //             {
+    //                 case TileStates.GreenTile:
+    //                     TileStateChange(TileStates.GreenFusionTile);
+    //                     break;
+    //                 case TileStates.RedTile:
+    //                     TileStateChange(TileStates.RedFusionTile);
+    //                     break;
+    //                 case TileStates.BlueTile:
+    //                     TileStateChange(TileStates.BlueFusionTile);
+    //                     break;
+    //                 default:
+    //                     Debug.Log("The tile state is not recognized:" + transform);
+    //                     break;
+    //             }
+    // }
 
     public void ActivateTileEffects()
     {
         switch (currentTileState)
         {
+            case TileStates.BlueTile:
+            case TileStates.GreenTile:
+            case TileStates.RedTile:
+                EffectImprove();
+                break;
+            
+            
             case TileStates.DestroyerTile:
                 EffectDestroy();
                 break;
@@ -328,7 +330,7 @@ public class HexagonTile : MonoBehaviour
         }
     }
     
-    public void EffectDestroy()
+    private void EffectDestroy()
     {
         
        
@@ -353,7 +355,7 @@ public class HexagonTile : MonoBehaviour
         }
     }
 
-    public void EffectInfect()
+    private void EffectInfect()
     {
         //Debug.Log("tile at hexagrid position:"+ transform.position +"PakkuCounter: " + PakkuCounter);
         if (lifeTime != 1)
@@ -387,6 +389,48 @@ public class HexagonTile : MonoBehaviour
         else
         {
             TileStateChange(TileStates.DefaultTile);
+        }
+    }
+
+    private void EffectImprove()
+    {
+        // If the tile has already cleared its first turn, we return to avoid triggering the effect again.
+        if (firstTurnCleared)
+        {
+            return;
+        }
+        
+        // We make a list of all tiles around this one.
+        List<HexagonTile> improvableAdjacentTiles = GetAdjacentTiles().ToList();
+        
+        // We iterate through the list and check if the tile is improvable. If not, we remove it from the list.
+        foreach (HexagonTile adjacentTile in GetAdjacentTiles())
+        {
+            if (!improvableTileStates.Contains(adjacentTile.currentTileState))
+            {
+                improvableAdjacentTiles.Remove(adjacentTile);
+            }
+            
+        }
+        
+        // We iterate through the list and improve the tiles depending on my current tile's state.
+        foreach (HexagonTile tile in improvableAdjacentTiles)
+        {
+            switch (currentTileState)
+            {
+                case TileStates.GreenTile:
+                    tile.lifeTime += greenImproveValue;
+                    break;
+                case TileStates.BlueTile:
+                    tile.lifeTime += blueImproveValue;
+                    break;
+                case TileStates.RedTile:
+                    tile.lifeTime += redImproveValue;
+                    break;
+                default:
+                    Debug.Log("Invalid tile with the improve effect :" + transform);
+                    break;
+            }
         }
     }
     
