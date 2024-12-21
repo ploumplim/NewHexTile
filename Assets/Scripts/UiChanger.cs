@@ -1,22 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UiChanger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
-    public static  void ChangeTextColor( TextMesh textMesh, Color color)
+    public static  void ChangeTextColor( TextMeshPro textMesh, Color color)
     {
         textMesh.color = color;
     }
