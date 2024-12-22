@@ -6,13 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="17f6822e-6c11-447c-86eb-a40ca1fc295f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/PakkuTile.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/PakkuTile.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexagonTile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexagonTile.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/EffectState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/EffectState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +139,7 @@
       <workItem from="1734554090581" duration="1949000" />
       <workItem from="1734685181477" duration="3297000" />
       <workItem from="1734688716269" duration="7286000" />
-      <workItem from="1734848015149" duration="5050000" />
+      <workItem from="1734848015149" duration="6294000" />
     </task>
     <servers />
   </component>

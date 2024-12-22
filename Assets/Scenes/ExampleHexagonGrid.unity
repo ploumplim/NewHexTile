@@ -4495,16 +4495,19 @@ MonoBehaviour:
 
 
     La Bomba destroys all tiles around itself (including dead ones).
-    The Pakku Tile eats the tiles with most lifetime, or dies if it has nothing to
-    eat.
+    The Pakku Tile transforms the adjacent tile with most lifetime before it dies.
 
 
-    Close this menu with the top left toggle. The Godmode toggle lets
-    you play any tiles you want.
+    The
+    Spreader tile will not stop spreading!
 
 
-    The reset button resets the game to the central
-    starter tile.'
+    Close this menu with the top left
+    toggle. The Godmode toggle lets you play any tiles you want.
+
+
+    The reset
+    button resets the game to the central starter tile.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4531,8 +4534,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41
-  m_fontSizeBase: 41
+  m_fontSize: 37.44
+  m_fontSizeBase: 37.44
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4977,7 +4980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: greenTileWeight
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: nextTilePreview
@@ -4985,7 +4988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: pakkuTileWeight
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: greenTileColor.b
@@ -5021,7 +5024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: destroyerTileWeight
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: destroyerDangerLimit

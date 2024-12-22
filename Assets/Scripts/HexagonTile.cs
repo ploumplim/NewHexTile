@@ -27,6 +27,10 @@ public class HexagonTile : MonoBehaviour
     }
     
     public ParticleSystem explosionEffect;
+    public ParticleSystem improvementEffect;
+    public Material greenTileMaterial;
+    public Material redTileMaterial;
+    public Material blueTileMaterial;
     [HideInInspector] public HexagonGrid parentGrid;
     [HideInInspector] public bool isAlive;
     [HideInInspector] public bool firstTurnCleared; //False when the tile arrives, becomes true one turn after (CounterState)
@@ -280,6 +284,7 @@ public class HexagonTile : MonoBehaviour
                     TileStates.BlueTile,
                     TileStates.RedTile,
                     TileStates.PakkuTile,
+                    TileStates.SpreadingTile
                 };
                 break;
                 default:
@@ -440,12 +445,18 @@ public class HexagonTile : MonoBehaviour
             switch (currentTileState)
             {
                 case TileStates.GreenTile:
+                    tile.improvementEffect.GetComponent<Renderer>().material = greenTileMaterial;
+                    tile.improvementEffect.Play();
                     tile.lifeTime += greenImproveValue;
                     break;
                 case TileStates.BlueTile:
+                    tile.improvementEffect.GetComponent<Renderer>().material = blueTileMaterial;
+                    tile.improvementEffect.Play();
                     tile.lifeTime += blueImproveValue;
                     break;
                 case TileStates.RedTile:
+                    tile.improvementEffect.GetComponent<Renderer>().material = redTileMaterial;
+                    tile.improvementEffect.Play();
                     tile.lifeTime += redImproveValue;
                     break;
                 default:
