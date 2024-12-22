@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="17f6822e-6c11-447c-86eb-a40ca1fc295f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexagonTile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexagonTile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameStates/PlacementState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameStates/PlacementState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +49,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/V2 - Next Hextile\HEXGRID.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/V3 - The Spreader Update\HEXGRID.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\ivan_\Documents\GitHub\NewHexTile\Builds\V1 - two Hextiles" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -141,7 +136,7 @@
       <workItem from="1734554090581" duration="1949000" />
       <workItem from="1734685181477" duration="3297000" />
       <workItem from="1734688716269" duration="7286000" />
-      <workItem from="1734848015149" duration="7211000" />
+      <workItem from="1734848015149" duration="8737000" />
     </task>
     <servers />
   </component>

@@ -286,9 +286,11 @@ public class HexagonTile : MonoBehaviour
                     TileStates.BlueTile,
                     TileStates.RedTile,
                     TileStates.PakkuTile,
-                    TileStates.SpreadingTile
+                    TileStates.SpreadingTile,
+                    TileStates.DestroyerTile
                 };
                 break;
+            
                 default:
                 improvableTileStates = new List<TileStates>{};
                 break;

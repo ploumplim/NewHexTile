@@ -10862,7 +10862,7 @@ MonoBehaviour:
   greenLifeTime: 4
   redLifeTime: 6
   blueLifeTime: 10
-  destroyerLifeTime: 1
+  destroyerLifeTime: 2
   pakkuLifeTime: 2
   spreaderGeneration: 1
   spreadingLifeTimeIncrement: 5
