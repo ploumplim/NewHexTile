@@ -5528,6 +5528,89 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &4480975264154659393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2027669609552426968}
+  - component: {fileID: 985554888292128036}
+  - component: {fileID: 9095342239502260603}
+  m_Layer: 0
+  m_Name: SpreadingTile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2027669609552426968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4480975264154659393}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 793547561724248260}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &985554888292128036
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4480975264154659393}
+  m_Mesh: {fileID: -462981019419857548, guid: 6489914623889404ca416f658a0742d4, type: 3}
+--- !u!23 &9095342239502260603
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4480975264154659393}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0046558ddd43a7b4ca66ef499b785fb9, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5579668075394274723
 GameObject:
   m_ObjectHideFlags: 0
@@ -5724,6 +5807,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6291191143088173571}
+  - {fileID: 2027669609552426968}
   - {fileID: 8442068133210152389}
   - {fileID: 4133874635719599294}
   - {fileID: 7511248145622621707}
@@ -5894,9 +5978,10 @@ MonoBehaviour:
   parentGrid: {fileID: 0}
   isAlive: 0
   doesntLegalize: 0
+  firstTurnCleared: 0
   lifeTime: 0
-  stateToFuseWith: 
   currentTileState: 0
+  improvableTileStates: 
   tileVisuals:
   - {fileID: 5579668075394274723}
   - {fileID: 6630738666705316025}
@@ -5910,17 +5995,18 @@ MonoBehaviour:
   - {fileID: 5834949633792385891}
   - {fileID: 904090365440887468}
   - {fileID: 8901684410220372835}
+  - {fileID: 4480975264154659393}
   starterLifeTime: 1
   greenLifeTime: 4
   redLifeTime: 6
   blueLifeTime: 10
-  greenFusionLifeTime: 5
-  redFusionLifeTime: 8
-  blueFusionLifeTime: 10
   destroyerLifeTime: 1
   pakkuLifeTime: 2
-  PakkuCooldown: 2
-  PakkuCounter: 0
+  spreadingStartLifeTime: 5
+  spreadingLifeTimeIncrement: 5
+  greenImproveValue: 5
+  redImproveValue: 8
+  blueImproveValue: 10
   currentActiveAsset: {fileID: 0}
 --- !u!1 &8127604981770351466
 GameObject:
@@ -6022,7 +6108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &889291862832859898
 Transform:
   m_ObjectHideFlags: 0

@@ -19,7 +19,8 @@ public class HexagonTile : MonoBehaviour
         StarterTile,
         DeadTile,
         DestroyerTile,
-        PakkuTile
+        PakkuTile,
+        SpreadingTile,
         // GreenFusionTile,
         // BlueFusionTile,
         // RedFusionTile,
@@ -28,17 +29,16 @@ public class HexagonTile : MonoBehaviour
     public ParticleSystem explosionEffect;
     [HideInInspector] public HexagonGrid parentGrid;
     [HideInInspector] public bool isAlive;
-    [HideInInspector] public bool doesntLegalize;
     [HideInInspector] public bool firstTurnCleared; //False when the tile arrives, becomes true one turn after (CounterState)
     [HideInInspector] public int lifeTime;
     [HideInInspector] public TileStates currentTileState;
+    [HideInInspector] public bool canLegalize;
     
     [Tooltip("This list has all states that this tile can improve.")]
     [FormerlySerializedAs("stateToFuseWith")] 
     public List<TileStates> improvableTileStates;
     [Tooltip("Drag and drop new visuals for the tiles here.")] 
     [FormerlySerializedAs("previewLister")] public List<GameObject> tileVisuals;
-    
     // Tile life times editable in inspector ★
     [Header("Tile Life Times")]
     public int starterLifeTime = 1;
@@ -49,6 +49,9 @@ public class HexagonTile : MonoBehaviour
     [Space]
     public int destroyerLifeTime = 1;
     public int pakkuLifeTime = 3;
+    [Space]
+    [HideInInspector]public int spreaderGeneration = 1;
+    public int spreadingLifeTimeIncrement = 5;
     
     [Header("Improvement Values")]
     [FormerlySerializedAs("greenFusionLifeTime")] [Space]
@@ -86,6 +89,7 @@ public class HexagonTile : MonoBehaviour
                 currentActiveAsset = tileVisuals[0];
                 lifeTime = 0;
                 isAlive = false;
+                canLegalize = false;
                 FillImprovableTiles();
                 break;
             
@@ -93,6 +97,7 @@ public class HexagonTile : MonoBehaviour
                 currentActiveAsset = tileVisuals[1];
                 lifeTime = 0;
                 isAlive = false;
+                canLegalize = false;
                 FillImprovableTiles();
                 break;
             
@@ -100,6 +105,7 @@ public class HexagonTile : MonoBehaviour
                 currentActiveAsset = tileVisuals[2];
                 lifeTime = starterLifeTime;
                 isAlive = true;
+                canLegalize = true;
                 FillImprovableTiles();
                 LegalizeTiles();
                 break;
@@ -108,6 +114,7 @@ public class HexagonTile : MonoBehaviour
                 currentActiveAsset = tileVisuals[3];
                 lifeTime = greenLifeTime;
                 isAlive = true;
+                canLegalize = true;
                 FillImprovableTiles();
                 
                 break;
@@ -116,6 +123,7 @@ public class HexagonTile : MonoBehaviour
                 currentActiveAsset = tileVisuals[4];
                 lifeTime = blueLifeTime;
                 isAlive = true;
+                canLegalize = true;
                 FillImprovableTiles();
                 
                 break;
@@ -124,6 +132,7 @@ public class HexagonTile : MonoBehaviour
                 currentActiveAsset = tileVisuals[5]; 
                 lifeTime = redLifeTime;
                 isAlive = true;
+                canLegalize = true;
                 FillImprovableTiles();
                 
                 break;
@@ -155,6 +164,7 @@ public class HexagonTile : MonoBehaviour
                 currentActiveAsset = tileVisuals[9];
                 lifeTime = 0;
                 isAlive = false;
+                canLegalize = false;
                 FillImprovableTiles();
                 break;
             case TileStates.DestroyerTile:
@@ -170,10 +180,17 @@ public class HexagonTile : MonoBehaviour
                 //GetComponentInChildren<Renderer>().material.color = new Color(1f, 1f, 0f);
                 lifeTime = pakkuLifeTime;
                 isAlive = true;
+                canLegalize = true;
                 FillImprovableTiles();
                 break;
-                
-                
+            
+            case TileStates.SpreadingTile:
+                currentActiveAsset = tileVisuals[12];
+                lifeTime = spreadingLifeTimeIncrement;
+                isAlive = true;
+                FillImprovableTiles();
+                break;
+            
             default:
                 Debug.Log("The tile state is not recognized:" + transform);
                 break;
@@ -198,7 +215,7 @@ public class HexagonTile : MonoBehaviour
     }
     
 
-    public HexagonTile[] GetAdjacentTiles()
+    private HexagonTile[] GetAdjacentTiles()
     {
         List<HexagonTile> adjacentTiles = new List<HexagonTile>();
         Vector3[] directions = new Vector3[]
@@ -236,12 +253,12 @@ public class HexagonTile : MonoBehaviour
                 }
             }
     }
-    public bool HasLivingAdjacentTiles() // returns true if has living adjacent tiles
+    public bool HasLegalizingTiles() // returns true if it has living adjacent tiles
     {
         HexagonTile[] adjacentTiles = GetAdjacentTiles();
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
-            if (adjacentTile.isAlive)
+            if (adjacentTile.canLegalize)
             {
                 return true;
             }
@@ -323,6 +340,10 @@ public class HexagonTile : MonoBehaviour
             
             case TileStates.PakkuTile:
                 EffectInfect();
+                break;
+            
+            case TileStates.SpreadingTile:
+                EffectSpread();
                 break;
             
             default:
@@ -434,4 +455,35 @@ public class HexagonTile : MonoBehaviour
         }
     }
     
+    private void EffectSpread()
+    {
+        
+        if (lifeTime != 1)
+        {
+            return;
+        }
+        
+        lifeTime += spreadingLifeTimeIncrement * spreaderGeneration;
+        
+        
+        // We make a list of all tiles around this one.
+        HexagonTile[] adjacentTiles = GetAdjacentTiles();
+
+        if (adjacentTiles.Length == 0)
+        {
+            TileStateChange(TileStates.DeadTile);
+        }
+        
+        // We iterate through the list and spread the effect to the tiles around this one.
+        foreach (HexagonTile adjacentTile in adjacentTiles)
+        {
+            if (!adjacentTile.isAlive && adjacentTile.currentTileState != TileStates.DeadTile)
+            {
+                adjacentTile.TileStateChange(currentTileState);
+                adjacentTile.spreaderGeneration = spreaderGeneration + 1;
+                adjacentTile.lifeTime += spreadingLifeTimeIncrement * adjacentTile.spreaderGeneration - spreadingLifeTimeIncrement;
+                
+            }
+        }
+    }
 }
