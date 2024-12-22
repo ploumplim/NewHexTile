@@ -307,8 +307,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../TilesForUnity/TilesForUnity.fspro
-  sourceBankPath: ../TilesForUnity/Build
+  sourceProjectPath: Assets/Plugins/FMOD/TILES/TILES.fspro
+  sourceBankPath: Assets/Plugins/FMOD/TILES/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1

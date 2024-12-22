@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{df75efc0-149f-461c-97ac-cab82c81ea47}">
+		<property name="assetPath">
+			<value>GAME/LevelUpReversed.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.7320181405895694</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{0ee7743e-92e8-48ef-a655-522390fe4a44}</destination>
+		</relationship>
+	</object>
+</objects>
