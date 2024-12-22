@@ -4259,9 +4259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e7d267072978d4abcfb6380e0bc195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridWidth: 15
-  gridHeight: 15
-  tileScale: 1.5
+  gridWidth: 20
+  gridHeight: 20
+  tileScale: 1
   hexagonTilePrefab: {fileID: 6892170649514544254, guid: 2d25a368a18567740ab7f817e9f76730, type: 3}
 --- !u!4 &1910971299
 Transform:
@@ -4479,35 +4479,35 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'You may place only the tile in the current slot. You may swap it with
-    the second one in the list.
+    the second one in the list (Button or spacebar).
 
 
-    Tiles have a lifetime (LT) that decreases every
-    turn by one.
+    Tiles have a lifetime
+    (LT) that decreases every turn by one.
 
 
-    When you place a green, red or blue tile it increases the
-    lifetime of other tiles.
+    When you place a green, red or blue
+    tile it increases the lifetime of other tiles.
 
 
-    When a tile reaches the end of its lifetime, it
-    dies.
+    When a tile reaches the
+    end of its lifetime, it dies.
 
 
-    La Bomba destroys all tiles around itself (including dead ones).
-    The Pakku Tile transforms the adjacent tile with most lifetime before it dies.
+    La Bomba destroys all tiles around itself
+    (including dead ones). The Pakku Tile transforms the adjacent tile with most
+    lifetime before it dies.
 
 
-    The
-    Spreader tile will not stop spreading!
+    The Spreader tile will not stop spreading!
 
 
-    Close this menu with the top left
-    toggle. The Godmode toggle lets you play any tiles you want.
+    Close
+    this menu with the top left toggle. The Godmode toggle lets you play any tiles
+    you want.
 
 
-    The reset
-    button resets the game to the central starter tile.'
+    The reset button resets the game to the central starter tile.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5048,19 +5048,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: starterTileXPosition
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: starterTileYPosition
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: spreaderTileXPosition
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: spreaderTileYPosition
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: futureTileStateList.Array.size

@@ -75,6 +75,10 @@ public class PlacementState : States
                 }
             }
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GM.SwapIncomingTiles(); 
+        }
     }
     
    

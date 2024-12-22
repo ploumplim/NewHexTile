@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 using System.Linq;
+using TMPro;
 
 public class HexagonTile : MonoBehaviour
 {
@@ -76,6 +77,7 @@ public class HexagonTile : MonoBehaviour
         // Set the default state
         if (currentTileState!= TileStates.StarterTile)
         {
+            GetComponentInChildren<TextMeshPro>().text = "";
             currentTileState = TileStates.DefaultTile;
             TileStateChange(TileStates.DefaultTile);
         }
