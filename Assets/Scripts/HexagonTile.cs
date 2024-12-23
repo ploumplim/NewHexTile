@@ -29,6 +29,7 @@ public class HexagonTile : MonoBehaviour
     
     public ParticleSystem explosionEffect;
     public ParticleSystem improvementEffect;
+    public ParticleSystem spreaderEffect;
     public Material greenTileMaterial;
     public Material redTileMaterial;
     public Material blueTileMaterial;
@@ -97,6 +98,7 @@ public class HexagonTile : MonoBehaviour
                 isAlive = false;
                 canLegalize = false;
                 FillImprovableTiles();
+                spreaderGeneration = 1;
                 break;
             
             case TileStates.LegalTile:
@@ -105,6 +107,7 @@ public class HexagonTile : MonoBehaviour
                 isAlive = false;
                 canLegalize = false;
                 FillImprovableTiles();
+                spreaderGeneration = 1;
                 break;
             
             case TileStates.StarterTile:
@@ -171,6 +174,7 @@ public class HexagonTile : MonoBehaviour
                 lifeTime = 0;
                 isAlive = false;
                 canLegalize = false;
+                spreaderGeneration = 1;
                 FillImprovableTiles();
                 break;
             case TileStates.DestroyerTile:
@@ -178,6 +182,7 @@ public class HexagonTile : MonoBehaviour
                 //GetComponentInChildren<Renderer>().material.color = new Color(1f, 0f, 1f);
                 lifeTime = destroyerLifeTime;
                 isAlive = true;
+                canLegalize = true;
                 FillImprovableTiles();
                 break;
             
@@ -470,13 +475,33 @@ public class HexagonTile : MonoBehaviour
         }
     }
     
+   
     private void EffectSpread()
     {
-        
+        var emission = spreaderEffect.emission;
+        switch (lifeTime)
+                {
+                    case > 3:
+                        spreaderEffect.Stop();
+                        break;
+                    case 3:
+                        spreaderEffect.Play();
+                        emission.rateOverTime = 6;
+                        break;
+                    case 2:
+                        spreaderEffect.Play();
+                        emission.rateOverTime = 12;
+                        break;
+                    case 1:
+                        spreaderEffect.Stop();
+                        break;
+                }
         if (lifeTime != 1)
         {
             return;
         }
+
+        
         
         lifeTime += spreadingLifeTimeIncrement * spreaderGeneration;
         
@@ -484,11 +509,6 @@ public class HexagonTile : MonoBehaviour
         // We make a list of all tiles around this one.
         HexagonTile[] adjacentTiles = GetAdjacentTiles();
 
-        if (adjacentTiles.Length == 0)
-        {
-            TileStateChange(TileStates.DeadTile);
-        }
-        
         // We iterate through the list and spread the effect to the tiles around this one.
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
@@ -497,7 +517,6 @@ public class HexagonTile : MonoBehaviour
                 adjacentTile.TileStateChange(currentTileState);
                 adjacentTile.spreaderGeneration = spreaderGeneration + 1;
                 adjacentTile.lifeTime += spreadingLifeTimeIncrement * adjacentTile.spreaderGeneration - spreadingLifeTimeIncrement;
-                
             }
         }
     }
