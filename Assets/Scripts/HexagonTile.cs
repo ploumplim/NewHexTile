@@ -93,6 +93,7 @@ public class HexagonTile : MonoBehaviour
         switch (state)
         {
             case TileStates.DefaultTile:
+                spreaderEffect.Stop();
                 currentActiveAsset = tileVisuals[0];
                 lifeTime = 0;
                 isAlive = false;
@@ -102,6 +103,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             
             case TileStates.LegalTile:
+                spreaderEffect.Stop();
                 currentActiveAsset = tileVisuals[1];
                 lifeTime = 0;
                 isAlive = false;
@@ -170,6 +172,7 @@ public class HexagonTile : MonoBehaviour
             //     FillImprovableTiles();
             
             case TileStates.DeadTile:
+                spreaderEffect.Stop();
                 currentActiveAsset = tileVisuals[9];
                 lifeTime = 0;
                 isAlive = false;
