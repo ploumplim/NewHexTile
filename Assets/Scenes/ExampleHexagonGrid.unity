@@ -5365,7 +5365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: futureTilesListCount
-      value: 20
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: starterTileXPosition
@@ -5385,7 +5385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: futureTileStateList.Array.size
-      value: 5
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: futureTileStateList.Array.data[0]
@@ -5406,6 +5406,34 @@ PrefabInstance:
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: futureTileStateList.Array.data[4]
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: futureTileStateList.Array.data[5]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: futureTileStateList.Array.data[6]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: futureTileStateList.Array.data[7]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: futureTileStateList.Array.data[8]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: futureTileStateList.Array.data[9]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: futureTileStateList.Array.data[10]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
+      propertyPath: futureTileStateList.Array.data[11]
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4271742919183421098, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}

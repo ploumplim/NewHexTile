@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17f6822e-6c11-447c-86eb-a40ca1fc295f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewHexTile/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexagonTile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexagonTile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HexagonTile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ExampleHexagonGrid.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,6 +139,7 @@
       <workItem from="1734848015149" duration="8737000" />
       <workItem from="1734892324332" duration="860000" />
       <workItem from="1734949716084" duration="3502000" />
+      <workItem from="1735225871337" duration="740000" />
     </task>
     <servers />
   </component>
