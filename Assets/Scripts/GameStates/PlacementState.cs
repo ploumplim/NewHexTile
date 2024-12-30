@@ -29,9 +29,6 @@ public class PlacementState : States
                 // If the ray hits a hexagon tile, we want to apply the next tile state to it.
                 HexagonTile hexTile = hit.collider.GetComponent<HexagonTile>();
                 
-                
-               
-                
                 if (hexTile != null)
                 {
                     if (Input.GetMouseButtonDown(0)) // Detect left mouse button click
@@ -82,7 +79,6 @@ public class PlacementState : States
                     }
                 }
                 
-                
                 if (hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
                 {
 
@@ -93,18 +89,32 @@ public class PlacementState : States
                         {
                             if (previousHexTile.currentTileState == HexagonTile.TileStates.LegalTile)
                             {
+                                HexagonTile[] PreviousHexAdjacentTile = previousHexTile.GetAdjacentTiles();
+                                HexagonTile[] HexAdjacentTile = hexTile.GetAdjacentTiles();
+                                
                                 foreach (var VARIABLE in previousHexTile.tileVisuals)
                                 {
                                     VARIABLE.SetActive(false);   
                                 }
-                                previousHexTile.tileVisuals[1].SetActive(true); 
+
+                                // Log tiles in PreviousHexAdjacentTile that are not in HexAdjacentTile
+                                foreach (var oldTile in PreviousHexAdjacentTile)
+                                {
+                                    if (!HexAdjacentTile.Contains(oldTile)
+                                        && oldTile.currentTileState!=HexagonTile.TileStates.LegalTile
+                                        && oldTile.currentTileState!=HexagonTile.TileStates.DefaultTile)
+                                    {
+                                        oldTile.GetComponentInChildren<TextMeshPro>().SetText(oldTile.lifeTime.ToString());
+                                    }
+                                }
+                                previousHexTile.tileVisuals[1].SetActive(true);
+                                
                             }
                             
                         }
                         previousHexTile = hexTile;
                     }
-                    
-                    
+
                     switch (GM.futureTileStateList[0])
                     {
                         case HexagonTile.TileStates.GreenTile:
@@ -112,24 +122,57 @@ public class PlacementState : States
                             {
                                 visualsTile.SetActive(false);
                             }
+
+                            foreach (var neighboorTile in hexTile.GetAdjacentTiles())
+                            {
+                                if (neighboorTile.lifeTime > 0)
+                                {
+                                    int lifeTimeImproved = neighboorTile.lifeTime + hexTile.greenImproveValue;
+                                    neighboorTile.GetComponentInChildren<TextMeshPro>().SetText(
+                                        lifeTimeImproved.ToString());
+                                }
+                                
+                            }
                             hexTile.tileVisuals[3].SetActive(true);
                             break;
+                        
                         case HexagonTile.TileStates.BlueTile:
                             foreach (var visualsTile in hexTile.tileVisuals)
                             {
                                 visualsTile.SetActive(false);
                             }
+                            foreach (var neighboorTile in hexTile.GetAdjacentTiles())
+                            {
+                                if (neighboorTile.lifeTime > 0)
+                                {
+                                    int lifeTimeImproved = neighboorTile.lifeTime + hexTile.blueImproveValue;
+                                    neighboorTile.GetComponentInChildren<TextMeshPro>().SetText(
+                                        lifeTimeImproved.ToString());
+                                }
+                                
+                            }
                             hexTile.tileVisuals[4].SetActive(true);
-                            
                             break;
+                        
                         case HexagonTile.TileStates.RedTile:
                             
                             foreach (var visualsTile in hexTile.tileVisuals)
                             {
                                 visualsTile.SetActive(false);
                             }
+                            foreach (var neighboorTile in hexTile.GetAdjacentTiles())
+                            {
+                                if (neighboorTile.lifeTime > 0)
+                                {
+                                    int lifeTimeImproved = neighboorTile.lifeTime + hexTile.redImproveValue;
+                                    neighboorTile.GetComponentInChildren<TextMeshPro>().SetText(
+                                        lifeTimeImproved.ToString());
+                                }
+                                
+                            }
                             hexTile.tileVisuals[5].SetActive(true);
                             break;
+                        
                         case HexagonTile.TileStates.DestroyerTile:
                             foreach (var visualsTile in hexTile.tileVisuals)
                             {
@@ -137,6 +180,7 @@ public class PlacementState : States
                             }
                             hexTile.tileVisuals[10].SetActive(true);
                             break;
+                        
                         case HexagonTile.TileStates.PakkuTile:
                             foreach (var visualsTile in hexTile.tileVisuals)
                             {
@@ -146,9 +190,6 @@ public class PlacementState : States
                             break;
                     }
                 }
-                
-                
-                
                 
             }
             if (Input.GetKeyDown(KeyCode.Space))
