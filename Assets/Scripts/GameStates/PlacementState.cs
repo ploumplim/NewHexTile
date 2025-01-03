@@ -79,42 +79,46 @@ public class PlacementState : States
                     }
                 }
                 
+                if (hexTile!= previousHexTile)
+                {
+                       
+                    if (previousHexTile != null)
+                    {
+                        if (previousHexTile.currentTileState == HexagonTile.TileStates.LegalTile)
+                        {
+                               
+                                
+                            HexagonTile[] PreviousHexAdjacentTile = previousHexTile.GetAdjacentTiles();
+                            HexagonTile[] HexAdjacentTile = hexTile.GetAdjacentTiles();
+                                
+                            foreach (var VARIABLE in previousHexTile.tileVisuals)
+                            {
+                                VARIABLE.SetActive(false);   
+                            }
+
+                            // Log tiles in PreviousHexAdjacentTile that are not in HexAdjacentTile
+                            foreach (var oldTile in PreviousHexAdjacentTile)
+                            {
+                                if (!HexAdjacentTile.Contains(oldTile)
+                                    && oldTile.currentTileState!=HexagonTile.TileStates.LegalTile
+                                    && oldTile.currentTileState!=HexagonTile.TileStates.DefaultTile
+                                    && oldTile.currentTileState!=HexagonTile.TileStates.DeadTile
+                                    && oldTile.currentTileState!=HexagonTile.TileStates.StarterTile)
+                                {
+                                    oldTile.GetComponentInChildren<TextMeshPro>().SetText(oldTile.lifeTime.ToString());
+                                }
+                            }
+                            previousHexTile.tileVisuals[1].SetActive(true);
+                                
+                        }
+                            
+                    }
+                    previousHexTile = hexTile;
+                }
+                
                 if (hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
                 {
-
-                    if (hexTile!= previousHexTile)
-                    {
-                        
-                        if (previousHexTile != null)
-                        {
-                            if (previousHexTile.currentTileState == HexagonTile.TileStates.LegalTile)
-                            {
-                                HexagonTile[] PreviousHexAdjacentTile = previousHexTile.GetAdjacentTiles();
-                                HexagonTile[] HexAdjacentTile = hexTile.GetAdjacentTiles();
-                                
-                                foreach (var VARIABLE in previousHexTile.tileVisuals)
-                                {
-                                    VARIABLE.SetActive(false);   
-                                }
-
-                                // Log tiles in PreviousHexAdjacentTile that are not in HexAdjacentTile
-                                foreach (var oldTile in PreviousHexAdjacentTile)
-                                {
-                                    if (!HexAdjacentTile.Contains(oldTile)
-                                        && oldTile.currentTileState!=HexagonTile.TileStates.LegalTile
-                                        && oldTile.currentTileState!=HexagonTile.TileStates.DefaultTile)
-                                    {
-                                        oldTile.GetComponentInChildren<TextMeshPro>().SetText(oldTile.lifeTime.ToString());
-                                    }
-                                }
-                                previousHexTile.tileVisuals[1].SetActive(true);
-                                
-                            }
-                            
-                        }
-                        previousHexTile = hexTile;
-                    }
-
+                    
                     switch (GM.futureTileStateList[0])
                     {
                         case HexagonTile.TileStates.GreenTile:
