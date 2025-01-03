@@ -19,186 +19,157 @@ public class PlacementState : States
     }
     
     public override void Tick()
+{
+    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    if (Physics.Raycast(ray, out RaycastHit hit))
     {
-        
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        HexagonTile hexTile = hit.collider.GetComponent<HexagonTile>();
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                // If the ray hits a hexagon tile, we want to apply the next tile state to it.
-                HexagonTile hexTile = hit.collider.GetComponent<HexagonTile>();
-                
-                if (hexTile != null)
-                {
-                    if (Input.GetMouseButtonDown(0)) // Detect left mouse button click
-                    {    
-                        if (hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
-                        {
-                            // If godmode is enabled, we want to apply the tile state that is selected in the godHUD
-                            if (GM.GODMODE)
-                            {
-                                int activeTileIndex = GM.godModeToggleScript.activeTile;
-                                switch (activeTileIndex)
-                                {
-                                    case 0:
-                                        NextTileCreate(hexTile);
-                                        break;
-                                    case 1:
-                                        hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
-                                        break;
-                                    case 2:
-                                        hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);
-                                        break;
-                                    case 3:
-                                        hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
-                                        break;
-                                    case 4:
-                                        hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
-                                        break;
-                                    case 5:
-                                        hexTile.TileStateChange(HexagonTile.TileStates.PakkuTile);
-                                        break;
-                                    
-                                    default:
-                                        Debug.LogError("Invalid active tile index: " + activeTileIndex);
-                                        break;
-                                    
-                                } 
-                            } 
-                            else // If godmode is disabled, we want to apply the next tile state to the hexagon tile
-                            {
-                                NextTileCreate(hexTile);
-                            }
-                        
-                        
-                            GM.ChangeState(GM.GetComponent<EffectState>());
-
-                        
-                        }
-                    }
-                }
-
-                HexagonTile[] ModifiedLifeTimeTile;
-                //Lorsque le joueur sort du Hover
-                if (hexTile!= previousHexTile)
-                {
-                       
-                    if (previousHexTile != null)
-                    {
-                        if (previousHexTile.currentTileState == HexagonTile.TileStates.LegalTile)
-                        {
-                            
-                            foreach (var VARIABLE in previousHexTile.tileVisuals)
-                            {
-                                VARIABLE.SetActive(false);   
-                            }
-                            previousHexTile.tileVisuals[1].SetActive(true);
-                            foreach (var VARIABLE in previousHexTile.GetAdjacentTiles())
-                            {
-                                if (VARIABLE.lifeTime > 0)
-                                {
-                                    VARIABLE.GetComponentInChildren<TextMeshPro>().SetText(VARIABLE.lifeTime.ToString());
-                                }
-                            }
-                        }
-                            
-                    }
-                    previousHexTile = hexTile;
-                }
-                
-                
-                
-                
-                if (hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
-                {
-                    
-                    switch (GM.futureTileStateList[0])
-                    {
-                        case HexagonTile.TileStates.GreenTile:
-                            foreach (var visualsTile in hexTile.tileVisuals)
-                            {
-                                visualsTile.SetActive(false);
-                            }
-
-                            foreach (var neighboorTile in hexTile.GetAdjacentTiles())
-                            {
-                                if (neighboorTile.lifeTime > 0
-                                    && neighboorTile.currentTileState != HexagonTile.TileStates.StarterTile)
-                                {
-                                    int lifeTimeImproved = neighboorTile.lifeTime + hexTile.greenImproveValue;
-                                    neighboorTile.GetComponentInChildren<TextMeshPro>().SetText(
-                                        lifeTimeImproved.ToString());
-                                    
-                                }
-                                
-                            }
-                            hexTile.tileVisuals[3].SetActive(true);
-                            break;
-                        
-                        case HexagonTile.TileStates.BlueTile:
-                            foreach (var visualsTile in hexTile.tileVisuals)
-                            {
-                                visualsTile.SetActive(false);
-                            }
-                            foreach (var neighboorTile in hexTile.GetAdjacentTiles())
-                            {
-                                if (neighboorTile.lifeTime > 0
-                                    && neighboorTile.currentTileState != HexagonTile.TileStates.StarterTile)
-                                {
-                                    int lifeTimeImproved = neighboorTile.lifeTime + hexTile.blueImproveValue;
-                                    neighboorTile.GetComponentInChildren<TextMeshPro>().SetText(
-                                        lifeTimeImproved.ToString());
-                                }
-                                
-                            }
-                            hexTile.tileVisuals[4].SetActive(true);
-                            break;
-                        
-                        case HexagonTile.TileStates.RedTile:
-                            
-                            foreach (var visualsTile in hexTile.tileVisuals)
-                            {
-                                visualsTile.SetActive(false);
-                            }
-                            foreach (var neighboorTile in hexTile.GetAdjacentTiles())
-                            {
-                                if (neighboorTile.lifeTime > 0
-                                    && neighboorTile.currentTileState != HexagonTile.TileStates.StarterTile)
-                                {
-                                    int lifeTimeImproved = neighboorTile.lifeTime + hexTile.redImproveValue;
-                                    neighboorTile.GetComponentInChildren<TextMeshPro>().SetText(
-                                        lifeTimeImproved.ToString());
-                                }
-                                
-                            }
-                            hexTile.tileVisuals[5].SetActive(true);
-                            break;
-                        
-                        case HexagonTile.TileStates.DestroyerTile:
-                            foreach (var visualsTile in hexTile.tileVisuals)
-                            {
-                                visualsTile.SetActive(false);
-                            }
-                            hexTile.tileVisuals[10].SetActive(true);
-                            break;
-                        
-                        case HexagonTile.TileStates.PakkuTile:
-                            foreach (var visualsTile in hexTile.tileVisuals)
-                            {
-                                visualsTile.SetActive(false);
-                            }
-                            hexTile.tileVisuals[11].SetActive(true);
-                            break;
-                    }
-                }
-                
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                GM.SwapIncomingTiles(); 
-            }
+        if (hexTile != null)
+        {
+            HandleMouseClick(hexTile);
+            HandleTileHover(hexTile);
+        }
     }
+
+    if (Input.GetKeyDown(KeyCode.Space))
+    {
+        GM.SwapIncomingTiles();
+    }
+}
+
+private void HandleMouseClick(HexagonTile hexTile)
+{
+    if (Input.GetMouseButtonDown(0) && hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
+    {
+        if (GM.GODMODE)
+        {
+            ApplyGodModeTileState(hexTile);
+        }
+        else
+        {
+            NextTileCreate(hexTile);
+        }
+
+        GM.ChangeState(GM.GetComponent<EffectState>());
+    }
+}
+
+private void ApplyGodModeTileState(HexagonTile hexTile)
+{
+    int activeTileIndex = GM.godModeToggleScript.activeTile;
+    switch (activeTileIndex)
+    {
+        case 0:
+            NextTileCreate(hexTile);
+            break;
+        case 1:
+            hexTile.TileStateChange(HexagonTile.TileStates.GreenTile);
+            break;
+        case 2:
+            hexTile.TileStateChange(HexagonTile.TileStates.BlueTile);
+            break;
+        case 3:
+            hexTile.TileStateChange(HexagonTile.TileStates.RedTile);
+            break;
+        case 4:
+            hexTile.TileStateChange(HexagonTile.TileStates.DestroyerTile);
+            break;
+        case 5:
+            hexTile.TileStateChange(HexagonTile.TileStates.PakkuTile);
+            break;
+        default:
+            Debug.LogError("Invalid active tile index: " + activeTileIndex);
+            break;
+    }
+}
+
+private void HandleTileHover(HexagonTile hexTile)
+{
+    if (hexTile != previousHexTile)
+    {
+        ResetPreviousTileVisuals();
+        previousHexTile = hexTile;
+    }
+
+    if (hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
+    {
+        UpdateTileVisuals(hexTile);
+    }
+}
+
+private void ResetPreviousTileVisuals()
+{
+    if (previousHexTile != null && previousHexTile.currentTileState == HexagonTile.TileStates.LegalTile)
+    {
+        foreach (var visual in previousHexTile.tileVisuals)
+        {
+            visual.SetActive(false);
+        }
+        previousHexTile.tileVisuals[1].SetActive(true);
+        foreach (var adjacentTile in previousHexTile.GetAdjacentTiles())
+        {
+            if (adjacentTile.lifeTime > 0
+                && adjacentTile.currentTileState != HexagonTile.TileStates.StarterTile)
+            {
+                adjacentTile.GetComponentInChildren<TextMeshPro>().SetText(adjacentTile.lifeTime.ToString());
+            }
+        }
+    }
+}
+
+private void UpdateTileVisuals(HexagonTile hexTile)
+{
+    foreach (var visual in hexTile.tileVisuals)
+    {
+        visual.SetActive(false);
+    }
+
+    foreach (var neighborTile in hexTile.GetAdjacentTiles())
+    {
+        if (neighborTile.lifeTime > 0 && neighborTile.currentTileState != HexagonTile.TileStates.StarterTile)
+        {
+            int lifeTimeImproved = neighborTile.lifeTime + GetTileImproveValue(hexTile);
+            neighborTile.GetComponentInChildren<TextMeshPro>().SetText(lifeTimeImproved.ToString());
+        }
+    }
+
+    hexTile.tileVisuals[GetTileVisualIndex(GM.futureTileStateList[0])].SetActive(true);
+}
+
+private int GetTileImproveValue(HexagonTile hexTile)
+{
+    switch (GM.futureTileStateList[0])
+    {
+        case HexagonTile.TileStates.GreenTile:
+            return hexTile.greenImproveValue;
+        case HexagonTile.TileStates.BlueTile:
+            return hexTile.blueImproveValue;
+        case HexagonTile.TileStates.RedTile:
+            return hexTile.redImproveValue;
+        default:
+            return 0;
+    }
+}
+
+private int GetTileVisualIndex(HexagonTile.TileStates state)
+{
+    switch (state)
+    {
+        case HexagonTile.TileStates.GreenTile:
+            return 3;
+        case HexagonTile.TileStates.BlueTile:
+            return 4;
+        case HexagonTile.TileStates.RedTile:
+            return 5;
+        case HexagonTile.TileStates.DestroyerTile:
+            return 10;
+        case HexagonTile.TileStates.PakkuTile:
+            return 11;
+        default:
+            return 0;
+    }
+}
     
    
     
