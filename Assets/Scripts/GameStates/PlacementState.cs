@@ -97,17 +97,18 @@ public class PlacementState : States
                             }
 
                             // Log tiles in PreviousHexAdjacentTile that are not in HexAdjacentTile
-                            foreach (var oldTile in PreviousHexAdjacentTile)
-                            {
-                                if (!HexAdjacentTile.Contains(oldTile)
-                                    && oldTile.currentTileState!=HexagonTile.TileStates.LegalTile
-                                    && oldTile.currentTileState!=HexagonTile.TileStates.DefaultTile
-                                    && oldTile.currentTileState!=HexagonTile.TileStates.DeadTile
-                                    && oldTile.currentTileState!=HexagonTile.TileStates.StarterTile)
-                                {
-                                    oldTile.GetComponentInChildren<TextMeshPro>().SetText(oldTile.lifeTime.ToString());
-                                }
-                            }
+                            // foreach (var oldTile in PreviousHexAdjacentTile)
+                            // {
+                            //     if (!HexAdjacentTile.Contains(oldTile)
+                            //         && oldTile.currentTileState!=HexagonTile.TileStates.LegalTile
+                            //         && oldTile.currentTileState!=HexagonTile.TileStates.DefaultTile
+                            //         && oldTile.currentTileState!=HexagonTile.TileStates.DeadTile
+                            //         && oldTile.currentTileState!=HexagonTile.TileStates.StarterTile)
+                            //     {
+                            //         Debug.Log( oldTile.currentTileState);
+                            //         oldTile.GetComponentInChildren<TextMeshPro>().SetText(oldTile.lifeTime.ToString());
+                            //     }
+                            // }
                             previousHexTile.tileVisuals[1].SetActive(true);
                                 
                         }
@@ -129,7 +130,8 @@ public class PlacementState : States
 
                             foreach (var neighboorTile in hexTile.GetAdjacentTiles())
                             {
-                                if (neighboorTile.lifeTime > 0)
+                                if (neighboorTile.lifeTime > 0
+                                    && neighboorTile.currentTileState != HexagonTile.TileStates.StarterTile)
                                 {
                                     int lifeTimeImproved = neighboorTile.lifeTime + hexTile.greenImproveValue;
                                     neighboorTile.GetComponentInChildren<TextMeshPro>().SetText(
@@ -147,7 +149,8 @@ public class PlacementState : States
                             }
                             foreach (var neighboorTile in hexTile.GetAdjacentTiles())
                             {
-                                if (neighboorTile.lifeTime > 0)
+                                if (neighboorTile.lifeTime > 0
+                                    && neighboorTile.currentTileState != HexagonTile.TileStates.StarterTile)
                                 {
                                     int lifeTimeImproved = neighboorTile.lifeTime + hexTile.blueImproveValue;
                                     neighboorTile.GetComponentInChildren<TextMeshPro>().SetText(
@@ -166,7 +169,8 @@ public class PlacementState : States
                             }
                             foreach (var neighboorTile in hexTile.GetAdjacentTiles())
                             {
-                                if (neighboorTile.lifeTime > 0)
+                                if (neighboorTile.lifeTime > 0
+                                    && neighboorTile.currentTileState != HexagonTile.TileStates.StarterTile)
                                 {
                                     int lifeTimeImproved = neighboorTile.lifeTime + hexTile.redImproveValue;
                                     neighboorTile.GetComponentInChildren<TextMeshPro>().SetText(
