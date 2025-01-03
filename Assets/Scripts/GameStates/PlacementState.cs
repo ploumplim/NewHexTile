@@ -78,7 +78,9 @@ public class PlacementState : States
                         }
                     }
                 }
-                
+
+                HexagonTile[] ModifiedLifeTimeTile;
+                //Lorsque le joueur sort du Hover
                 if (hexTile!= previousHexTile)
                 {
                        
@@ -91,13 +93,22 @@ public class PlacementState : States
                             {
                                 VARIABLE.SetActive(false);   
                             }
-                            
                             previousHexTile.tileVisuals[1].SetActive(true);
+                            foreach (var VARIABLE in previousHexTile.GetAdjacentTiles())
+                            {
+                                if (VARIABLE.lifeTime > 0)
+                                {
+                                    VARIABLE.GetComponentInChildren<TextMeshPro>().SetText(VARIABLE.lifeTime.ToString());
+                                }
+                            }
                         }
                             
                     }
                     previousHexTile = hexTile;
                 }
+                
+                
+                
                 
                 if (hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
                 {
@@ -118,6 +129,7 @@ public class PlacementState : States
                                     int lifeTimeImproved = neighboorTile.lifeTime + hexTile.greenImproveValue;
                                     neighboorTile.GetComponentInChildren<TextMeshPro>().SetText(
                                         lifeTimeImproved.ToString());
+                                    
                                 }
                                 
                             }
