@@ -113,6 +113,7 @@ private void ResetPreviousTileVisuals()
                 && adjacentTile.currentTileState != HexagonTile.TileStates.StarterTile)
             {
                 adjacentTile.GetComponentInChildren<TextMeshPro>().SetText(adjacentTile.lifeTime.ToString());
+                adjacentTile.GetComponentInChildren<TextMeshPro>().color = Color.white;
             }
         }
     }
@@ -131,6 +132,22 @@ private void UpdateTileVisuals(HexagonTile hexTile)
         {
             int lifeTimeImproved = neighborTile.lifeTime + GetTileImproveValue(hexTile);
             neighborTile.GetComponentInChildren<TextMeshPro>().SetText(lifeTimeImproved.ToString());
+            neighborTile.GetComponentInChildren<TextMeshPro>().color = Color.magenta;
+        }
+    }
+
+    foreach (var VARIABLE in GM.Tiles)
+    {
+        if (VARIABLE.currentTileState == HexagonTile.TileStates.PakkuTile)
+        {
+            foreach (var PakkuNeighboor in VARIABLE.GetAdjacentTiles())
+            {
+                if (PakkuNeighboor.lifeTime>0)
+                {
+                    PakkuNeighboor.tileVisuals[13].SetActive(true);
+                }
+                
+            }
         }
     }
 
@@ -170,9 +187,6 @@ private int GetTileVisualIndex(HexagonTile.TileStates state)
             return 0;
     }
 }
-    
-   
-    
     public void NextTileCreate(HexagonTile hexTile)
     { 
         
