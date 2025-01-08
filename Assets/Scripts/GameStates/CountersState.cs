@@ -26,15 +26,18 @@ public class CountersState : States
                 // This function sets the color hue of the tile's text depending on their lifetime.
                 if (tile.lifeTime >= GM.resetLifeTimeColor)
                 {
-                    tile.GetComponentInChildren<TextMeshPro>().color = Color.white;
+                    UiChanger.ChangeTextColor(tile.GetComponentInChildren<TextMeshPro>(), Color.white);
+                    //tile.GetComponentInChildren<TextMeshPro>().color = Color.white;
                 }
                 else if (tile.lifeTime <= GM.firstLifeTimeThreshold && tile.lifeTime > GM.secondLifeTimeThreshold)
                 {
-                    tile.GetComponentInChildren<TextMeshPro>().color = Color.yellow;
+                    UiChanger.ChangeTextColor(tile.GetComponentInChildren<TextMeshPro>(), Color.yellow);
+                    //tile.GetComponentInChildren<TextMeshPro>().color = Color.yellow;
                 }
                 else if (tile.lifeTime <= GM.secondLifeTimeThreshold)
                 {
-                    tile.GetComponentInChildren<TextMeshPro>().color = Color.red;
+                    UiChanger.ChangeTextColor(tile.GetComponentInChildren<TextMeshPro>(), Color.red);
+                    //tile.GetComponentInChildren<TextMeshPro>().color = Color.red;
                 }
                 
                 // When the lifetime of the tile reaches 0, we change it to dead, clear text and set first turn cleared to false.

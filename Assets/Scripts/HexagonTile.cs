@@ -229,7 +229,7 @@ public class HexagonTile : MonoBehaviour
     }
     
 
-    private HexagonTile[] GetAdjacentTiles()
+    public HexagonTile[] GetAdjacentTiles()
     {
         List<HexagonTile> adjacentTiles = new List<HexagonTile>();
         Vector3[] directions = new Vector3[]
@@ -450,7 +450,8 @@ public class HexagonTile : MonoBehaviour
             }
             
         }
-        
+       
+        //TODO Faire l'afficgage des effets d'amélioration
         // We iterate through the list and improve the tiles depending on my current tile's state.
         foreach (HexagonTile tile in improvableAdjacentTiles)
         {
