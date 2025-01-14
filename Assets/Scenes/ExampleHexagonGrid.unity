@@ -1334,7 +1334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a985ce6f27ed6724ab30fc362d04c1f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Color: {r: 0.9924528, g: 0.8986959, b: 0.09550016, a: 0}
 --- !u!114 &632989499 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
@@ -4975,7 +4974,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060840196}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
