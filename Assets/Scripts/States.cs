@@ -31,15 +31,16 @@ public abstract class States : MonoBehaviour
       LegalTilesShouldBeDefault(GM.Tiles.Cast<HexagonTile>().ToList());
       // Update my living tiles list
       GM.livingTiles = UpdateLivingTileList(GM.Tiles);
+      GM.lawfulTiles = UpdateLawfulTileList(GM.Tiles);
       // Legalize my tiles
-      foreach (HexagonTile tile in GM.livingTiles)
+      foreach (HexagonTile tile in GM.lawfulTiles)
       {
          tile.LegalizeTiles();
       }
       
    }
    
-   public List<HexagonTile> UpdateLivingTileList(HexagonTile[,] tiles)
+   private List<HexagonTile> UpdateLivingTileList(HexagonTile[,] tiles)
    {
       List<HexagonTile> newLivingTiles = new List<HexagonTile>();
       foreach (HexagonTile tile in tiles)
@@ -57,12 +58,30 @@ public abstract class States : MonoBehaviour
       return newLivingTiles; //Return the updated list.
    }
    
-   public void LegalTilesShouldBeDefault(List<HexagonTile> legalTiles)
+   private List<HexagonTile> UpdateLawfulTileList(HexagonTile[,] tiles)
+   {
+      List<HexagonTile> newLawfulTiles = new List<HexagonTile>();
+      foreach (HexagonTile tile in tiles)
+      { //If the tile is lawful, add it to the lawful tiles list.
+         if (tile.canLegalize)
+         {
+            newLawfulTiles.Add(tile);
+         }
+         else //If the tile is not lawful, remove it from the lawful tiles list.
+         {
+            newLawfulTiles.Remove(tile);
+         }
+      }
+      
+      return newLawfulTiles; //Return the updated list.
+   }
+   
+   private void LegalTilesShouldBeDefault(List<HexagonTile> legalTiles)
    {
       foreach (HexagonTile tile in legalTiles.ToList())
       {
          // If the tile has no living adjacent tiles and is a legal tile, change the tile state to default.
-         if (!tile.HasLivingAdjacentTiles() &&
+         if (!tile.HasLegalizingTiles() &&
              tile.currentTileState == HexagonTile.TileStates.LegalTile)
          {
             tile.TileStateChange(HexagonTile.TileStates.DefaultTile);

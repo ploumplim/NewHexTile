@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     public int greenImproveTime;
     [HideInInspector] // This is a list of all the living tiles in the grid.
     public List<HexagonTile> livingTiles;
+    [HideInInspector] // this is a list of all tiles that can legalize
+    public List<HexagonTile> lawfulTiles;
     // This is the script that manages godmode.
     [FormerlySerializedAs("toggleScript")] [HideInInspector]
     public GodModeToggleScript godModeToggleScript;
@@ -110,10 +112,16 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public List<int> weights;
     // This is the minimum amount of tiles that need to be placed before we spawn bombs
     
-    [Header("Starter Tiles")]
+    [Header("Starter Tile")]
     // starter tile position
     public int starterTileXPosition = 1;
     public int starterTileYPosition = 1;
+    
+    [Tooltip("Only one spreader tile for now.")]
+    [Header("Spreader Tile")]
+    // spreader tile position
+    public int spreaderTileXPosition = 1;
+    public int spreaderTileYPosition = 1;
     
     private void Start()
     {
@@ -145,7 +153,11 @@ public class GameManager : MonoBehaviour
         // SET STARTER TILE
         var starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
           starterTile.TileStateChange(HexagonTile.TileStates.StarterTile);
-          
+        
+        // SET SPREADER TILE
+        var spreaderTile = hexGrid.TileInstances[spreaderTileXPosition, spreaderTileYPosition].GetComponent<HexagonTile>();
+        spreaderTile.TileStateChange(HexagonTile.TileStates.SpreadingTile);
+        
         // Set the current state to the placement state.
         currentState = GetComponent<PlacementState>();
         currentState.Enter();
@@ -205,6 +217,17 @@ public class GameManager : MonoBehaviour
         // Set the starter tile
         var starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
         starterTile.TileStateChange(HexagonTile.TileStates.StarterTile);
+        
+        // reset the spreader generation of all my tiles
+        foreach (HexagonTile tile in Tiles)
+        {
+            tile.spreaderGeneration = 1;
+        }
+        
+        
+        // Set the spreader tile
+        var spreaderTile = hexGrid.TileInstances[spreaderTileXPosition, spreaderTileYPosition].GetComponent<HexagonTile>();
+        spreaderTile.TileStateChange(HexagonTile.TileStates.SpreadingTile);
         
         
     }
