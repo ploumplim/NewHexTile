@@ -41,8 +41,10 @@ public class PlacementState : States
 private void HandleMouseClick(HexagonTile hexTile)
 {
     if (Input.GetMouseButtonDown(0) && hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
-    {
-        if (GM.GODMODE)
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.clickSound, this.transform.position);
+
+            if (GM.GODMODE)
         {
             ApplyGodModeTileState(hexTile);
         }
@@ -88,6 +90,7 @@ private void HandleTileHover(HexagonTile hexTile)
 {
     if (hexTile != previousHexTile)
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.hoverSound, this.transform.position);
         ResetPreviousTileVisuals();
         previousHexTile = hexTile;
     }

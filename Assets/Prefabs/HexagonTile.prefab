@@ -15747,6 +15747,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6698b5bb0eca87a4bba2ff9ccb7be6f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombaSound:
+    Guid:
+      Data1: -1111310272
+      Data2: 1333040256
+      Data3: -1088212599
+      Data4: 1306371007
+    Path: event:/Bomba
   explosionEffect: {fileID: 7166381139016470785}
   improvementEffect: {fileID: 9196288156149020201}
   spreaderEffect: {fileID: 7231251327234502567}

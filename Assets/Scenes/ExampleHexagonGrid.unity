@@ -3746,6 +3746,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471918431}
   m_CullTransparentMesh: 1
+--- !u!1 &1516029086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1516029087}
+  - component: {fileID: 1516029088}
+  m_Layer: 0
+  m_Name: FMODEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1516029087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516029086}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2060840199}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1516029088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516029086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3883b37e47ca8714b85d8b56e377f22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <bombaSound>k__BackingField:
+    Guid:
+      Data1: -1111310272
+      Data2: 1333040256
+      Data3: -1088212599
+      Data4: 1306371007
+    Path: event:/Bomba
+  <clickSound>k__BackingField:
+    Guid:
+      Data1: 256576732
+      Data2: 1240735479
+      Data3: 1622632327
+      Data4: -1686140827
+    Path: event:/Click
+  <hoverSound>k__BackingField:
+    Guid:
+      Data1: 637172570
+      Data2: 1126318245
+      Data3: -642584399
+      Data4: -1165399274
+    Path: event:/MouseOverTiles
+  <improveSound>k__BackingField:
+    Guid:
+      Data1: 1491282726
+      Data2: 1304053842
+      Data3: -1210787408
+      Data4: -481878846
+    Path: event:/Improve
 --- !u!1 &1518312606
 GameObject:
   m_ObjectHideFlags: 0
@@ -4960,6 +5032,7 @@ GameObject:
   - component: {fileID: 2060840199}
   - component: {fileID: 2060840198}
   - component: {fileID: 2060840197}
+  - component: {fileID: 2060840200}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -5028,9 +5101,22 @@ Transform:
   m_LocalPosition: {x: 1813.0568, y: 859.38104, z: 4000.9697}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1516029087}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2060840200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060840196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3eab3266fe2448b1197ca5d4faddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2081003493
 GameObject:
   m_ObjectHideFlags: 0
