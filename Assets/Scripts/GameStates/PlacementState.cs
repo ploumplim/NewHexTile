@@ -49,9 +49,30 @@ private void HandleMouseClick(HexagonTile hexTile)
         else
         {
             NextTileCreate(hexTile);
+            foreach (var Tile in GM.Tiles)
+            {
+                if (Tile.currentTileState == HexagonTile.TileStates.DestroyerTile&& Tile.lifeTime==1)
+                {
+                    foreach (var neighboorOfDestroyerTile in Tile.GetAdjacentTiles())
+                    {
+                        if (neighboorOfDestroyerTile.currentTileState == HexagonTile.TileStates.LegalTile)
+                        {
+                            neighboorOfDestroyerTile.tileVisuals[14].SetActive(true);
+                            
+                        }
+                        
+                    }
+                }
+                else
+                {
+                    Tile.tileVisuals[14].SetActive(false);
+                }
+               
+            }
         }
 
         GM.ChangeState(GM.GetComponent<EffectState>());
+        
     }
 }
 
@@ -88,6 +109,7 @@ private void HandleTileHover(HexagonTile hexTile)
 {
     if (hexTile != previousHexTile)
     {
+        //TODO Jouer le son du HOVER
         ResetPreviousTileVisuals();
         previousHexTile = hexTile;
     }
