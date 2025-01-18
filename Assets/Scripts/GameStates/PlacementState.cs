@@ -9,6 +9,7 @@ public class PlacementState : States
 {
 
     private HexagonTile previousHexTile;
+    HexagonTile MaxNeighboor = null; 
     public override void Enter()
     {
         // Generate the next tile to be placed on the board by updating the next tile state to the first element in the future tile list.
@@ -160,13 +161,37 @@ private void UpdateTileVisuals(HexagonTile hexTile)
 
     foreach (var VARIABLE in GM.Tiles)
     {
+        
         if (VARIABLE.currentTileState == HexagonTile.TileStates.PakkuTile)
         {
+            
+            
             foreach (var PakkuNeighboor in VARIABLE.GetAdjacentTiles())
             {
                 if (PakkuNeighboor.lifeTime>0)
                 {
-                    PakkuNeighboor.tileVisuals[13].SetActive(true);
+                    if (!MaxNeighboor )
+                    {
+                        MaxNeighboor = PakkuNeighboor;
+                    }
+                    if (MaxNeighboor.lifeTime < PakkuNeighboor.lifeTime&&MaxNeighboor.Longevity<PakkuNeighboor.Longevity)
+                    {
+                        MaxNeighboor = PakkuNeighboor;
+                       
+                        Debug.LogError(MaxNeighboor.lifeTime);
+                    }
+                    MaxNeighboor.tileVisuals[13].SetActive(true);
+                    // if (PakkuNeighboor==MaxNeighboor)
+                    // {
+                    //    
+                    // }
+                    // else
+                    // {
+                    //     //PakkuNeighboor.tileVisuals[13].SetActive(false);
+                    // }
+                    //
+                    // Debug.LogError(PakkuNeighboor.Longevity);
+                    
                 }
                 
             }

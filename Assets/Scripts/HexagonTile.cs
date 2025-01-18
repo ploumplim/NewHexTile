@@ -58,6 +58,7 @@ public class HexagonTile : MonoBehaviour
     [Space]
     [HideInInspector]public int spreaderGeneration = 1;
     public int spreadingLifeTimeIncrement = 5;
+    public int Longevity = 0;
     
     [Header("Improvement Values")]
     [FormerlySerializedAs("greenFusionLifeTime")] [Space]
