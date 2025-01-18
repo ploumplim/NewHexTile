@@ -188,6 +188,7 @@ public class HexagonTile : MonoBehaviour
                 isAlive = true;
                 canLegalize = true;
                 FillImprovableTiles();
+                
                 break;
             
             case TileStates.PakkuTile:
@@ -228,7 +229,23 @@ public class HexagonTile : MonoBehaviour
         
         
     }
-    
+
+    private void VisualOfNextTileDestroyed()
+    {
+        HexagonTile[] adjacentTiles = GetAdjacentTiles();
+        
+        foreach (var neighboorOfDestroyerTile in adjacentTiles)
+        {
+            if (neighboorOfDestroyerTile.currentTileState == TileStates.LegalTile)
+            {
+                neighboorOfDestroyerTile.tileVisuals[14].SetActive(true);
+                Debug.LogError("Test");
+            }
+            
+        }
+        
+    }
+
 
     public HexagonTile[] GetAdjacentTiles()
     {
@@ -336,8 +353,7 @@ public class HexagonTile : MonoBehaviour
     
     private void EffectDestroy()
     {
-        
-       
+        VisualOfNextTileDestroyed();
         if (lifeTime == 1)
         {
             //TODO Jouer le son de demollition

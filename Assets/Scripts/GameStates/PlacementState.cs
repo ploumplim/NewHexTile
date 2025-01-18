@@ -50,26 +50,6 @@ private void HandleMouseClick(HexagonTile hexTile)
         else
         {
             NextTileCreate(hexTile);
-            foreach (var Tile in GM.Tiles)
-            {
-                if (Tile.currentTileState == HexagonTile.TileStates.DestroyerTile&& Tile.lifeTime==1)
-                {
-                    foreach (var neighboorOfDestroyerTile in Tile.GetAdjacentTiles())
-                    {
-                        if (neighboorOfDestroyerTile.currentTileState == HexagonTile.TileStates.LegalTile)
-                        {
-                            neighboorOfDestroyerTile.tileVisuals[14].SetActive(true);
-                            
-                        }
-                        
-                    }
-                }
-                else
-                {
-                    Tile.tileVisuals[14].SetActive(false);
-                }
-               
-            }
         }
 
         GM.ChangeState(GM.GetComponent<EffectState>());
@@ -177,21 +157,8 @@ private void UpdateTileVisuals(HexagonTile hexTile)
                     if (MaxNeighboor.lifeTime < PakkuNeighboor.lifeTime&&MaxNeighboor.Longevity<PakkuNeighboor.Longevity)
                     {
                         MaxNeighboor = PakkuNeighboor;
-                       
-                        Debug.LogError(MaxNeighboor.lifeTime);
                     }
                     MaxNeighboor.tileVisuals[13].SetActive(true);
-                    // if (PakkuNeighboor==MaxNeighboor)
-                    // {
-                    //    
-                    // }
-                    // else
-                    // {
-                    //     //PakkuNeighboor.tileVisuals[13].SetActive(false);
-                    // }
-                    //
-                    // Debug.LogError(PakkuNeighboor.Longevity);
-                    
                 }
                 
             }

@@ -15984,6 +15984,7 @@ MonoBehaviour:
   pakkuLifeTime: 2
   spreaderGeneration: 1
   spreadingLifeTimeIncrement: 5
+  Longevity: 0
   greenImproveValue: 5
   redImproveValue: 8
   blueImproveValue: 10
