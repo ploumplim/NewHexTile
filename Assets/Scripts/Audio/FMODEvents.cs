@@ -10,6 +10,8 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference clickSound { get; private set; }
     [field: SerializeField] public EventReference hoverSound { get; private set; }
     [field: SerializeField] public EventReference improveSound { get; private set; }
+    [field: SerializeField] public EventReference pakkuSound { get; private set; }
+
 
 
 

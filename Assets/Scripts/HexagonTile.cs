@@ -399,6 +399,8 @@ public class HexagonTile : MonoBehaviour
         //Debug.Log("tile at hexagrid position:"+ transform.position +"PakkuCounter: " + PakkuCounter);
         if (lifeTime != 1)
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.pakkuSound, this.transform.position);
+
             return;
         }
         // we make a list of all tiles around this one.

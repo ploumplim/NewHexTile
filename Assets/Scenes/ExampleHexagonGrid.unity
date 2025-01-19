@@ -3818,6 +3818,13 @@ MonoBehaviour:
       Data3: -1210787408
       Data4: -481878846
     Path: event:/Improve
+  <pakkuSound>k__BackingField:
+    Guid:
+      Data1: -1763948571
+      Data2: 1249727793
+      Data3: 174651302
+      Data4: -117854650
+    Path: event:/Pakku
 --- !u!1 &1518312606
 GameObject:
   m_ObjectHideFlags: 0
