@@ -9,6 +9,7 @@ namespace Editor
         public int gridX;
         public int gridY;
         public string levelName;
+        public List<HexagonTile.TileStates> hexagonTileStates = new List<HexagonTile.TileStates>();
         public List<TileInfo> tiles = new List<TileInfo>();
     }
 
