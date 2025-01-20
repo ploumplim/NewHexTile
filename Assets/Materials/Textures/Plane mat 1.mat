@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Plane mat 1
+  m_Shader: {fileID: 4800000, guid: 30599e31ec6f4b843bed75c7d0644a9e, type: 3}
+  m_Parent: {fileID: 2100000, guid: 9aa5803795cc0ce408f72b185dba65b5, type: 2}
+  m_ModifiedSerializedProperties: 2
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: b13ee954d39510046ab9ecc014856d8d, type: 3}
+        m_Scale: {x: -1.39, y: -7.26}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: b13ee954d39510046ab9ecc014856d8d, type: 3}
+        m_Scale: {x: 2.6, y: 1.7}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample2:
+        m_Texture: {fileID: 2800000, guid: 2916e2e52d9b7bb4bb88871adfe1a224, type: 3}
+        m_Scale: {x: 0.19, y: 0.24}
+        m_Offset: {x: 0, y: 0}
+    - _leaf_Opacity:
+        m_Texture: {fileID: 2800000, guid: 085af6efd01d48aaa9981d4b8d75ecce, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 1, y: 1}
+    m_Ints: []
+    m_Floats:
+    - _Float0: 0.01
+    - _Float1: 0.1
+    - _Float2: 0.56
+    - _Float3: 0.83
+    - _Float6: 0.85
+    - _Float7: 0.09
+    - __dirty: 0
+    - _alphaaqua: 1
+    - _blend: 0.06400432
+    - _inflate: 2.34
+    - _lerpCrayon: 0.91
+    - _smoothness: 0
+    m_Colors:
+    - _Color0: {r: 0.14509797, g: 0.58431375, b: 0.5168866, a: 1}
+  m_BuildTextureStacks: []

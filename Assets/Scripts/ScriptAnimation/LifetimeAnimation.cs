@@ -18,7 +18,28 @@ public class LifetimeAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lifetime = HexTile.lifeTime;
+        
+        if (HexTile.lifeTime == 1 ) 
+        {
+            lifetime = 15;
+        }
+        if (HexTile.lifeTime == 2)
+        {
+            lifetime = 9;
+        }
+        if (HexTile.lifeTime == 3)
+        {
+            lifetime = 6;
+        }
+        if (HexTile.lifeTime == 4)
+        {
+            lifetime = 3;
+        }
+        if (HexTile.lifeTime >= 5 )
+        {
+            lifetime = 1;
+        }
+       
         speedAnimation =AnimationCurve.Evaluate(lifetimeAnimation) * lifetime;
         
         animator.speed =speedAnimation ;
