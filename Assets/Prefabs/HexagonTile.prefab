@@ -16378,6 +16378,62 @@ PrefabInstance:
       propertyPath: HexTile
       value: 
       objectReference: {fileID: 7727613333656210295}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 6153937062885253332}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[0].time
+      value: 0.0083351135
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[1].time
+      value: 1.0041646
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[1].value
+      value: 0.002357483
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[1].inSlope
+      value: -0.12579463
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[1].inWeight
+      value: 0.15999846
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[1].outSlope
+      value: -0.12579463
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[0].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332079612994391075, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16386,5 +16442,10 @@ PrefabInstance:
 --- !u!4 &4482936975718302129 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1900315857449574346, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
+  m_PrefabInstance: {fileID: 2623857341685407355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6153937062885253332 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8146727497377480367, guid: bf7ac5733574c96459c305e860f7f939, type: 3}
   m_PrefabInstance: {fileID: 2623857341685407355}
   m_PrefabAsset: {fileID: 0}

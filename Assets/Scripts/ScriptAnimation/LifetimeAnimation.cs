@@ -8,6 +8,8 @@ public class LifetimeAnimation : MonoBehaviour
     public Animator animator;
     private float speedAnimation;
     private float lifetime;
+    private float lifetimeAnimation;
+    public AnimationCurve AnimationCurve;
     
 
     // Start is called before the first frame update
@@ -17,7 +19,8 @@ public class LifetimeAnimation : MonoBehaviour
     void Update()
     {
         lifetime = HexTile.lifeTime;
-        speedAnimation = 50 + lifetime;
-        animator.SetFloat("Speed", speedAnimation);
+        speedAnimation =AnimationCurve.Evaluate(lifetimeAnimation) * lifetime;
+        
+        animator.speed =speedAnimation ;
     }
 }
