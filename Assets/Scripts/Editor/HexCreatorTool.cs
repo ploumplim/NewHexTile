@@ -78,15 +78,22 @@ public class HexCreatorTool : EditorWindow
     {
         GUILayout.Label("Hex Creator Tool", EditorStyles.boldLabel);
 
-        // Button to create new LevelExotic
+        // Red block for creating new LevelExotic
+        GUIStyle redStyle = new GUIStyle(GUI.skin.box);
+        redStyle.normal.background = MakeTex(2, 2, new Color(1f, 0.5f, 0.5f, 1f));
+        GUILayout.BeginVertical(redStyle);
         if (GUILayout.Button("Create LevelExotic"))
         {
             CreateLevelExoticPopup.ShowPopup();
         }
+        GUILayout.EndVertical();
 
-        // Section 2: Select existing LevelExotic
-        GUILayout.BeginVertical("box");
+        // Blue block for selecting existing LevelExotic
+        GUIStyle blueStyle = new GUIStyle(GUI.skin.box);
+        blueStyle.normal.background = MakeTex(2, 2, new Color(0.5f, 0.5f, 1f, 1f));
+        GUILayout.BeginVertical(blueStyle);
         GUILayout.Label("Select Existing LevelExotic", EditorStyles.boldLabel);
+        GUILayout.Space(20);
 
         if (levelExoticAssets.Length > 0)
         {
@@ -102,11 +109,7 @@ public class HexCreatorTool : EditorWindow
         {
             EditorGUILayout.Popup("Select LevelExotic", 0, new string[] { "No LevelExotic available" });
         }
-
-        if (GUILayout.Button("Refresh"))
-        {
-            LoadLevelExoticAssets();
-        }
+        GUILayout.Space(20);
 
         if (selectedLevelExotic != null)
         {
@@ -114,12 +117,20 @@ public class HexCreatorTool : EditorWindow
             DisplayTileStateGrid();
         }
         GUILayout.EndVertical();
+
+        // Add space between the menus
+        GUILayout.Space(20);
+
+        // Refresh button
+        if (GUILayout.Button("Refresh"))
+        {
+            LoadLevelExoticAssets();
+        }
     }
 
     private void DisplayTileStateGrid()
     {
         if (tileStates == null) return;
-
         for (int i = 0; i < selectedLevelExotic.gridX; i++)
         {
             GUILayout.BeginHorizontal();
@@ -130,11 +141,15 @@ public class HexCreatorTool : EditorWindow
             GUILayout.EndHorizontal();
         }
 
-        GUILayout.Label("Select Valid Tile States:");
+        // Add space between the grid and the "Select Valid Tile States:" label
+        GUILayout.Space(20);
+
+        GUILayout.Label("Select Valid Tile States:", EditorStyles.boldLabel);
         for (int i = 0; i < tileStateSelections.Length; i++)
         {
             tileStateSelections[i] = EditorGUILayout.Toggle(((HexagonTile.TileStates)i).ToString(), tileStateSelections[i]);
         }
+        GUILayout.Space(20);
 
         if (GUILayout.Button("Save Tile States"))
         {
@@ -144,6 +159,8 @@ public class HexCreatorTool : EditorWindow
 
     private void SaveTileStates()
     {
+        
+        
         selectedLevelExotic.tiles.Clear();
         selectedLevelExotic.hexagonTileStates.Clear();
 
@@ -172,6 +189,19 @@ public class HexCreatorTool : EditorWindow
         EditorUtility.SetDirty(selectedLevelExotic);
         AssetDatabase.SaveAssets();
         Debug.Log("Tile states and valid tile states saved to LevelExotic.");
+    }
+
+    private Texture2D MakeTex(int width, int height, Color col)
+    {
+        Color[] pix = new Color[width * height];
+        for (int i = 0; i < pix.Length; i++)
+        {
+            pix[i] = col;
+        }
+        Texture2D result = new Texture2D(width, height);
+        result.SetPixels(pix);
+        result.Apply();
+        return result;
     }
 }
 
