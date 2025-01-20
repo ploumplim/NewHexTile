@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class HexCreatorTool : EditorWindow
 {
-    private string nameLevel;
-    private string xCoord = "0";
-    private string yCoord = "0";
     private LevelExotic selectedLevelExotic;
     private LevelExotic[] levelExoticAssets;
     private string[] levelExoticNames;
     private HexagonTile.TileStates[,] tileStates;
+    private bool[] tileStateSelections;
 
     [MenuItem("Tools/Hex Creator Tool")]
     public static void ShowWindow()
@@ -40,7 +38,8 @@ public class HexCreatorTool : EditorWindow
         if (levelExoticAssets.Length > 0)
         {
             selectedLevelExotic = levelExoticAssets[0];
-            LoadTileStatesFromSelectedLevel();
+            LoadTileStates();
+            LoadTileStateSelections();
         }
         else
         {
@@ -48,7 +47,7 @@ public class HexCreatorTool : EditorWindow
         }
     }
 
-    private void LoadTileStatesFromSelectedLevel()
+    private void LoadTileStates()
     {
         if (selectedLevelExotic == null) return;
 
@@ -56,10 +55,22 @@ public class HexCreatorTool : EditorWindow
         int gridY = selectedLevelExotic.gridY;
         tileStates = new HexagonTile.TileStates[gridX, gridY];
 
-        // Initialize tileStates with data from the selectedLevelExotic
         foreach (var tile in selectedLevelExotic.tiles)
         {
             tileStates[tile.x, tile.y] = tile.tileState;
+        }
+    }
+
+    private void LoadTileStateSelections()
+    {
+        if (selectedLevelExotic == null) return;
+
+        int tileStateCount = Enum.GetValues(typeof(HexagonTile.TileStates)).Length;
+        tileStateSelections = new bool[tileStateCount];
+
+        foreach (var state in selectedLevelExotic.hexagonTileStates)
+        {
+            tileStateSelections[(int)state] = true;
         }
     }
 
@@ -70,7 +81,7 @@ public class HexCreatorTool : EditorWindow
         // Button to create new LevelExotic
         if (GUILayout.Button("Create LevelExotic"))
         {
-            ShowCreateLevelExoticPopup();
+            CreateLevelExoticPopup.ShowPopup();
         }
 
         // Section 2: Select existing LevelExotic
@@ -79,13 +90,12 @@ public class HexCreatorTool : EditorWindow
 
         if (levelExoticAssets.Length > 0)
         {
-            int selectedIndex = Array.IndexOf(levelExoticAssets, selectedLevelExotic);
-            int newIndex = EditorGUILayout.Popup("Select LevelExotic", selectedIndex, levelExoticNames);
-
-            if (newIndex != selectedIndex)
+            int selectedIndex = EditorGUILayout.Popup("Select LevelExotic", Array.IndexOf(levelExoticAssets, selectedLevelExotic), levelExoticNames);
+            if (selectedIndex != -1 && selectedLevelExotic != levelExoticAssets[selectedIndex])
             {
-                selectedLevelExotic = levelExoticAssets[newIndex];
-                LoadTileStatesFromSelectedLevel(); // Update tileStates to match the selected level
+                selectedLevelExotic = levelExoticAssets[selectedIndex];
+                LoadTileStates();
+                LoadTileStateSelections();
             }
         }
         else
@@ -106,15 +116,88 @@ public class HexCreatorTool : EditorWindow
         GUILayout.EndVertical();
     }
 
-    private void ShowCreateLevelExoticPopup()
+    private void DisplayTileStateGrid()
     {
-        nameLevel = EditorUtility.DisplayDialogComplex("Create New LevelExotic", "Enter Level Name:", "Create", "Cancel", null) == 0 ? nameLevel : null;
-        xCoord = EditorUtility.DisplayDialogComplex("Create New LevelExotic", "Enter X Coordinate:", "Create", "Cancel", null) == 0 ? xCoord : null;
-        yCoord = EditorUtility.DisplayDialogComplex("Create New LevelExotic", "Enter Y Coordinate:", "Create", "Cancel", null) == 0 ? yCoord : null;
+        if (tileStates == null) return;
 
-        if (!string.IsNullOrEmpty(nameLevel) && !string.IsNullOrEmpty(xCoord) && !string.IsNullOrEmpty(yCoord))
+        for (int i = 0; i < selectedLevelExotic.gridX; i++)
+        {
+            GUILayout.BeginHorizontal();
+            for (int j = 0; j < selectedLevelExotic.gridY; j++)
+            {
+                tileStates[i, j] = (HexagonTile.TileStates)EditorGUILayout.EnumPopup(tileStates[i, j]);
+            }
+            GUILayout.EndHorizontal();
+        }
+
+        GUILayout.Label("Select Valid Tile States:");
+        for (int i = 0; i < tileStateSelections.Length; i++)
+        {
+            tileStateSelections[i] = EditorGUILayout.Toggle(((HexagonTile.TileStates)i).ToString(), tileStateSelections[i]);
+        }
+
+        if (GUILayout.Button("Save Tile States"))
+        {
+            SaveTileStates();
+        }
+    }
+
+    private void SaveTileStates()
+    {
+        selectedLevelExotic.tiles.Clear();
+        selectedLevelExotic.hexagonTileStates.Clear();
+
+        for (int i = 0; i < selectedLevelExotic.gridX; i++)
+        {
+            for (int j = 0; j < selectedLevelExotic.gridY; j++)
+            {
+                TileInfo tileInfo = new TileInfo
+                {
+                    x = i,
+                    y = j,
+                    tileState = tileStates[i, j]
+                };
+                selectedLevelExotic.tiles.Add(tileInfo);
+            }
+        }
+
+        for (int i = 0; i < tileStateSelections.Length; i++)
+        {
+            if (tileStateSelections[i])
+            {
+                selectedLevelExotic.hexagonTileStates.Add((HexagonTile.TileStates)i);
+            }
+        }
+
+        EditorUtility.SetDirty(selectedLevelExotic);
+        AssetDatabase.SaveAssets();
+        Debug.Log("Tile states and valid tile states saved to LevelExotic.");
+    }
+}
+
+public class CreateLevelExoticPopup : EditorWindow
+{
+    private string nameLevel;
+    private string xCoord = "0";
+    private string yCoord = "0";
+
+    public static void ShowPopup()
+    {
+        var window = GetWindow<CreateLevelExoticPopup>("Create LevelExotic");
+        window.Show();
+    }
+
+    private void OnGUI()
+    {
+        GUILayout.Label("Create New LevelExotic", EditorStyles.boldLabel);
+        nameLevel = EditorGUILayout.TextField("Level Name", nameLevel);
+        xCoord = EditorGUILayout.TextField("X", xCoord);
+        yCoord = EditorGUILayout.TextField("Y", yCoord);
+
+        if (GUILayout.Button("Create"))
         {
             CreateLevelExotic();
+            Close();
         }
     }
 
@@ -132,53 +215,11 @@ public class HexCreatorTool : EditorWindow
             AssetDatabase.SaveAssets();
             EditorUtility.SetDirty(newLevelExotic);
 
-            LoadLevelExoticAssets();
+            Debug.Log($"New LevelExotic created with X: {x}, Y: {y}, Name: {nameLevel}");
         }
         else
         {
             Debug.LogError("Invalid coordinates entered.");
         }
-    }
-
-    private void DisplayTileStateGrid()
-    {
-        if (tileStates == null) return;
-
-        for (int i = 0; i < selectedLevelExotic.gridX; i++)
-        {
-            GUILayout.BeginHorizontal();
-            for (int j = 0; j < selectedLevelExotic.gridY; j++)
-            {
-                tileStates[i, j] = (HexagonTile.TileStates)EditorGUILayout.EnumPopup(tileStates[i, j]);
-            }
-            GUILayout.EndHorizontal();
-        }
-
-        if (GUILayout.Button("Save Tile States"))
-        {
-            SaveTileStates();
-        }
-    }
-
-    private void SaveTileStates()
-    {
-        selectedLevelExotic.tiles.Clear();
-        for (int i = 0; i < selectedLevelExotic.gridX; i++)
-        {
-            for (int j = 0; j < selectedLevelExotic.gridY; j++)
-            {
-                TileInfo tileInfo = new TileInfo
-                {
-                    x = i,
-                    y = j,
-                    tileState = tileStates[i, j]
-                };
-                selectedLevelExotic.tiles.Add(tileInfo);
-            }
-        }
-
-        EditorUtility.SetDirty(selectedLevelExotic);
-        AssetDatabase.SaveAssets();
-        Debug.Log("Tile states saved to LevelExotic.");
     }
 }
