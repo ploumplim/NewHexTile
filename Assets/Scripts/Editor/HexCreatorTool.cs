@@ -82,15 +82,19 @@ public class HexCreatorTool : EditorWindow
         GUIStyle redStyle = new GUIStyle(GUI.skin.box);
         redStyle.normal.background = MakeTex(2, 2, new Color(1f, 0.5f, 0.5f, 1f));
         GUILayout.BeginVertical(redStyle);
+        GUI.backgroundColor = Color.red;
         if (GUILayout.Button("Create LevelExotic"))
         {
             CreateLevelExoticPopup.ShowPopup();
         }
+        GUI.backgroundColor = Color.white;
         GUILayout.Space(10);
+        GUI.backgroundColor = Color.cyan;
         if (GUILayout.Button("Refresh LevelExotic List & Data"))
         {
             LoadLevelExoticAssets();
         }
+        GUI.backgroundColor = Color.white;
         GUILayout.EndVertical();
 
         // Blue block for selecting existing LevelExotic
@@ -177,10 +181,12 @@ public class HexCreatorTool : EditorWindow
         }
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
+        GUI.backgroundColor = Color.green;
         if (GUILayout.Button("Save Tile States"))
         {
             SaveTileStates();
         }
+        GUI.backgroundColor = Color.white;
     }
 
     private void SaveTileStates()
