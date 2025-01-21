@@ -10,6 +10,7 @@ public class HexCreatorTool : EditorWindow
     private string[] levelExoticNames;
     private HexagonTile.TileStates[,] tileStates;
     private bool[] tileStateSelections;
+    private Vector2 scrollPosition;
 
     [MenuItem("Tools/Hex Creator Tool")]
     public static void ShowWindow()
@@ -95,23 +96,27 @@ public class HexCreatorTool : EditorWindow
             LoadLevelExoticAssets();
         }
         GUI.backgroundColor = Color.white;
+        GUILayout.Space(10);
+        GUI.backgroundColor = Color.green;
+        if (GUILayout.Button("Save Tile States"))
+        {
+            SaveTileStates();
+        }
+        GUI.backgroundColor = Color.white;
         GUILayout.EndVertical();
 
         // Blue block for selecting existing LevelExotic
         GUIStyle blueStyle = new GUIStyle(GUI.skin.box);
         blueStyle.normal.background = MakeTex(2, 2, new Color(0.5f, 0.5f, 1f, 1f));
         GUILayout.BeginVertical(blueStyle);
-        
+
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
         GUILayout.Label("Select Level", EditorStyles.boldLabel);
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
-        
-        
-        
-        
+
         if (levelExoticAssets.Length > 0)
         {
             int selectedIndex = EditorGUILayout.Popup("Select Level", Array.IndexOf(levelExoticAssets, selectedLevelExotic), levelExoticNames);
@@ -131,7 +136,9 @@ public class HexCreatorTool : EditorWindow
         if (selectedLevelExotic != null)
         {
             GUILayout.Label($"Selected Level: {selectedLevelExotic.name}");
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(EditorGUIUtility.currentViewWidth), GUILayout.Height(400));
             DisplayTileStateGrid();
+            EditorGUILayout.EndScrollView();
         }
         GUILayout.EndVertical();
 
@@ -139,7 +146,6 @@ public class HexCreatorTool : EditorWindow
         GUILayout.Space(10);
 
         // Refresh button
-        
     }
 
     private void DisplayTileStateGrid()
@@ -183,12 +189,6 @@ public class HexCreatorTool : EditorWindow
         }
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
-        GUI.backgroundColor = Color.green;
-        if (GUILayout.Button("Save Tile States"))
-        {
-            SaveTileStates();
-        }
-        GUI.backgroundColor = Color.white;
     }
 
     private void SaveTileStates()
