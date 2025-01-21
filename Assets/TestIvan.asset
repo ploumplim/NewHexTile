@@ -10,24 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52cb1f31fd654df9afd7670cf98cbdc5, type: 3}
-  m_Name: Test8
+  m_Name: TestIvan
   m_EditorClassIdentifier: 
   gridX: 5
-  gridY: 4
-  levelName: Test8
-  hexagonTileStates: 0000000006000000
+  gridY: 5
+  levelName: TestIvan
+  hexagonTileStates: 000000000200000004000000
   tiles:
   - x: 0
     y: 0
-    tileState: 1
+    tileState: 4
   - x: 0
     y: 1
-    tileState: 0
+    tileState: 3
   - x: 0
     y: 2
     tileState: 0
   - x: 0
     y: 3
+    tileState: 3
+  - x: 0
+    y: 4
     tileState: 0
   - x: 1
     y: 0
@@ -41,18 +44,24 @@ MonoBehaviour:
   - x: 1
     y: 3
     tileState: 0
+  - x: 1
+    y: 4
+    tileState: 0
   - x: 2
     y: 0
     tileState: 0
   - x: 2
     y: 1
-    tileState: 0
+    tileState: 3
   - x: 2
     y: 2
     tileState: 0
   - x: 2
     y: 3
     tileState: 0
+  - x: 2
+    y: 4
+    tileState: 0
   - x: 3
     y: 0
     tileState: 0
@@ -61,9 +70,12 @@ MonoBehaviour:
     tileState: 0
   - x: 3
     y: 2
-    tileState: 0
+    tileState: 4
   - x: 3
     y: 3
+    tileState: 0
+  - x: 3
+    y: 4
     tileState: 0
   - x: 4
     y: 0
@@ -76,4 +88,7 @@ MonoBehaviour:
     tileState: 0
   - x: 4
     y: 3
+    tileState: 0
+  - x: 4
+    y: 4
     tileState: 0

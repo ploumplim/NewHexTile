@@ -83,14 +83,14 @@ public class HexCreatorTool : EditorWindow
         redStyle.normal.background = MakeTex(2, 2, new Color(1f, 0.5f, 0.5f, 1f));
         GUILayout.BeginVertical(redStyle);
         GUI.backgroundColor = Color.red;
-        if (GUILayout.Button("Create LevelExotic"))
+        if (GUILayout.Button("Create Level"))
         {
             CreateLevelExoticPopup.ShowPopup();
         }
         GUI.backgroundColor = Color.white;
         GUILayout.Space(10);
         GUI.backgroundColor = Color.cyan;
-        if (GUILayout.Button("Refresh LevelExotic List & Data"))
+        if (GUILayout.Button("Refresh Level List & Data"))
         {
             LoadLevelExoticAssets();
         }
@@ -104,7 +104,7 @@ public class HexCreatorTool : EditorWindow
         
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
-        GUILayout.Label("Select Existing LevelExotic", EditorStyles.boldLabel);
+        GUILayout.Label("Select Level", EditorStyles.boldLabel);
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
@@ -112,7 +112,7 @@ public class HexCreatorTool : EditorWindow
         
         if (levelExoticAssets.Length > 0)
         {
-            int selectedIndex = EditorGUILayout.Popup("Select LevelExotic", Array.IndexOf(levelExoticAssets, selectedLevelExotic), levelExoticNames);
+            int selectedIndex = EditorGUILayout.Popup("Select Level", Array.IndexOf(levelExoticAssets, selectedLevelExotic), levelExoticNames);
             if (selectedIndex != -1 && selectedLevelExotic != levelExoticAssets[selectedIndex])
             {
                 selectedLevelExotic = levelExoticAssets[selectedIndex];
@@ -122,7 +122,7 @@ public class HexCreatorTool : EditorWindow
         }
         else
         {
-            EditorGUILayout.Popup("Select LevelExotic", 0, new string[] { "No LevelExotic available" });
+            EditorGUILayout.Popup("Select Level", 0, new string[] { "No Level available" });
         }
         GUILayout.Space(20);
 
@@ -220,7 +220,7 @@ public class HexCreatorTool : EditorWindow
 
         EditorUtility.SetDirty(selectedLevelExotic);
         AssetDatabase.SaveAssets();
-        Debug.Log("Tile states and valid tile states saved to LevelExotic.");
+        Debug.Log("Tile states and valid tile states saved to Level.");
     }
 
     private Texture2D MakeTex(int width, int height, Color col)
@@ -245,13 +245,13 @@ public class CreateLevelExoticPopup : EditorWindow
 
     public static void ShowPopup()
     {
-        var window = GetWindow<CreateLevelExoticPopup>("Create LevelExotic");
+        var window = GetWindow<CreateLevelExoticPopup>("Create Level");
         window.Show();
     }
 
     private void OnGUI()
     {
-        GUILayout.Label("Create New LevelExotic", EditorStyles.boldLabel);
+        GUILayout.Label("Create New Level", EditorStyles.boldLabel);
         nameLevel = EditorGUILayout.TextField("Level Name", nameLevel);
         xCoord = EditorGUILayout.TextField("X", xCoord);
         yCoord = EditorGUILayout.TextField("Y", yCoord);

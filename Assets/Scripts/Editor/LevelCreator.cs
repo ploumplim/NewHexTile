@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Editor
 {
-    [CreateAssetMenu(fileName = "LevelExoticCreator", menuName = "LevelExoticCreator", order = 0)]
+    [CreateAssetMenu(fileName = "LevelCreator", menuName = "LevelCreator", order = 0)]
     public class LevelExotic : ScriptableObject
     {
         public int gridX;
