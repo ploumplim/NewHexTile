@@ -1662,7 +1662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 11400000, guid: 1508753bf475b2a4d9244791cde45c76, type: 2}
-  selectedLevelExotic: {fileID: 0}
+  selectedLevelExotic: {fileID: 11400000, guid: 1b035e3c03544ee42aa1bfe9e121fa38, type: 2}
 --- !u!4 &812799417
 Transform:
   m_ObjectHideFlags: 0
@@ -4596,6 +4596,7 @@ MonoBehaviour:
   gridHeight: 20
   tileScale: 1
   hexagonTilePrefab: {fileID: 6892170649514544254, guid: 2d25a368a18567740ab7f817e9f76730, type: 3}
+  LevelData: {fileID: 812799416}
 --- !u!4 &1910971299
 Transform:
   m_ObjectHideFlags: 0
