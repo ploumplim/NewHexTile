@@ -136,7 +136,9 @@ public class HexCreatorTool : EditorWindow
         if (selectedLevelExotic != null)
         {
             GUILayout.Label($"Selected Level: {selectedLevelExotic.name}");
-            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(EditorGUIUtility.currentViewWidth), GUILayout.Height(400));
+
+            // Box for DisplayTileStateGrid with scroll view
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(EditorGUIUtility.currentViewWidth - 30), GUILayout.Height(400));
             DisplayTileStateGrid();
             EditorGUILayout.EndScrollView();
         }
@@ -152,6 +154,11 @@ public class HexCreatorTool : EditorWindow
     {
         if (tileStates == null) return;
 
+        // Box for dropdown menus
+        GUIStyle boxStyle = new GUIStyle(GUI.skin.box);
+        boxStyle.normal.background = MakeTex(2, 2, new Color(0.8f, 0.8f, 0.8f, 1f));
+        GUILayout.BeginVertical(boxStyle);
+
         for (int i = 0; i < selectedLevelExotic.gridX; i++)
         {
             GUILayout.BeginHorizontal();
@@ -161,6 +168,8 @@ public class HexCreatorTool : EditorWindow
             }
             GUILayout.EndHorizontal();
         }
+
+        GUILayout.EndVertical();
 
         // Add space between the grid and the "Select Valid Tile States:" label
         GUILayout.Space(10);
@@ -188,7 +197,6 @@ public class HexCreatorTool : EditorWindow
             currentItem++;
         }
         GUILayout.EndHorizontal();
-        GUILayout.Space(20);
     }
 
     private void SaveTileStates()
