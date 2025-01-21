@@ -1310,6 +1310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092db98dfbc21b34db8806d58e2a1878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GM: {fileID: 0}
 --- !u!114 &632989492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,6 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a076e201ffe298d438613b3a47138929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GM: {fileID: 0}
 --- !u!114 &632989496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1334,7 +1336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a985ce6f27ed6724ab30fc362d04c1f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Color: {r: 0.9924528, g: 0.8986959, b: 0.09550016, a: 0}
+  GM: {fileID: 0}
 --- !u!114 &632989499 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
@@ -4550,9 +4552,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e7d267072978d4abcfb6380e0bc195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridWidth: 20
-  gridHeight: 20
-  tileScale: 1
+  gridWidth: 13
+  gridHeight: 13
+  tileScale: 1.3
   hexagonTilePrefab: {fileID: 6892170649514544254, guid: 2d25a368a18567740ab7f817e9f76730, type: 3}
 --- !u!4 &1910971299
 Transform:
@@ -5466,11 +5468,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: spreaderTileXPosition
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: spreaderTileYPosition
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7163118725097851189, guid: 2d6467abc2df8b64894a660505a622c5, type: 3}
       propertyPath: futureTileStateList.Array.size
