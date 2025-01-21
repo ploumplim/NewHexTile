@@ -1,6 +1,6 @@
-// HexagonGrid.cs
 using System;
 using System.Collections.Generic;
+using Editor;
 using GameStates;
 using UnityEngine;
 
@@ -14,15 +14,11 @@ public class HexagonGrid : MonoBehaviour
     [SerializeField] public HexagonTile[,] TileInstances;
 
     public LevelStarter LevelData;
-        // private void Awake()
-        // {
-        //     TileInstances = new HexagonTile[gridWidth, gridHeight];
-        // }
 
     public void InitGrid()
     {
-        gridHeight=LevelData.selectedLevelExotic.gridX;
-        gridWidth=LevelData.selectedLevelExotic.gridY;
+        gridHeight = LevelData.selectedLevelExotic.gridX;
+        gridWidth = LevelData.selectedLevelExotic.gridY;
         TileInstances = new HexagonTile[gridWidth, gridHeight];
         for (int y = 0; y < gridWidth; y++)
         {
@@ -45,9 +41,14 @@ public class HexagonGrid : MonoBehaviour
                 {
                     tile.InitializeTile();
                     tile.parentGrid = this;
+                    // Set the tile state based on the Level data
+                    TileInfo tileInfo = LevelData.selectedLevelExotic.tiles.Find(t => t.x == x && t.y == y);
+                    if (tileInfo != null)
+                    {
+                        tile.TileStateChange(tileInfo.tileState);
+                    }
                 }
             }
         }
     }
-    
 }
