@@ -9,9 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07b88da03b182d541aeb897c516775c4, type: 3}
-  m_Name: LevelManager
+  m_Script: {fileID: 11500000, guid: 52cb1f31fd654df9afd7670cf98cbdc5, type: 3}
+  m_Name: LevelTest
   m_EditorClassIdentifier: 
-  levels:
-  - {fileID: 11400000, guid: ceb1d74161b2767449d5742596cb8251, type: 2}
-  - {fileID: 11400000, guid: 3544cd8cbdceab447b41a36ac1b60e22, type: 2}
+  gridX: 6
+  gridY: 4
+  levelName: LevelTest
+  hexagonTileStates: 
+  tiles:
+  - x: 0
+    y: 0
+    tileState: 1
+  - x: 0
+    y: 1
+    tileState: 2

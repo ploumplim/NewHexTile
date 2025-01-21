@@ -24,8 +24,5 @@ public class LevelManager : ScriptableObject
         
         Debug.LogWarning($"Level {updatedLevel.name} not found in LevelManager.");
     }
-    private void OnEnable()
-    {
-        hideFlags = HideFlags.NotEditable;
-    }
+    
 }

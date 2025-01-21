@@ -75,81 +75,95 @@ public class HexCreatorTool : EditorWindow
         }
     }
 
-    private void OnGUI()
+   private void OnGUI()
+{
+    GUILayout.Label("Hex Creator Tool", EditorStyles.boldLabel);
+
+    // Red block for creating new LevelExotic
+    GUIStyle redStyle = new GUIStyle(GUI.skin.box);
+    redStyle.normal.background = MakeTex(2, 2, new Color(1f, 0.5f, 0.5f, 1f));
+    GUILayout.BeginVertical(redStyle);
+    GUI.backgroundColor = Color.red;
+    if (GUILayout.Button("Create Level"))
     {
-        GUILayout.Label("Hex Creator Tool", EditorStyles.boldLabel);
+        CreateLevelExoticPopup.ShowPopup();
+    }
+    GUI.backgroundColor = Color.white;
+    GUILayout.Space(10);
+    GUI.backgroundColor = Color.cyan;
+    if (GUILayout.Button("Refresh Level List & Data"))
+    {
+        LoadLevelExoticAssets();
+    }
+    GUI.backgroundColor = Color.white;
+    GUILayout.Space(10);
+    GUI.backgroundColor = Color.green;
+    if (GUILayout.Button("Save Tile States"))
+    {
+        SaveTileStates();
+    }
+    GUI.backgroundColor = Color.white;
+    GUILayout.EndVertical();
 
-        // Red block for creating new LevelExotic
-        GUIStyle redStyle = new GUIStyle(GUI.skin.box);
-        redStyle.normal.background = MakeTex(2, 2, new Color(1f, 0.5f, 0.5f, 1f));
-        GUILayout.BeginVertical(redStyle);
-        GUI.backgroundColor = Color.red;
-        if (GUILayout.Button("Create Level"))
-        {
-            CreateLevelExoticPopup.ShowPopup();
-        }
-        GUI.backgroundColor = Color.white;
-        GUILayout.Space(10);
-        GUI.backgroundColor = Color.cyan;
-        if (GUILayout.Button("Refresh Level List & Data"))
-        {
-            LoadLevelExoticAssets();
-        }
-        GUI.backgroundColor = Color.white;
-        GUILayout.Space(10);
-        GUI.backgroundColor = Color.green;
-        if (GUILayout.Button("Save Tile States"))
-        {
-            SaveTileStates();
-        }
-        GUI.backgroundColor = Color.white;
-        GUILayout.EndVertical();
+    // Blue block for selecting existing LevelExotic
+    GUIStyle blueStyle = new GUIStyle(GUI.skin.box);
+    blueStyle.normal.background = MakeTex(2, 2, new Color(0.5f, 0.5f, 1f, 1f));
+    GUILayout.BeginVertical(blueStyle);
 
-        // Blue block for selecting existing LevelExotic
-        GUIStyle blueStyle = new GUIStyle(GUI.skin.box);
-        blueStyle.normal.background = MakeTex(2, 2, new Color(0.5f, 0.5f, 1f, 1f));
-        GUILayout.BeginVertical(blueStyle);
+    GUILayout.BeginHorizontal();
+    GUILayout.FlexibleSpace();
+    GUILayout.Label("Select Level", EditorStyles.boldLabel);
+    GUILayout.FlexibleSpace();
+    GUILayout.EndHorizontal();
+    GUILayout.Space(10);
 
+    if (levelExoticAssets.Length > 0)
+    {
+        int selectedIndex = EditorGUILayout.Popup("Select Level :", Array.IndexOf(levelExoticAssets, selectedLevelExotic), levelExoticNames);
+        if (selectedIndex != -1 && selectedLevelExotic != levelExoticAssets[selectedIndex])
+        {
+            selectedLevelExotic = levelExoticAssets[selectedIndex];
+            LoadTileStates();
+            LoadTileStateSelections();
+        }
+    }
+    else
+    {
+        EditorGUILayout.Popup("Select Level ", 0, new string[] { "No Level available" });
+    }
+    GUILayout.Space(20);
+
+    if (selectedLevelExotic != null)
+    {
+       // GUILayout.Label($"Modify parameters of level : {selectedLevelExotic.name}");
+        
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
-        GUILayout.Label("Select Level", EditorStyles.boldLabel);
+        GUILayout.Label($"Modify parameters of level : {selectedLevelExotic.name}", EditorStyles.boldLabel);
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
-        GUILayout.Space(20);
-
-        if (levelExoticAssets.Length > 0)
-        {
-            int selectedIndex = EditorGUILayout.Popup("Select Level", Array.IndexOf(levelExoticAssets, selectedLevelExotic), levelExoticNames);
-            if (selectedIndex != -1 && selectedLevelExotic != levelExoticAssets[selectedIndex])
-            {
-                selectedLevelExotic = levelExoticAssets[selectedIndex];
-                LoadTileStates();
-                LoadTileStateSelections();
-            }
-        }
-        else
-        {
-            EditorGUILayout.Popup("Select Level", 0, new string[] { "No Level available" });
-        }
-        GUILayout.Space(20);
-
-        if (selectedLevelExotic != null)
-        {
-            GUILayout.Label($"Selected Level: {selectedLevelExotic.name}");
-
-            // Box for DisplayTileStateGrid with scroll view
-            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(EditorGUIUtility.currentViewWidth - 30), GUILayout.Height(400));
-            DisplayTileStateGrid();
-            EditorGUILayout.EndScrollView();
-        }
-        GUILayout.EndVertical();
-
-        // Add space between the menus
         GUILayout.Space(10);
+        
+        // Add text field for modifying the level name
+        selectedLevelExotic.levelName = EditorGUILayout.TextField("Level Name", selectedLevelExotic.levelName);
 
-        // Refresh button
+        // Add text fields for modifying x and y values
+        selectedLevelExotic.gridX = EditorGUILayout.IntField("Grid X", selectedLevelExotic.gridX);
+        selectedLevelExotic.gridY = EditorGUILayout.IntField("Grid Y", selectedLevelExotic.gridY);
+        GUILayout.Space(20);
+
+        // Box for DisplayTileStateGrid with scroll view
+        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(EditorGUIUtility.currentViewWidth - 30), GUILayout.Height(400));
+        DisplayTileStateGrid();
+        EditorGUILayout.EndScrollView();
     }
+    GUILayout.EndVertical();
 
+    // Add space between the menus
+    GUILayout.Space(10);
+
+    // Refresh button
+}
     private void DisplayTileStateGrid()
     {
         if (tileStates == null) return;
@@ -199,48 +213,85 @@ public class HexCreatorTool : EditorWindow
         GUILayout.EndHorizontal();
     }
 
-    private void SaveTileStates()
+   private void SaveTileStates()
+{
+    // Apply changes to the level name and grid dimensions
+   
+    selectedLevelExotic.levelName = EditorGUILayout.TextField("Level Name", selectedLevelExotic.levelName);
+    selectedLevelExotic.gridX = EditorGUILayout.IntField("Grid X", selectedLevelExotic.gridX);
+    selectedLevelExotic.gridY = EditorGUILayout.IntField("Grid Y", selectedLevelExotic.gridY);
+    string newName = selectedLevelExotic.levelName;
+
+    selectedLevelExotic.tiles.Clear();
+    selectedLevelExotic.hexagonTileStates.Clear();
+
+    for (int i = 0; i < selectedLevelExotic.gridX; i++)
     {
-        selectedLevelExotic.tiles.Clear();
-        selectedLevelExotic.hexagonTileStates.Clear();
-
-        for (int i = 0; i < selectedLevelExotic.gridX; i++)
+        for (int j = 0; j < selectedLevelExotic.gridY; j++)
         {
-            for (int j = 0; j < selectedLevelExotic.gridY; j++)
+            if (tileStates[i, j] != HexagonTile.TileStates.DefaultTile)
             {
-                TileInfo tileInfo = new TileInfo
-                {
-                    x = i,
-                    y = j,
-                    tileState = tileStates[i, j]
-                };
-                selectedLevelExotic.tiles.Add(tileInfo);
+                selectedLevelExotic.tiles.Add(new TileInfo { x = i, y = j, tileState = tileStates[i, j] });
             }
-        }
-
-        for (int i = 0; i < tileStateSelections.Length; i++)
-        {
-            if (tileStateSelections[i])
-            {
-                selectedLevelExotic.hexagonTileStates.Add((HexagonTile.TileStates)i);
-            }
-        }
-
-        EditorUtility.SetDirty(selectedLevelExotic);
-        AssetDatabase.SaveAssets();
-        Debug.Log("Tile states and valid tile states saved to Level.");
-
-        // Update the level in LevelManager
-        LevelManager levelManager = AssetDatabase.LoadAssetAtPath<LevelManager>("Assets/LevelManager.asset");
-        if (levelManager != null)
-        {
-            levelManager.UpdateLevel(selectedLevelExotic);
-        }
-        else
-        {
-            Debug.LogError("LevelManager asset not found at 'Assets/LevelManager.asset'");
         }
     }
+
+    for (int i = 0; i < tileStateSelections.Length; i++)
+    {
+        if (tileStateSelections[i])
+        {
+            selectedLevelExotic.hexagonTileStates.Add((HexagonTile.TileStates)i);
+        }
+    }
+
+    // Rename the asset if the name has changed
+    if (selectedLevelExotic == null || string.IsNullOrEmpty(newName))
+    {
+        Debug.LogWarning("Selected ScriptableObject or newName is null/empty.");
+        return;
+    }
+
+    if (newName != selectedLevelExotic.name)
+    {
+        string assetPath = AssetDatabase.GetAssetPath(selectedLevelExotic);
+
+        // Update the name in the ScriptableObject and rename the asset
+        selectedLevelExotic.name = newName;
+        AssetDatabase.RenameAsset(assetPath, newName);
+
+        // Optional: Save changes to the asset
+        EditorUtility.SetDirty(selectedLevelExotic);
+        AssetDatabase.SaveAssets();
+
+        // Rename the GameObject associated with the ScriptableObject if it exists
+        GameObject levelGameObject = GameObject.Find(selectedLevelExotic.name);
+        if (levelGameObject != null)
+        {
+            levelGameObject.name = newName;
+        }
+
+        Debug.Log($"Successfully renamed ScriptableObject to '{newName}' and updated GameObject if applicable.");
+    }
+    else
+    {
+        Debug.Log("The new name is the same as the current name. No renaming performed.");
+    }
+
+    EditorUtility.SetDirty(selectedLevelExotic);
+    AssetDatabase.SaveAssets();
+    Debug.Log("Tile states and valid tile states saved to Level.");
+
+    // Update the level in LevelManager
+    LevelManager levelManager = AssetDatabase.LoadAssetAtPath<LevelManager>("Assets/LevelManager.asset");
+    if (levelManager != null)
+    {
+        levelManager.UpdateLevel(selectedLevelExotic);
+    }
+    else
+    {
+        Debug.LogError("LevelManager asset not found at 'Assets/LevelManager.asset'");
+    }
+}
 
     private Texture2D MakeTex(int width, int height, Color col)
     {
@@ -262,7 +313,7 @@ public class CreateLevelExoticPopup : EditorWindow
     private string xCoord = "0";
     private string yCoord = "0";
 
-    public static void ShowPopup()
+    public new static void ShowPopup()
     {
         var window = GetWindow<CreateLevelExoticPopup>("Create Level");
         window.Show();
