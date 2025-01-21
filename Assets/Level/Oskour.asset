@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52cb1f31fd654df9afd7670cf98cbdc5, type: 3}
-  m_Name: Test2
+  m_Name: Oskour
   m_EditorClassIdentifier: 
-  gridX: 6
-  gridY: 6
-  levelName: Test2
+  gridX: 5
+  gridY: 5
+  levelName: Oskour
   hexagonTileStates: 
   tiles: []

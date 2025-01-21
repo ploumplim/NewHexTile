@@ -283,7 +283,7 @@ public class CreateLevelExoticPopup : EditorWindow
             newLevelExotic.gridY = y;
             newLevelExotic.levelName = nameLevel;
 
-            string assetPath = $"Assets/{nameLevel}.asset";
+            string assetPath = $"Assets/Level/{nameLevel}.asset";
             AssetDatabase.CreateAsset(newLevelExotic, assetPath);
             AssetDatabase.SaveAssets();
             EditorUtility.SetDirty(newLevelExotic);
