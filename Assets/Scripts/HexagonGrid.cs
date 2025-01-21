@@ -1,17 +1,19 @@
 // HexagonGrid.cs
 using System;
 using System.Collections.Generic;
+using GameStates;
 using UnityEngine;
 
 public class HexagonGrid : MonoBehaviour
 {
-    [SerializeField] public int gridWidth = 60;
-    [SerializeField] public int gridHeight = 60;
+    [SerializeField] public int gridWidth;
+    [SerializeField] public int gridHeight;
     [SerializeField] public float tileScale = 1f;
     [SerializeField] private GameObject hexagonTilePrefab;
 
     [SerializeField] public HexagonTile[,] TileInstances;
-    
+
+    public LevelStarter LevelData;
         // private void Awake()
         // {
         //     TileInstances = new HexagonTile[gridWidth, gridHeight];
@@ -19,7 +21,8 @@ public class HexagonGrid : MonoBehaviour
 
     public void InitGrid()
     {
-        
+        gridHeight=LevelData.selectedLevelExotic.gridX;
+        gridWidth=LevelData.selectedLevelExotic.gridY;
         TileInstances = new HexagonTile[gridWidth, gridHeight];
         for (int y = 0; y < gridWidth; y++)
         {

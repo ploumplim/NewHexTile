@@ -123,58 +123,63 @@ public class GameManager : MonoBehaviour
     public int spreaderTileXPosition = 1;
     public int spreaderTileYPosition = 1;
     
-    private void Start()
+   private void Start()
+{
+    if (Instance == null)
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        States[] states = GetComponents<States>();
-        
-        foreach (States state in states)
-        {
-            state.Initialize(this);
-        }
-        DontDestroyOnLoad(gameObject);
-        
-        // Initialize the grid
-        hexGrid.InitGrid();
-        
-        Tiles = hexGrid.TileInstances;
-        
-        // Obtain the lifetime of the different tilestates for output.
-        greenLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().greenLifeTime - 1;
-        redLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().redLifeTime - 1;
-        blueLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().blueLifeTime - 1;
-        redImproveTime = Tiles[1, 1].GetComponent<HexagonTile>().redImproveValue - 1;
-        blueImproveTime = Tiles[1, 1].GetComponent<HexagonTile>().blueImproveValue - 1;
-        greenImproveTime = Tiles[1, 1].GetComponent<HexagonTile>().greenImproveValue - 1;
-        
-        // SET STARTER TILE
-        var starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
-          starterTile.TileStateChange(HexagonTile.TileStates.StarterTile);
-        
-        // SET SPREADER TILE
-        var spreaderTile = hexGrid.TileInstances[spreaderTileXPosition, spreaderTileYPosition].GetComponent<HexagonTile>();
-        spreaderTile.TileStateChange(HexagonTile.TileStates.SpreadingTile);
-        
-        // Set the current state to the placement state.
-        currentState = GetComponent<PlacementState>();
-        currentState.Enter();
-        
-        //Debug.Log(starterTile.gameObject.name);
-      
-        weights = new List<int> {greenTileWeight, blueTileWeight, redTileWeight, destroyerTileWeight, pakkuTileWeight};        
-
-        // Initialize scripts
-        godModeToggleScript = GetComponent<GodModeToggleScript>();
-        
-        
-        // nextTileSelectorToggle = GetComponent<NextTileSelectorToggle>();
-        
-        // Initialize the future tile state list by creating 10 random states and adding them to the list.
-
+        Instance = this;
     }
+    States[] states = GetComponents<States>();
+
+    foreach (States state in states)
+    {
+        state.Initialize(this);
+    }
+    DontDestroyOnLoad(gameObject);
+
+    // Initialize the grid
+    hexGrid.InitGrid();
+
+    Tiles = hexGrid.TileInstances;
+
+    if (Tiles == null || Tiles.Length == 0)
+    {
+        Debug.LogError("Tiles array is not initialized properly.");
+        return;
+    }
+
+    // Ensure the indices are within the bounds of the array
+    if (Tiles.GetLength(0) <= 1 || Tiles.GetLength(1) <= 1)
+    {
+        Debug.LogError("Tiles array dimensions are too small.");
+        return;
+    }
+
+    // Obtain the lifetime of the different tile states for output
+    greenLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().greenLifeTime - 1;
+    redLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().redLifeTime - 1;
+    blueLifeTime = Tiles[1, 1].GetComponent<HexagonTile>().blueLifeTime - 1;
+    redImproveTime = Tiles[1, 1].GetComponent<HexagonTile>().redImproveValue - 1;
+    blueImproveTime = Tiles[1, 1].GetComponent<HexagonTile>().blueImproveValue - 1;
+    greenImproveTime = Tiles[1, 1].GetComponent<HexagonTile>().greenImproveValue - 1;
+
+    // // SET STARTER TILE
+    // var starterTile = hexGrid.TileInstances[starterTileXPosition, starterTileYPosition].GetComponent<HexagonTile>();
+    // starterTile.TileStateChange(HexagonTile.TileStates.StarterTile);
+
+    // // SET SPREADER TILE
+    // var spreaderTile = hexGrid.TileInstances[spreaderTileXPosition, spreaderTileYPosition].GetComponent<HexagonTile>();
+    // spreaderTile.TileStateChange(HexagonTile.TileStates.SpreadingTile);
+
+    // Set the current state to the placement state
+    currentState = GetComponent<PlacementState>();
+    currentState.Enter();
+
+    weights = new List<int> { greenTileWeight, blueTileWeight, redTileWeight, destroyerTileWeight, pakkuTileWeight };
+
+    // Initialize scripts
+    godModeToggleScript = GetComponent<GodModeToggleScript>();
+}
     
     private void Update()
     {

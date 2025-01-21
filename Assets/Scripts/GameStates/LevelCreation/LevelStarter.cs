@@ -14,8 +14,12 @@ namespace GameStates
         {
             if (levelManager != null)
             {
-                // Initialize or load the selected level if needed
-                selectedLevelExotic = levelManager.levels.Count > 0 ? levelManager.levels[0] : null;
+                // Find the level by its name or other unique property
+                selectedLevelExotic = levelManager.levels.Find(level => level.name == selectedLevelExotic.name);
+                if (selectedLevelExotic == null && levelManager.levels.Count > 0)
+                {
+                    selectedLevelExotic = levelManager.levels[0]; // Fallback to the first level if not found
+                }
             }
             else
             {
