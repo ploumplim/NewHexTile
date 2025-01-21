@@ -110,6 +110,8 @@ public class HexCreatorTool : EditorWindow
         GUILayout.Space(20);
         
         
+        
+        
         if (levelExoticAssets.Length > 0)
         {
             int selectedIndex = EditorGUILayout.Popup("Select Level", Array.IndexOf(levelExoticAssets, selectedLevelExotic), levelExoticNames);
@@ -191,8 +193,6 @@ public class HexCreatorTool : EditorWindow
 
     private void SaveTileStates()
     {
-        
-        
         selectedLevelExotic.tiles.Clear();
         selectedLevelExotic.hexagonTileStates.Clear();
 
@@ -221,6 +221,17 @@ public class HexCreatorTool : EditorWindow
         EditorUtility.SetDirty(selectedLevelExotic);
         AssetDatabase.SaveAssets();
         Debug.Log("Tile states and valid tile states saved to Level.");
+
+        // Update the level in LevelManager
+        LevelManager levelManager = AssetDatabase.LoadAssetAtPath<LevelManager>("Assets/LevelManager.asset");
+        if (levelManager != null)
+        {
+            levelManager.UpdateLevel(selectedLevelExotic);
+        }
+        else
+        {
+            Debug.LogError("LevelManager asset not found at 'Assets/LevelManager.asset'");
+        }
     }
 
     private Texture2D MakeTex(int width, int height, Color col)
@@ -276,6 +287,19 @@ public class CreateLevelExoticPopup : EditorWindow
             AssetDatabase.CreateAsset(newLevelExotic, assetPath);
             AssetDatabase.SaveAssets();
             EditorUtility.SetDirty(newLevelExotic);
+
+            // Add the new LevelExotic to the LevelManager
+            LevelManager levelManager = AssetDatabase.LoadAssetAtPath<LevelManager>("Assets/LevelManager.asset");
+            if (levelManager != null)
+            {
+                levelManager.levels.Add(newLevelExotic);
+                EditorUtility.SetDirty(levelManager);
+                AssetDatabase.SaveAssets();
+            }
+            else
+            {
+                Debug.LogError("LevelManager asset not found at 'Assets/LevelManager.asset'");
+            }
 
             Debug.Log($"New LevelExotic created with X: {x}, Y: {y}, Name: {nameLevel}");
         }

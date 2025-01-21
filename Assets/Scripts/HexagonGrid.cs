@@ -20,8 +20,6 @@ public class HexagonGrid : MonoBehaviour
     public void InitGrid()
     {
         
-        
-        
         TileInstances = new HexagonTile[gridWidth, gridHeight];
         for (int y = 0; y < gridWidth; y++)
         {
