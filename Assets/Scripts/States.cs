@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public abstract class States : MonoBehaviour
 {
-   protected GameManager GM;
+   public GameManager GM;
    
    public virtual void Initialize(GameManager GM)
    {

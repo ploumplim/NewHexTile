@@ -58,6 +58,7 @@ public class HexagonTile : MonoBehaviour
     [Space]
     [HideInInspector]public int spreaderGeneration = 1;
     public int spreadingLifeTimeIncrement = 5;
+    public int Longevity = 0;
     
     [Header("Improvement Values")]
     [FormerlySerializedAs("greenFusionLifeTime")] [Space]
@@ -187,6 +188,7 @@ public class HexagonTile : MonoBehaviour
                 isAlive = true;
                 canLegalize = true;
                 FillImprovableTiles();
+                
                 break;
             
             case TileStates.PakkuTile:
@@ -227,7 +229,23 @@ public class HexagonTile : MonoBehaviour
         
         
     }
-    
+
+    private void VisualOfNextTileDestroyed()
+    {
+        HexagonTile[] adjacentTiles = GetAdjacentTiles();
+        
+        foreach (var neighboorOfDestroyerTile in adjacentTiles)
+        {
+            if (neighboorOfDestroyerTile.currentTileState == TileStates.LegalTile)
+            {
+                neighboorOfDestroyerTile.tileVisuals[14].SetActive(true);
+                Debug.LogError("Test");
+            }
+            
+        }
+        
+    }
+
 
     public HexagonTile[] GetAdjacentTiles()
     {
@@ -305,40 +323,6 @@ public class HexagonTile : MonoBehaviour
         }
     }
     
-    //Deprecated fusion codes
-    // public bool CanBeFused()
-    // {
-    //     HexagonTile[] adjacentTiles = GetAdjacentTiles();
-    //     
-    //     foreach (HexagonTile adjacentTile in adjacentTiles)
-    //     {
-    //         if (adjacentTile != null &&
-    //             stateToFuseWith.Contains(adjacentTile.currentTileState))
-    //         {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-    //
-    // public void FuseTiles()
-    // {
-    //     switch (currentTileState)
-    //             {
-    //                 case TileStates.GreenTile:
-    //                     TileStateChange(TileStates.GreenFusionTile);
-    //                     break;
-    //                 case TileStates.RedTile:
-    //                     TileStateChange(TileStates.RedFusionTile);
-    //                     break;
-    //                 case TileStates.BlueTile:
-    //                     TileStateChange(TileStates.BlueFusionTile);
-    //                     break;
-    //                 default:
-    //                     Debug.Log("The tile state is not recognized:" + transform);
-    //                     break;
-    //             }
-    // }
 
     public void ActivateTileEffects()
     {
@@ -362,7 +346,6 @@ public class HexagonTile : MonoBehaviour
             case TileStates.SpreadingTile:
                 EffectSpread();
                 break;
-            
             default:
                 break;
         }
@@ -370,11 +353,10 @@ public class HexagonTile : MonoBehaviour
     
     private void EffectDestroy()
     {
-        
-       
+        VisualOfNextTileDestroyed();
         if (lifeTime == 1)
         {
-
+            //TODO Jouer le son de demollition
             // activate the explosion effect
             explosionEffect.Play();
             // we set its state to default.

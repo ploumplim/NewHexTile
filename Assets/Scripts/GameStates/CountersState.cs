@@ -21,6 +21,7 @@ public class CountersState : States
                     tile.firstTurnCleared = true;
                 }
                 tile.lifeTime -= 1;
+                tile.Longevity += 1;
                 tile.GetComponentInChildren<TextMeshPro>().text = tile.lifeTime.ToString();
                 
                 // This function sets the color hue of the tile's text depending on their lifetime.

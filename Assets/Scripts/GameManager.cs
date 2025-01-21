@@ -318,13 +318,9 @@ public class GameManager : MonoBehaviour
                     nextTilePreview2.GetComponentInChildren<Image>().color = pakkuTileColor;
                     break;
             }
-            {
-                
-            }
+            
         }
-        
-        
-        //print("Tile index:" + index + "state: " + futureTileStateList[index]);
+       
     }
 
     
