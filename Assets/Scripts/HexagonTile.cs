@@ -22,6 +22,9 @@ public class HexagonTile : MonoBehaviour
         DestroyerTile,
         PakkuTile,
         SpreadingTile,
+        
+        TargetTile,
+        WallTile,
         // GreenFusionTile,
         // BlueFusionTile,
         // RedFusionTile,
@@ -147,6 +150,18 @@ public class HexagonTile : MonoBehaviour
                 canLegalize = true;
                 FillImprovableTiles();
                 
+                break;
+            case TileStates.TargetTile:
+                currentActiveAsset = tileVisuals[15];
+                lifeTime = 10000;
+                isAlive = true;
+                canLegalize = false;
+                break;
+            case TileStates.WallTile :
+                currentActiveAsset = tileVisuals[16];
+                lifeTime = 10000;
+                isAlive = false;
+                canLegalize = false;
                 break;
                 
                 //Deprecated fusion cases

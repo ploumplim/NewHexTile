@@ -50,12 +50,21 @@ MonoBehaviour:
   - x: 2
     y: 2
     tileState: 4
+  - x: 3
+    y: 0
+    tileState: 11
+  - x: 4
+    y: 0
+    tileState: 11
   - x: 4
     y: 2
     tileState: 4
   - x: 4
     y: 3
     tileState: 4
+  - x: 5
+    y: 0
+    tileState: 11
   - x: 5
     y: 2
     tileState: 4
