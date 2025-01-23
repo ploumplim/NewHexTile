@@ -154,7 +154,7 @@ public class HexagonTile : MonoBehaviour
             case TileStates.TargetTile:
                 currentActiveAsset = tileVisuals[15];
                 lifeTime = 10000;
-                isAlive = true;
+                isAlive = false;
                 canLegalize = false;
                 break;
             case TileStates.WallTile :
@@ -381,11 +381,14 @@ public class HexagonTile : MonoBehaviour
             // we iterate through the list and activate the explosion effect on each tile, then set their state to default.
             foreach (HexagonTile adjacentTile in adjacentTiles)
             {
-                if (adjacentTile.isAlive || adjacentTile.currentTileState == TileStates.DeadTile)
+                if (adjacentTile.currentTileState!=TileStates.WallTile&&adjacentTile.currentTileState!=TileStates.TargetTile)
                 {
-                    adjacentTile.explosionEffect.Play();
+                    if (adjacentTile.isAlive || adjacentTile.currentTileState == TileStates.DeadTile)
+                    {
+                        adjacentTile.explosionEffect.Play();
+                    }
+                    adjacentTile.TileStateChange(TileStates.DefaultTile);
                 }
-                adjacentTile.TileStateChange(TileStates.DefaultTile);
             }
         }
     }
