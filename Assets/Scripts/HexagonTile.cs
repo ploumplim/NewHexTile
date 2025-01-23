@@ -159,7 +159,7 @@ public class HexagonTile : MonoBehaviour
                 break;
             case TileStates.WallTile :
                 currentActiveAsset = tileVisuals[16];
-                lifeTime = 10000;
+                lifeTime = 0;
                 isAlive = false;
                 canLegalize = false;
                 break;
@@ -203,7 +203,6 @@ public class HexagonTile : MonoBehaviour
                 isAlive = true;
                 canLegalize = true;
                 FillImprovableTiles();
-                
                 break;
             
             case TileStates.PakkuTile:
@@ -408,10 +407,14 @@ public class HexagonTile : MonoBehaviour
         
         foreach (HexagonTile adjacentTile in adjacentTiles)
         {
-            if (adjacentTile.isAlive)
+            if (adjacentTile.currentTileState != TileStates.WallTile)
             {
-                aliveTiles.Add(adjacentTile);
+                if (adjacentTile.isAlive)
+                {
+                    aliveTiles.Add(adjacentTile);
+                }
             }
+            
         }
         
         // Then, we sort the list by their lifetime, with the longest life time being the first element.

@@ -26,15 +26,5 @@ namespace GameStates
                 Debug.LogWarning("LevelManager is not assigned.");
             }
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-            // Access levelManager and selectedLevelExotic here
-            if (levelManager != null && selectedLevelExotic != null)
-            {
-                Debug.Log($"Selected Level: {selectedLevelExotic.levelName}");
-            }
-        }
     }
 }
