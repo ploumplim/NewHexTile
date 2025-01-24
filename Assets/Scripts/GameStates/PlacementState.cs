@@ -39,23 +39,24 @@ public class PlacementState : States
     }
 }
 
-private void HandleMouseClick(HexagonTile hexTile)
-{
-    if (Input.GetMouseButtonDown(0) && hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
+    private void HandleMouseClick(HexagonTile hexTile)
     {
-        if (GM.GODMODE)
+        if (Input.GetMouseButtonDown(0) && hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
         {
-            ApplyGodModeTileState(hexTile);
-        }
-        else
-        {
-            NextTileCreate(hexTile);
-        }
+            if (GM.GODMODE)
+            {
+                ApplyGodModeTileState(hexTile);
+            }
+            else
+            {
+                NextTileCreate(hexTile);
+            }
+            
+            hexTile.TargetTileEffect();
 
-        GM.ChangeState(GM.GetComponent<EffectState>());
-        
+            GM.ChangeState(GM.GetComponent<EffectState>());
+        }
     }
-}
 
 private void ApplyGodModeTileState(HexagonTile hexTile)
 {

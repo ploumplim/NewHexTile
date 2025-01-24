@@ -92,6 +92,7 @@ public class HexagonTile : MonoBehaviour
     {
         currentTileState = state;
         
+        
         // Change the tile's current state variable. ★
         // Implement behavior modification based on the state
         switch (state)
@@ -156,6 +157,7 @@ public class HexagonTile : MonoBehaviour
                 lifeTime = 10000;
                 isAlive = false;
                 canLegalize = false;
+                
                 break;
             case TileStates.WallTile :
                 currentActiveAsset = tileVisuals[16];
@@ -481,8 +483,6 @@ public class HexagonTile : MonoBehaviour
             }
         }
     }
-    
-   
     private void EffectSpread()
     {
         var emission = spreaderEffect.emission;
@@ -507,9 +507,6 @@ public class HexagonTile : MonoBehaviour
         {
             return;
         }
-
-        
-        
         lifeTime += spreadingLifeTimeIncrement * spreaderGeneration;
         
         
@@ -524,6 +521,19 @@ public class HexagonTile : MonoBehaviour
                 adjacentTile.TileStateChange(currentTileState);
                 adjacentTile.spreaderGeneration = spreaderGeneration + 1;
                 adjacentTile.lifeTime += spreadingLifeTimeIncrement * adjacentTile.spreaderGeneration - spreadingLifeTimeIncrement;
+            }
+        }
+    }
+
+    public void TargetTileEffect()
+    {
+        HexagonTile[] adjacentTiles = GetAdjacentTiles();
+        foreach (HexagonTile adjacentTile in adjacentTiles)
+        {
+            if (adjacentTile.currentTileState == TileStates.TargetTile)
+            {
+                Debug.Log("Target tile Reached");
+                break;
             }
         }
     }
