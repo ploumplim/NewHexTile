@@ -57,4 +57,11 @@ public class HexagonGrid : MonoBehaviour
         rotation.z = 180;
         Grid.transform.rotation = rotation;
     }
+    public void ClearGrid()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }

@@ -125,7 +125,6 @@ private void ResetPreviousTileVisuals()
             {
                 adjacentTile.GetComponentInChildren<TextMeshPro>().SetText(adjacentTile.lifeTime.ToString());
                 adjacentTile.GetComponentInChildren<TextMeshPro>().color = Color.white;
-                Debug.Log(adjacentTile.lifeTime);
             }
         }
     }

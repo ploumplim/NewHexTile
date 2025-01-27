@@ -257,7 +257,6 @@ public class HexagonTile : MonoBehaviour
             if (neighboorOfDestroyerTile.currentTileState == TileStates.LegalTile)
             {
                 neighboorOfDestroyerTile.tileVisuals[14].SetActive(true);
-                Debug.LogError("Test");
             }
             
         }
