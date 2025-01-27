@@ -56,6 +56,13 @@ public class PlacementState : States
 
             GM.ChangeState(GM.GetComponent<EffectState>());
         }
+        else if (Input.GetMouseButtonDown(0) 
+                 && hexTile.currentTileState == HexagonTile.TileStates.TargetTile
+                 && hexTile.isTargetable)
+        {
+            Debug.Log("Victory");
+        }
+        
     }
 
 private void ApplyGodModeTileState(HexagonTile hexTile)

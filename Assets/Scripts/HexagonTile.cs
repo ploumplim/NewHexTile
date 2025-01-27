@@ -75,6 +75,8 @@ public class HexagonTile : MonoBehaviour
     
     [HideInInspector]
     public GameObject currentActiveAsset;
+
+    public bool isTargetable;
     
     
     public void InitializeTile()
@@ -532,7 +534,7 @@ public class HexagonTile : MonoBehaviour
         {
             if (adjacentTile.currentTileState == TileStates.TargetTile)
             {
-                Debug.Log("Target tile Reached");
+                adjacentTile.isTargetable = true;
                 break;
             }
         }
