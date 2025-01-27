@@ -125,6 +125,7 @@ private void ResetPreviousTileVisuals()
             {
                 adjacentTile.GetComponentInChildren<TextMeshPro>().SetText(adjacentTile.lifeTime.ToString());
                 adjacentTile.GetComponentInChildren<TextMeshPro>().color = Color.white;
+                Debug.Log(adjacentTile.lifeTime);
             }
         }
     }
@@ -145,6 +146,7 @@ private void UpdateTileVisuals(HexagonTile hexTile)
             neighborTile.GetComponentInChildren<TextMeshPro>().SetText(lifeTimeImproved.ToString());
             neighborTile.GetComponentInChildren<TextMeshPro>().color = Color.magenta;
         }
+        
     }
 
     foreach (var VARIABLE in GM.Tiles)
