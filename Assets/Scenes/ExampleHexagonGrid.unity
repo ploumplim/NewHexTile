@@ -1662,7 +1662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 11400000, guid: 1508753bf475b2a4d9244791cde45c76, type: 2}
-  selectedLevelExotic: {fileID: 11400000, guid: 73e2e80b936735c4c979d8daf2c89c7f, type: 2}
+  selectedLevelExotic: {fileID: 11400000, guid: 3544cd8cbdceab447b41a36ac1b60e22, type: 2}
 --- !u!4 &812799417
 Transform:
   m_ObjectHideFlags: 0
@@ -2242,7 +2242,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.08, y: 10, z: 8.57}
+  m_LocalPosition: {x: -1.86, y: 10, z: 8.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
