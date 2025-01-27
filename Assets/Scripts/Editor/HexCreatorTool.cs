@@ -167,7 +167,7 @@ public class HexCreatorTool : EditorWindow
 {
     if (tileStates == null) return;
 
-    // Définir les dimensions visibles pour la grille
+    // Dimensions visibles pour la grille
     float visibleWidth = EditorGUIUtility.currentViewWidth - 40; // Ajuste la largeur visible
     float visibleHeight = 300f; // Ajuste la hauteur visible
 
@@ -179,15 +179,20 @@ public class HexCreatorTool : EditorWindow
     scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(visibleWidth), GUILayout.Height(visibleHeight));
     GUILayout.BeginHorizontal(GUILayout.Width(totalWidth));
 
+    // Parcourir les lignes de bas en haut
     for (int i = 0; i < selectedLevelExotic.gridX; i++)
     {
         GUILayout.BeginVertical(GUILayout.Height(totalHeight));
         for (int j = 0; j < selectedLevelExotic.gridY; j++)
         {
-            // Ensure i and j are within the bounds of the array
-            if (i >= 0 && i < tileStates.GetLength(0) && j >= 0 && j < tileStates.GetLength(1))
+            // Inverser les indices vertical et horizontal pour correspondre à la logique in-game
+            int invertedIndexX = selectedLevelExotic.gridX - 1 - i;
+            int invertedIndexY = selectedLevelExotic.gridY - 1 - j;
+
+            // Affiche la bonne case dans l'éditeur
+            if (invertedIndexX >= 0 && invertedIndexX < tileStates.GetLength(0) && invertedIndexY >= 0 && invertedIndexY < tileStates.GetLength(1))
             {
-                tileStates[i, j] = (HexagonTile.TileStates)EditorGUILayout.EnumPopup(tileStates[i, j], GUILayout.Width(140));
+                tileStates[invertedIndexX, invertedIndexY] = (HexagonTile.TileStates)EditorGUILayout.EnumPopup(tileStates[invertedIndexX, invertedIndexY], GUILayout.Width(140));
             }
         }
         GUILayout.EndVertical();
@@ -223,6 +228,7 @@ public class HexCreatorTool : EditorWindow
     }
     GUILayout.EndHorizontal();
 }
+
 
 
    private void SaveTileStates()

@@ -11,12 +11,15 @@ public class HexagonGrid : MonoBehaviour
     [SerializeField] public float tileScale = 1f;
     [SerializeField] private GameObject hexagonTilePrefab;
 
+    public GameObject Grid;
+
     [SerializeField] public HexagonTile[,] TileInstances;
 
     public LevelStarter LevelData;
 
     public void InitGrid()
     {
+        Grid = this.gameObject;
         gridHeight = LevelData.selectedLevelExotic.gridY;
         gridWidth = LevelData.selectedLevelExotic.gridX;
         TileInstances = new HexagonTile[gridWidth, gridHeight];
@@ -49,5 +52,9 @@ public class HexagonGrid : MonoBehaviour
                 }
             }
         }
+
+        var rotation = Grid.transform.rotation;
+        rotation.z = 180;
+        Grid.transform.rotation = rotation;
     }
 }
