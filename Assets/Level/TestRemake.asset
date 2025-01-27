@@ -20,6 +20,24 @@ MonoBehaviour:
   - x: 0
     y: 0
     tileState: 2
+  - x: 2
+    y: 1
+    tileState: 1
+  - x: 2
+    y: 2
+    tileState: 1
+  - x: 3
+    y: 1
+    tileState: 1
+  - x: 3
+    y: 2
+    tileState: 8
+  - x: 3
+    y: 3
+    tileState: 4
+  - x: 3
+    y: 4
+    tileState: 4
   - x: 4
     y: 4
     tileState: 1
