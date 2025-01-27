@@ -16,6 +16,8 @@ public class HexagonGrid : MonoBehaviour
     [SerializeField] public HexagonTile[,] TileInstances;
 
     public LevelStarter LevelData;
+    
+    public GameObject GridAnchor;
 
     public void InitGrid()
     {
@@ -52,10 +54,10 @@ public class HexagonGrid : MonoBehaviour
                 }
             }
         }
-
         var rotation = Grid.transform.rotation;
         rotation.z = 180;
         Grid.transform.rotation = rotation;
+        
     }
     public void ClearGrid()
     {

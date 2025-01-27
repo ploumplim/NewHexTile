@@ -15,6 +15,7 @@ public class Ui_ChoiceLevelDropDown : MonoBehaviour
     void Start()
     {
         PopulateDropdown();
+        SetInitialLevel();
         levelDropdown.onValueChanged.AddListener(DropDownSample);
     }
 
@@ -27,6 +28,20 @@ public class Ui_ChoiceLevelDropDown : MonoBehaviour
         }
         levelDropdown.ClearOptions();
         levelDropdown.AddOptions(levelNames);
+    }
+
+    private void SetInitialLevel()
+    {
+        LevelExotic currentLevel = hexagonGrid.LevelData.selectedLevelExotic;
+        if (currentLevel != null)
+        {
+            int index = levelManager.levels.IndexOf(currentLevel);
+            if (index >= 0)
+            {
+                levelDropdown.value = index;
+                currentLevelIndex = index;
+            }
+        }
     }
 
     public void DropDownSample(int index)
@@ -54,13 +69,12 @@ public class Ui_ChoiceLevelDropDown : MonoBehaviour
         LevelExotic selectedLevel = levelManager.levels[index];
         hexagonGrid.LevelData.selectedLevelExotic = selectedLevel;
         hexagonGrid.InitGrid();
-        var rotation = hexagonGrid.transform.rotation;
-        rotation.z = 180;
-        hexagonGrid.transform.rotation = rotation;
+        hexagonGrid.Grid.transform.position = hexagonGrid.GridAnchor.transform.position;
     }
 
     private void UnloadLevel()
     {
         hexagonGrid.ClearGrid();
+        hexagonGrid.Grid.transform.position = Vector3.zero; // Reset position to ensure it updates correctly
     }
 }
