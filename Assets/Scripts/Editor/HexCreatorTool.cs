@@ -153,9 +153,8 @@ public class HexCreatorTool : EditorWindow
         GUILayout.Space(20);
 
         // Box for DisplayTileStateGrid with scroll view
-        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(EditorGUIUtility.currentViewWidth - 30), GUILayout.Height(400));
-        DisplayTileStateGrid();
-        EditorGUILayout.EndScrollView();
+         DisplayTileStateGrid();
+       
     }
     GUILayout.EndVertical();
 
@@ -165,53 +164,66 @@ public class HexCreatorTool : EditorWindow
     // Refresh button
 }
     private void DisplayTileStateGrid()
+{
+    if (tileStates == null) return;
+
+    // Définir les dimensions visibles pour la grille
+    float visibleWidth = EditorGUIUtility.currentViewWidth - 40; // Ajuste la largeur visible
+    float visibleHeight = 300f; // Ajuste la hauteur visible
+
+    // Dimensions totales de la grille
+    float totalWidth = selectedLevelExotic.gridY * 150; // 150 est la largeur estimée de chaque EnumPopup
+    float totalHeight = selectedLevelExotic.gridX * 20; // 20 est la hauteur estimée de chaque EnumPopup
+
+    // Créer un conteneur avec des barres de défilement
+    scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(visibleWidth), GUILayout.Height(visibleHeight));
+    GUILayout.BeginHorizontal(GUILayout.Width(totalWidth));
+
+    for (int i = 0; i < selectedLevelExotic.gridX; i++)
     {
-        if (tileStates == null) return;
-
-        // Box for dropdown menus
-        GUIStyle boxStyle = new GUIStyle(GUI.skin.box);
-        boxStyle.normal.background = MakeTex(2, 2, new Color(0.8f, 0.8f, 0.8f, 1f));
-        GUILayout.BeginVertical(boxStyle);
-
-        for (int i = 0; i < selectedLevelExotic.gridX; i++)
+        GUILayout.BeginVertical(GUILayout.Height(totalHeight));
+        for (int j = 0; j < selectedLevelExotic.gridY; j++)
         {
-            GUILayout.BeginHorizontal();
-            for (int j = 0; j < selectedLevelExotic.gridY; j++)
+            // Ensure i and j are within the bounds of the array
+            if (i >= 0 && i < tileStates.GetLength(0) && j >= 0 && j < tileStates.GetLength(1))
             {
-                tileStates[i, j] = (HexagonTile.TileStates)EditorGUILayout.EnumPopup(tileStates[i, j]);
+                tileStates[i, j] = (HexagonTile.TileStates)EditorGUILayout.EnumPopup(tileStates[i, j], GUILayout.Width(140));
             }
-            GUILayout.EndHorizontal();
         }
-
         GUILayout.EndVertical();
-
-        // Add space between the grid and the "Select Valid Tile States:" label
-        GUILayout.Space(10);
-
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("Select Valid Tile States:", EditorStyles.boldLabel);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-
-        int maxItemsPerRow = Mathf.FloorToInt(EditorGUIUtility.currentViewWidth / 150); // Adjust 150 based on the approximate width of each checkbox
-        int currentItem = 0;
-        GUILayout.Space(20);
-        GUILayout.BeginHorizontal();
-        for (int i = 0; i < tileStateSelections.Length; i++)
-        {
-            if (currentItem >= maxItemsPerRow)
-            {
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal();
-                currentItem = 0;
-            }
-
-            tileStateSelections[i] = EditorGUILayout.Toggle(((HexagonTile.TileStates)i).ToString(), tileStateSelections[i]);
-            currentItem++;
-        }
-        GUILayout.EndHorizontal();
     }
+
+    GUILayout.EndHorizontal();
+    EditorGUILayout.EndScrollView();
+
+    // Ajouter un peu d'espace pour séparer des autres éléments
+    GUILayout.Space(10);
+
+    GUILayout.BeginHorizontal();
+    GUILayout.FlexibleSpace();
+    GUILayout.Label("Select Valid Tile States:", EditorStyles.boldLabel);
+    GUILayout.FlexibleSpace();
+    GUILayout.EndHorizontal();
+
+    int maxItemsPerRow = Mathf.FloorToInt(EditorGUIUtility.currentViewWidth / 150); // Ajuste 150 en fonction de la largeur de chaque checkbox
+    int currentItem = 0;
+    GUILayout.Space(20);
+    GUILayout.BeginHorizontal();
+    for (int i = 0; i < tileStateSelections.Length; i++)
+    {
+        if (currentItem >= maxItemsPerRow)
+        {
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            currentItem = 0;
+        }
+
+        tileStateSelections[i] = EditorGUILayout.Toggle(((HexagonTile.TileStates)i).ToString(), tileStateSelections[i]);
+        currentItem++;
+    }
+    GUILayout.EndHorizontal();
+}
+
 
    private void SaveTileStates()
 {
