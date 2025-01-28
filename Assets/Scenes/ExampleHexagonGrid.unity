@@ -1482,7 +1482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &532740313
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2494,7 +2494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 11400000, guid: 1508753bf475b2a4d9244791cde45c76, type: 2}
-  selectedLevelExotic: {fileID: 11400000, guid: 9fb43094c5e672548a874fcaa02cf4fd, type: 2}
+  selectedLevelExotic: {fileID: 11400000, guid: 73e2e80b936735c4c979d8daf2c89c7f, type: 2}
 --- !u!4 &812799417
 Transform:
   m_ObjectHideFlags: 0
