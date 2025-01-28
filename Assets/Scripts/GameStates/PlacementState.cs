@@ -111,10 +111,12 @@ private void HandleTileHover(HexagonTile hexTile)
 
 private void ResetPreviousTileVisuals()
 {
-    if (previousHexTile != null && previousHexTile.currentTileState == HexagonTile.TileStates.LegalTile)
+    if (previousHexTile != null 
+        && previousHexTile.currentTileState == HexagonTile.TileStates.LegalTile)
     {
         foreach (var visual in previousHexTile.tileVisuals)
         {
+           
             visual.SetActive(false);
         }
         previousHexTile.tileVisuals[1].SetActive(true);
@@ -123,6 +125,10 @@ private void ResetPreviousTileVisuals()
             if (adjacentTile.lifeTime > 0
                 && adjacentTile.currentTileState != HexagonTile.TileStates.StarterTile)
             {
+                if (previousHexTile.willExplode)
+                {
+                    previousHexTile.tileVisuals[14].SetActive(true);
+                }
                 adjacentTile.GetComponentInChildren<TextMeshPro>().SetText(adjacentTile.lifeTime.ToString());
                 adjacentTile.GetComponentInChildren<TextMeshPro>().color = Color.white;
             }
@@ -139,7 +145,8 @@ private void UpdateTileVisuals(HexagonTile hexTile)
 
     foreach (var neighborTile in hexTile.GetAdjacentTiles())
     {
-        if (neighborTile.lifeTime > 0 && neighborTile.currentTileState != HexagonTile.TileStates.StarterTile)
+        if (neighborTile.lifeTime > 0 && 
+            neighborTile.currentTileState != HexagonTile.TileStates.StarterTile)
         {
             int lifeTimeImproved = neighborTile.lifeTime + GetTileImproveValue(hexTile);
             neighborTile.GetComponentInChildren<TextMeshPro>().SetText(lifeTimeImproved.ToString());

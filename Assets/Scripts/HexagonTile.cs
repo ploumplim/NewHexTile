@@ -77,6 +77,8 @@ public class HexagonTile : MonoBehaviour
     public GameObject currentActiveAsset;
 
     public bool isTargetable;
+
+    public bool willExplode;
     
     
     public void InitializeTile()
@@ -257,6 +259,7 @@ public class HexagonTile : MonoBehaviour
             if (neighboorOfDestroyerTile.currentTileState == TileStates.LegalTile)
             {
                 neighboorOfDestroyerTile.tileVisuals[14].SetActive(true);
+               neighboorOfDestroyerTile.willExplode = true;
             }
             
         }

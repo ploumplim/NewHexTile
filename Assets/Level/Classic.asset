@@ -35,6 +35,9 @@ MonoBehaviour:
   - x: 9
     y: 1
     tileState: 4
+  - x: 10
+    y: 0
+    tileState: 4
   - x: 19
     y: 0
     tileState: 1
