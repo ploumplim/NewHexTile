@@ -2494,7 +2494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 11400000, guid: 1508753bf475b2a4d9244791cde45c76, type: 2}
-  selectedLevelExotic: {fileID: 11400000, guid: 73e2e80b936735c4c979d8daf2c89c7f, type: 2}
+  selectedLevelExotic: {fileID: 11400000, guid: c53dfb50d5d7bed44915439f54199e7a, type: 2}
 --- !u!4 &812799417
 Transform:
   m_ObjectHideFlags: 0
