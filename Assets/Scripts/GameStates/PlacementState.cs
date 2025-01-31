@@ -147,7 +147,8 @@ private void UpdateTileVisuals(HexagonTile hexTile)
     foreach (var neighborTile in hexTile.GetAdjacentTiles())
     {
         if (neighborTile.lifeTime > 0 && 
-            neighborTile.currentTileState != HexagonTile.TileStates.StarterTile)
+            neighborTile.currentTileState != HexagonTile.TileStates.StarterTile
+            &&neighborTile.currentTileState != HexagonTile.TileStates.TargetTile)
         {
             int lifeTimeImproved = neighborTile.lifeTime + GetTileImproveValue(hexTile);
             neighborTile.GetComponentInChildren<TextMeshPro>().SetText(lifeTimeImproved.ToString());
@@ -163,15 +164,7 @@ private void UpdateTileVisuals(HexagonTile hexTile)
             {
                 if (PakkuNeighboor.lifeTime>0)
                 {
-                    if (!MaxNeighboor )
-                    {
-                        MaxNeighboor = PakkuNeighboor;
-                    }
-                    if (MaxNeighboor.lifeTime < PakkuNeighboor.lifeTime&&MaxNeighboor.Longevity<PakkuNeighboor.Longevity)
-                    {
-                        MaxNeighboor = PakkuNeighboor;
-                    }
-                    MaxNeighboor.tileVisuals[13].SetActive(true);
+                    PakkuNeighboor.tileVisuals[13].SetActive(true);
                 }
                 
             }
