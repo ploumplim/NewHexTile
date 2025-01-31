@@ -58,6 +58,7 @@ public class CountersState : States
                     tile.GetComponentInChildren<TextMeshPro>().SetText("");
                 }
             }
+            
         }
         else
         {
