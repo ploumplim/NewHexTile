@@ -43,6 +43,8 @@ public class PlacementState : States
     {
         if (Input.GetMouseButtonDown(0) && hexTile.currentTileState == HexagonTile.TileStates.LegalTile)
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.clickSound, this.transform.position);
+
             if (GM.GODMODE)
             {
                 ApplyGodModeTileState(hexTile);
@@ -98,7 +100,7 @@ private void HandleTileHover(HexagonTile hexTile)
 {
     if (hexTile != previousHexTile)
     {
-        //TODO Jouer le son du HOVER
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.hoverSound, this.transform.position);
         ResetPreviousTileVisuals();
         previousHexTile = hexTile;
     }
@@ -116,7 +118,6 @@ private void ResetPreviousTileVisuals()
     {
         foreach (var visual in previousHexTile.tileVisuals)
         {
-           
             visual.SetActive(false);
         }
         previousHexTile.tileVisuals[1].SetActive(true);
@@ -152,16 +153,12 @@ private void UpdateTileVisuals(HexagonTile hexTile)
             neighborTile.GetComponentInChildren<TextMeshPro>().SetText(lifeTimeImproved.ToString());
             neighborTile.GetComponentInChildren<TextMeshPro>().color = Color.magenta;
         }
-        
     }
 
     foreach (var VARIABLE in GM.Tiles)
     {
-        
         if (VARIABLE.currentTileState == HexagonTile.TileStates.PakkuTile)
         {
-            
-            
             foreach (var PakkuNeighboor in VARIABLE.GetAdjacentTiles())
             {
                 if (PakkuNeighboor.lifeTime>0)

@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 using System.Linq;
 using TMPro;
 
+
 public class HexagonTile : MonoBehaviour
 {
     public enum TileStates // These are our tiles states. To add more states, we must add its corresponding variables
@@ -376,7 +377,7 @@ public class HexagonTile : MonoBehaviour
         VisualOfNextTileDestroyed();
         if (lifeTime == 1)
         {
-            //TODO Jouer le son de demollition
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.bombaSound, this.transform.position);
             // activate the explosion effect
             explosionEffect.Play();
             // we set its state to default.
@@ -403,6 +404,8 @@ public class HexagonTile : MonoBehaviour
         //Debug.Log("tile at hexagrid position:"+ transform.position +"PakkuCounter: " + PakkuCounter);
         if (lifeTime != 1)
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.pakkuSound, this.transform.position);
+
             return;
         }
         // we make a list of all tiles around this one.
@@ -464,6 +467,8 @@ public class HexagonTile : MonoBehaviour
         // We iterate through the list and improve the tiles depending on my current tile's state.
         foreach (HexagonTile tile in improvableAdjacentTiles)
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.improveSound, this.transform.position);
+
             switch (currentTileState)
             {
                 case TileStates.GreenTile:
