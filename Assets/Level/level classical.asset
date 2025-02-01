@@ -10,10 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52cb1f31fd654df9afd7670cf98cbdc5, type: 3}
-  m_Name: "pr\xE9sentation"
+  m_Name: level classical
   m_EditorClassIdentifier: 
   gridX: 13
   gridY: 13
-  levelName: "pr\xE9sentation"
+  levelName: level classical
   hexagonTileStates: 
-  tiles: []
+  tiles:
+  - x: 2
+    y: 7
+    tileState: 9
+  - x: 10
+    y: 7
+    tileState: 4
+  - x: 11
+    y: 6
+    tileState: 4
+  - x: 11
+    y: 7
+    tileState: 5
+  - x: 11
+    y: 8
+    tileState: 4
+  - x: 12
+    y: 7
+    tileState: 4
